@@ -7,206 +7,161 @@ const sorted = editions.sort((a, b) => b.data.edition - a.data.edition);
 ---
 
 <BaseLayout
-  title="Baseera بصيرة Archive"
-  description="All editions of Baseera — bi-weekly signal briefings distilling one article into The Finding, The Pattern, and The Signal."
+  title="Baseera بصيرة"
+  description="Bi-weekly distilled reading. One article. Three layers: The Finding, The Pattern, The Signal."
 >
-  <!-- Page Header -->
-  <section class="page-header">
-    <div class="container">
-      <p class="eyebrow">Archive</p>
-      <h1 class="page-title">Baseera <span class="ar">بصيرة</span></h1>
-      <div class="gold-rule"></div>
-      <p class="page-desc">
-        Every edition distils one article or paper into three layers: <strong>The Finding</strong> (what the source says), <strong>The Pattern</strong> (what it means across sectors), and <strong>The Signal</strong> (what leaders should act on). Bi-weekly. No noise.
-      </p>
-    </div>
-  </section>
 
-  <!-- Editions Grid -->
-  <section class="editions">
-    <div class="container">
-      {sorted.length === 0 ? (
-        <p class="empty">No editions yet. Check back soon.</p>
-      ) : (
-        <div class="editions-grid">
-          {sorted.map((edition) => (
-            <a href={`/baseera/${edition.slug}`} class="edition-card">
-              <div class="card-top">
-                <span class="edition-number">Edition {edition.data.edition}</span>
-                <span class="edition-date">{edition.data.date}</span>
+<div class="page-header">
+  <div class="wrap">
+    <div class="header-eyebrow mono">Archive</div>
+    <h1 class="page-title">Baseera <span class="ar">بصيرة</span></h1>
+    <p class="page-desc">
+      One article or paper. Three layers: the finding, the pattern, the signal. Bi-weekly. No noise.
+    </p>
+  </div>
+</div>
+
+<div class="section">
+  <div class="wrap">
+
+    <div class="section-label">All editions</div>
+
+    {sorted.length === 0 ? (
+      <p class="empty-state">No editions yet — check back soon.</p>
+    ) : (
+      <ul class="editions-list">
+        {sorted.map((edition) => (
+          <li class="edition-item">
+            <a href={`/baseera/${edition.slug}`} class="edition-link">
+              <div class="edition-meta mono">
+                Edition {String(edition.data.edition).padStart(3, '0')}
+                {edition.data.tags && <span> · {edition.data.tags.slice(0,2).join(' · ')}</span>}
+                <span class="edition-date"> · {edition.data.date}</span>
               </div>
-              <h2 class="edition-title">{edition.data.title}</h2>
-              <p class="edition-source">
-                Source: <em>{edition.data.article}</em>
-                {edition.data.author && ` — ${edition.data.author}`}
-              </p>
-              <div class="edition-finding">
-                <span class="finding-label">The Finding</span>
-                <p>{edition.data.finding}</p>
-              </div>
-              {edition.data.tags && (
-                <div class="edition-tags">
-                  {edition.data.tags.map((tag) => (
-                    <span class="tag">{tag}</span>
-                  ))}
+              <div class="edition-title">{edition.data.title}</div>
+              <div class="edition-finding">{edition.data.finding}</div>
+              {edition.data.article && (
+                <div class="edition-source mono">
+                  Source: {edition.data.article}
+                  {edition.data.author && ` — ${edition.data.author}`}
                 </div>
               )}
-              <span class="read-link">Read edition →</span>
             </a>
-          ))}
-        </div>
-      )}
-    </div>
-  </section>
+            <div class="edition-arrow">→</div>
+          </li>
+        ))}
+      </ul>
+    )}
+
+  </div>
+</div>
+
 </BaseLayout>
 
 <style>
   .page-header {
-    background: var(--navy);
-    padding: 4rem 0 3rem;
+    padding: 64px 0 48px;
+    border-bottom: 1px solid var(--rule);
   }
 
-  .eyebrow {
-    font-size: 0.75rem;
-    letter-spacing: 0.12em;
+  .header-eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--gold);
-    font-weight: 500;
-    margin-bottom: 0.75rem;
+    color: var(--sand);
+    margin-bottom: 16px;
   }
 
   .page-title {
-    font-size: clamp(2rem, 4vw, 3rem);
-    color: var(--white);
-    font-weight: 600;
+    font-size: clamp(36px, 5vw, 56px);
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 16px;
   }
 
   .ar {
-    color: var(--gold);
     font-style: italic;
+    color: var(--sand-dark);
   }
-
-  .page-header .gold-rule { margin: 1.5rem 0; }
 
   .page-desc {
-    color: rgba(255,255,255,0.72);
-    font-size: 1rem;
-    max-width: 580px;
-    line-height: 1.8;
+    font-size: 18px;
+    color: var(--ink-soft);
+    line-height: 1.65;
+    max-width: 500px;
   }
 
-  .editions {
-    padding: 4rem 0;
-  }
+  .editions-list { list-style: none; }
 
-  .editions-grid {
+  .edition-item {
     display: grid;
-    gap: 1.5rem;
+    grid-template-columns: 1fr auto;
+    gap: 24px;
+    align-items: start;
+    padding: 32px 0;
+    border-bottom: 1px solid var(--rule);
+    cursor: pointer;
+    transition: all 0.12s;
   }
 
-  .edition-card {
-    background: var(--white);
-    padding: 2rem;
-    border-left: 4px solid var(--gold);
-    display: block;
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
+  .edition-item:first-child { padding-top: 0; }
+  .edition-item:last-child { border-bottom: none; }
+  .edition-item:hover .edition-title { color: var(--sand-dark); }
 
-  .edition-card:hover {
-    transform: translateX(4px);
-    box-shadow: 0 2px 16px rgba(26, 60, 94, 0.08);
-  }
+  .edition-link { display: block; }
 
-  .card-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 0.75rem;
-  }
-
-  .edition-number {
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
+  .edition-meta {
+    font-size: 10px;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--gold);
+    color: var(--sand);
+    margin-bottom: 10px;
   }
 
-  .edition-date {
-    font-size: 0.75rem;
-    color: var(--text-muted);
-  }
+  .edition-date { color: var(--ink-faint); }
 
   .edition-title {
-    font-size: 1.25rem;
-    color: var(--navy);
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-  }
-
-  .edition-source {
-    font-size: 0.8rem;
-    color: var(--text-muted);
-    margin-bottom: 1.25rem;
+    font-size: 22px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.25;
+    margin-bottom: 10px;
+    transition: color 0.15s;
   }
 
   .edition-finding {
-    background: var(--sand);
-    padding: 1rem 1.25rem;
-    border-radius: 2px;
-    margin-bottom: 1.25rem;
+    font-size: 15px;
+    color: var(--ink-soft);
+    line-height: 1.65;
+    margin-bottom: 12px;
   }
 
-  .finding-label {
-    font-size: 0.65rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--navy);
-    display: block;
-    margin-bottom: 0.4rem;
-  }
-
-  .edition-finding p {
-    font-size: 0.875rem;
-    color: var(--text);
-    line-height: 1.7;
-  }
-
-  .edition-tags {
-    display: flex;
-    gap: 0.4rem;
-    flex-wrap: wrap;
-    margin-bottom: 1.25rem;
-  }
-
-  .tag {
-    font-size: 0.65rem;
-    font-weight: 500;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    background: var(--navy);
-    color: rgba(255,255,255,0.8);
-    padding: 0.2rem 0.5rem;
-    border-radius: 2px;
-  }
-
-  .read-link {
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--navy);
-    letter-spacing: 0.02em;
-    transition: color 0.2s;
-  }
-
-  .edition-card:hover .read-link {
-    color: var(--gold);
-  }
-
-  .empty {
-    text-align: center;
-    color: var(--text-muted);
-    padding: 4rem 0;
+  .edition-source {
+    font-size: 10px;
+    color: var(--ink-faint);
+    letter-spacing: 0.04em;
     font-style: italic;
+  }
+
+  .edition-arrow {
+    font-size: 18px;
+    color: var(--rule);
+    margin-top: 8px;
+    transition: color 0.15s, transform 0.15s;
+  }
+  .edition-item:hover .edition-arrow { color: var(--sand); transform: translateX(4px); }
+
+  .empty-state {
+    font-size: 15px;
+    color: var(--ink-faint);
+    font-style: italic;
+    padding: 40px 0;
+  }
+
+  @media (max-width: 760px) {
+    .edition-item { grid-template-columns: 1fr; }
+    .edition-arrow { display: none; }
   }
 </style>

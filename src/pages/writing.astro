@@ -1,210 +1,261 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-
-const platforms = [
-  {
-    name: "The Sand & Silicon Byte",
-    subtitle: "Weekly Newsletter",
-    description: "The owned asset. Weekly intelligence for leaders navigating AI, systems, and the knowledge economy. One signal, fully thought through. Beehiiv.",
-    url: "https://thesandandsiliconbyte.beehiiv.com",
-    cta: "Subscribe →",
-    primary: true,
-  },
-  {
-    name: "Substack",
-    subtitle: "Raw thinking · southafricanbedouin",
-    description: "Where the ideas start. Irregular, impulse-driven, less polished. Raw thinking before it becomes content. Discovery layer.",
-    url: "https://southafricanbedouin.substack.com",
-    cta: "Read on Substack →",
-    primary: false,
-  },
-  {
-    name: "LinkedIn",
-    subtitle: "@southafricanbedouin",
-    description: "Daily and bi-weekly content across all four pillars. Where Baseera editions are published first. The primary public voice.",
-    url: "https://linkedin.com/in/muhammadseedat",
-    cta: "Connect →",
-    primary: false,
-  },
-];
 ---
 
 <BaseLayout
   title="Writing"
-  description="Muhammad Seedat's writing — newsletter, Substack, and LinkedIn. One signal, fully thought through."
+  description="Muhammad Seedat's writing — The Sand & Silicon Byte newsletter, Substack, and LinkedIn."
 >
 
-  <section class="page-header">
-    <div class="container">
-      <p class="eyebrow">Writing</p>
-      <h1 class="page-title">Where the thinking lives</h1>
-      <div class="gold-rule"></div>
-      <p class="page-desc">
-        The newsletter is the owned asset. Everything else feeds it. Here is where to find each layer of the writing.
-      </p>
-    </div>
-  </section>
+<div class="page-header">
+  <div class="wrap">
+    <div class="header-eyebrow mono">Writing</div>
+    <h1 class="page-title">Where the thinking lives</h1>
+    <p class="page-desc">
+      The newsletter is the owned asset. Everything else feeds it.
+    </p>
+  </div>
+</div>
 
-  <section class="platforms">
-    <div class="container--narrow">
-      <div class="platforms-list">
-        {platforms.map((p) => (
-          <div class={`platform-card ${p.primary ? 'platform-card--primary' : ''}`}>
-            <div class="platform-top">
-              <div>
-                <h2 class="platform-name">{p.name}</h2>
-                <span class="platform-sub">{p.subtitle}</span>
-              </div>
-              {p.primary && <span class="primary-badge">Primary</span>}
-            </div>
-            <p class="platform-desc">{p.description}</p>
-            <a href={p.url} target="_blank" rel="noopener" class="platform-cta">
-              {p.cta}
-            </a>
-          </div>
-        ))}
+<!-- Newsletter -->
+<div class="section">
+  <div class="wrap">
+
+    <div class="section-label">The Sand &amp; Silicon Byte · Primary</div>
+
+    <div class="platform-feature">
+      <div class="platform-meta mono">
+        <span class="platform-badge">Weekly newsletter</span>
+        <span class="platform-status">·</span>
+        <span>Beehiiv · Free</span>
       </div>
+      <h2 class="platform-name">The Sand &amp; Silicon Byte</h2>
+      <p class="platform-desc">
+        A weekly letter at the intersection of AI, the Gulf, and education. One big idea. Three signals.
+        An ancient thread. A prompt you can use this week. Written from inside the systems — not from a think tank.
+      </p>
+      <p class="platform-desc">
+        This is the owned asset. No algorithm. Direct to your inbox. Everything else — LinkedIn, Baseera,
+        Substack — feeds this. The newsletter is where readers become a community.
+      </p>
+      <a href="https://thesandandsiliconbyte.beehiiv.com" target="_blank" rel="noopener" class="btn-dark" style="margin-top: 8px; display: inline-block;">
+        Subscribe free →
+      </a>
     </div>
-  </section>
 
-  <section class="writing-note">
-    <div class="container--narrow">
-      <h2>On the writing itself</h2>
-      <div class="gold-rule"></div>
+  </div>
+</div>
+
+<!-- Other Platforms -->
+<div class="section">
+  <div class="wrap">
+
+    <div class="section-label">Other platforms</div>
+
+    <ul class="platforms-list">
+
+      <li class="platform-item">
+        <div class="platform-body">
+          <div class="platform-item-meta mono">LinkedIn · @southafricanbedouin</div>
+          <div class="platform-item-title">Daily &amp; bi-weekly content</div>
+          <div class="platform-item-desc">The primary public voice. Where Baseera editions are published first, alongside daily signal posts across all four content pillars.</div>
+        </div>
+        <a href="https://linkedin.com/in/southafricanbedouin" target="_blank" rel="noopener" class="platform-arrow">→</a>
+      </li>
+
+      <li class="platform-item">
+        <div class="platform-body">
+          <div class="platform-item-meta mono">Substack · southafricanbedouin</div>
+          <div class="platform-item-title">Raw thinking</div>
+          <div class="platform-item-desc">Where the ideas start. Irregular, impulse-driven, less polished. Raw thinking before it becomes content. The discovery layer.</div>
+        </div>
+        <a href="https://southafricanbedouin.substack.com" target="_blank" rel="noopener" class="platform-arrow">→</a>
+      </li>
+
+      <li class="platform-item">
+        <div class="platform-body">
+          <div class="platform-item-meta mono">Baseera · بصيرة</div>
+          <div class="platform-item-title">Distilled reading</div>
+          <div class="platform-item-desc">One article. Three layers: The Finding, The Pattern, The Signal. Published bi-weekly. One idea, fully thought through.</div>
+        </div>
+        <a href="/baseera" class="platform-arrow">→</a>
+      </li>
+
+    </ul>
+
+  </div>
+</div>
+
+<!-- On the writing -->
+<div class="section">
+  <div class="wrap">
+
+    <div class="section-label">On the writing itself</div>
+
+    <div class="writing-note">
       <p>
-        Everything I write follows the same principle: <strong>I am the witness, not the hero.</strong> The content is about the pattern, the system, the idea I noticed — not about my years of experience or my journey. The reader is the protagonist.
+        Everything I write follows the same principle: <strong>I am the witness, not the hero.</strong>
+        The content is about the pattern, the system, the idea I noticed — not about my years of
+        experience or my journey. The reader is the protagonist.
       </p>
       <p>
-        The voice is direct. No performed reflection. No announcement phrases. The thought delivered, not announced.
+        The voice is direct. No performed reflection. No announcement phrases.
+        The thought delivered, not announced.
       </p>
       <p>
-        Long-form always opens with <em>As-salamu alaykum (Peace be upon you)</em>. That is not a stylistic choice. It is who I am.
+        Long-form always opens with <em>As-salamu alaykum</em>. That is not a stylistic choice.
+        It is who I am.
       </p>
+      <blockquote class="writing-quote">
+        "The systems you build today determine who leads tomorrow."
+      </blockquote>
     </div>
-  </section>
+
+  </div>
+</div>
 
 </BaseLayout>
 
 <style>
   .page-header {
-    background: var(--navy);
-    padding: 4rem 0 3rem;
+    padding: 64px 0 48px;
+    border-bottom: 1px solid var(--rule);
   }
 
-  .eyebrow {
-    font-size: 0.75rem;
-    letter-spacing: 0.12em;
+  .header-eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: var(--gold);
-    font-weight: 500;
-    margin-bottom: 0.75rem;
+    color: var(--sand);
+    margin-bottom: 16px;
   }
 
   .page-title {
-    font-size: clamp(2rem, 4vw, 3rem);
-    color: var(--white);
-    font-weight: 600;
+    font-size: clamp(32px, 4.5vw, 52px);
+    font-weight: 500;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 14px;
   }
-
-  .page-header .gold-rule { margin: 1.5rem 0; }
 
   .page-desc {
-    color: rgba(255,255,255,0.72);
-    font-size: 1rem;
-    max-width: 520px;
-    line-height: 1.8;
+    font-size: 18px;
+    color: var(--ink-soft);
+    line-height: 1.6;
   }
 
-  .platforms {
-    padding: 4rem 0;
-    background: var(--sand);
+  /* Feature Platform */
+  .platform-feature {
+    border-left: 2px solid var(--sand);
+    padding-left: 24px;
   }
 
-  .platforms-list {
+  .platform-meta {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--sand);
+    margin-bottom: 12px;
     display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
+    gap: 8px;
+    align-items: center;
   }
 
-  .platform-card {
-    background: var(--white);
-    padding: 2rem;
-    border-left: 3px solid var(--border);
-  }
-
-  .platform-card--primary {
-    border-left-color: var(--gold);
-    background: var(--white);
-    box-shadow: 0 2px 20px rgba(26, 60, 94, 0.07);
-  }
-
-  .platform-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 1rem;
-  }
+  .platform-status { color: var(--rule); }
 
   .platform-name {
-    font-size: 1.2rem;
-    color: var(--navy);
-    font-weight: 600;
-    margin-bottom: 0.2rem;
-  }
-
-  .platform-sub {
-    font-size: 0.8rem;
-    color: var(--text-muted);
-  }
-
-  .primary-badge {
-    font-size: 0.65rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    background: var(--gold);
-    color: var(--navy-deep);
-    padding: 0.25rem 0.6rem;
-    border-radius: 2px;
+    font-size: 26px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 16px;
+    letter-spacing: -0.01em;
   }
 
   .platform-desc {
-    font-size: 0.9rem;
-    color: var(--text-muted);
-    line-height: 1.7;
-    margin-bottom: 1.25rem;
+    font-size: 17px;
+    color: var(--ink-mid);
+    line-height: 1.8;
+    max-width: 560px;
+    margin-bottom: 14px;
   }
 
-  .platform-cta {
-    font-size: 0.875rem;
-    font-weight: 600;
-    color: var(--navy);
-    transition: color 0.2s;
+  /* Platforms List */
+  .platforms-list { list-style: none; }
+
+  .platform-item {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 24px;
+    align-items: start;
+    padding: 28px 0;
+    border-bottom: 1px solid var(--rule);
+    cursor: pointer;
+    transition: all 0.12s;
   }
 
-  .platform-cta:hover { color: var(--gold); }
+  .platform-item:first-child { padding-top: 0; }
+  .platform-item:last-child { border-bottom: none; }
+  .platform-item:hover .platform-item-title { color: var(--sand-dark); }
 
+  .platform-item-meta {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--sand);
+    margin-bottom: 8px;
+  }
+
+  .platform-item-title {
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.3;
+    margin-bottom: 8px;
+    transition: color 0.15s;
+  }
+
+  .platform-item-desc {
+    font-size: 15px;
+    color: var(--ink-soft);
+    line-height: 1.65;
+  }
+
+  .platform-arrow {
+    font-size: 18px;
+    color: var(--rule);
+    margin-top: 8px;
+    transition: color 0.15s, transform 0.15s;
+    display: block;
+  }
+  .platform-item:hover .platform-arrow { color: var(--sand); transform: translateX(4px); }
+
+  /* Writing Note */
   .writing-note {
-    padding: 4rem 0;
-    background: var(--white);
+    font-size: 17px;
+    color: var(--ink-mid);
+    line-height: 1.8;
+    max-width: 600px;
   }
 
-  .writing-note h2 {
-    font-size: 1.5rem;
-    color: var(--navy);
-    margin-bottom: 0;
-  }
-
-  .writing-note .gold-rule { margin: 1.25rem 0 1.75rem; }
-
-  .writing-note p {
-    font-size: 1rem;
-    color: #2a3a4a;
-    line-height: 1.85;
-    margin-bottom: 1.25rem;
-    max-width: 680px;
-  }
-
-  .writing-note strong { color: var(--navy); }
+  .writing-note p { margin-bottom: 1.2em; }
+  .writing-note strong { color: var(--ink); font-weight: 500; }
   .writing-note em { font-style: italic; }
+
+  .writing-quote {
+    margin-top: 28px;
+    padding: 16px 20px;
+    border-left: 2px solid var(--sand);
+    background: var(--sand-pale);
+    font-style: italic;
+    font-size: 17px;
+    color: var(--ink-mid);
+    line-height: 1.6;
+    border-radius: 0 4px 4px 0;
+  }
+
+  @media (max-width: 760px) {
+    .platform-item { grid-template-columns: 1fr; }
+    .platform-arrow { display: none; }
+  }
 </style>

@@ -5,471 +5,831 @@ import { getCollection } from 'astro:content';
 const baseeraEditions = await getCollection('baseera');
 const latestEditions = baseeraEditions
   .sort((a, b) => b.data.edition - a.data.edition)
-  .slice(0, 3);
+  .slice(0, 4);
 ---
 
-<BaseLayout title="Muhammad Seedat" description="Systems thinker. Strategic advisor. The South African Bedouin.">
+<BaseLayout title="Muhammad Seedat — The South African Bedouin" description="Decoding the world, life & human systems — through a South African Bedouin lens. Industrial Engineer. Systems Architect. Ex-Accenture. Qatar-based.">
 
-  <!-- Hero -->
-  <section class="hero">
-    <div class="container">
-      <div class="hero-inner">
-        <div class="hero-text">
-          <p class="hero-eyebrow">Systems Thinker · Strategic Advisor · Doha, Qatar</p>
-          <h1 class="hero-headline">
-            The systems you build today determine who leads tomorrow.
-          </h1>
-          <div class="gold-rule"></div>
-          <p class="hero-sub">
-            As-salamu alaykum. I'm Muhammad Seedat — industrial engineer, systems thinker, and advisor based in Doha. I write about Industry 5.0, AI in the Gulf and Africa, and the human constant underneath every transformation.
-          </p>
-          <div class="hero-actions">
-            <a href="/baseera" class="btn btn-primary">Read Baseera بصيرة →</a>
-            <a href="https://thesandandsiliconbyte.beehiiv.com" target="_blank" rel="noopener" class="btn btn-secondary">The Sand & Silicon Byte</a>
-          </div>
+<!-- ─── HERO ─────────────────────────────────────────── -->
+<div class="hero">
+  <div class="wrap">
+    <div class="hero-eyebrow">@southafricanbedouin</div>
+    <h1 class="hero-name">Muhammad Seedat.</h1>
+    <p class="hero-identity">The South African Bedouin</p>
+    <p class="hero-tagline">
+      Decoding the world, life &amp; human systems —<br />
+      through a South African Bedouin lens.
+    </p>
+    <div class="hero-creds">
+      <span>Industrial Engineer</span><span class="sep">·</span>
+      <span>Systems Architect</span><span class="sep">·</span>
+      <span>Ex-Accenture</span><span class="sep">·</span>
+      <span>Qatar-based</span><span class="sep">·</span>
+      <span>Father</span><span class="sep">·</span>
+      <span>Barista</span><span class="sep">·</span>
+      <span>Belief in one Creator</span>
+    </div>
+    <div class="hero-actions">
+      <a href="#newsletter" class="btn-dark">Read the newsletter →</a>
+      <a href="#resources" class="btn-text">Explore resources</a>
+    </div>
+  </div>
+</div>
+
+<!-- ─── ABOUT STRIP ──────────────────────────────────── -->
+<div class="about-strip" id="about">
+  <div class="wrap-wide">
+    <div class="about-strip-inner">
+
+      <div class="about-strip-left">
+        <div class="about-strip-name mono">Muhammad Seedat</div>
+        <div class="about-strip-handle mono">@southafricanbedouin</div>
+        <div class="about-strip-img">
+          <!--
+            Replace with:
+            <img src="/images/muhammad.jpg" alt="Muhammad Seedat" />
+          -->
+          🧔🏽
         </div>
-        <div class="hero-badge">
-          <div class="badge-inner">
-            <span class="badge-ar">بصيرة</span>
-            <span class="badge-en">The South African Bedouin</span>
-          </div>
+        <div class="about-socials">
+          <a href="https://linkedin.com/in/southafricanbedouin" target="_blank" rel="noopener">LinkedIn ↗</a>
+          <a href="https://x.com/southafricanbedouin" target="_blank" rel="noopener">X ↗</a>
+          <a href="https://instagram.com/southafricanbedouin" target="_blank" rel="noopener">Instagram ↗</a>
         </div>
       </div>
-    </div>
-  </section>
 
-  <!-- About -->
-  <section class="about">
-    <div class="container--narrow">
-      <h2 class="section-title">Who I Am</h2>
-      <div class="gold-rule"></div>
-      <div class="about-body">
+      <div class="about-strip-body">
         <p>
-          South African-born. Gulf-built. Fifteen years building greenfield hospitals, national education strategies, special needs school systems, and enterprise transformations across Healthcare, Education, Government, and FMCG in the Gulf.
+          South African-born. Qatar-based. Half my life in each — two homes, one lens.
+          Industrial Engineer by training. Systems Architect by practice.
+          I spent years at Accenture learning how large, complex organisations actually work —
+          and more importantly, why they don't.
         </p>
         <p>
-          I trained as an industrial engineer. I think like a systems architect. I write like someone who has watched the same failure pattern repeat across enough sectors to know it is never random.
+          The handle is <strong>@southafricanbedouin</strong>. The Bedouin navigated without road signs —
+          by stars, memory, and an understanding of the landscape that only comes from crossing it.
+          That's the operating model here.
         </p>
         <p>
-          My work sits at the intersection of the knowledge economy, AI adoption, and human-centred leadership — always viewed through the lens of <strong>Africa and the East</strong>. Not Silicon Valley. Not London. The regions the world's largest transformation wave is actually happening in.
+          Father. Barista. Someone who believes in one Creator and finds that belief everywhere —
+          in systems, in people, in the way things connect when you slow down enough to see it.
         </p>
-        <p>
-          I run <strong>Baseera (بصيرة)</strong> — a bi-weekly signal briefing that distils one article or paper into three layers: The Finding, The Pattern, The Signal. Each edition is one idea, fully thought through.
-        </p>
+        <blockquote class="about-quote">
+          "The systems you build today determine who leads tomorrow."
+        </blockquote>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ─── RESOURCES ─────────────────────────────────────── -->
+<div class="section" id="resources">
+  <div class="wrap-wide">
+
+    <div class="section-label">Resources</div>
+
+    <div class="resources-tabs">
+      <button class="res-tab active" data-tab="tools">🛠 Tools</button>
+      <button class="res-tab" data-tab="guides">📖 Guides</button>
+      <button class="res-tab" data-tab="prompts">✦ Prompts</button>
+      <button class="res-tab" data-tab="models">⬡ Models</button>
+    </div>
+
+    <!-- TOOLS -->
+    <div class="res-panel active" id="tab-tools">
+      <div class="res-grid">
+
+        <div class="res-card">
+          <span class="res-card-badge free">Free · No signup</span>
+          <div class="res-card-title">Qatar Newcomer Navigator</div>
+          <div class="res-card-desc">The complete guide to arriving in Qatar. QID, driving licence, bank account, school enrollment — step by step, in plain language.</div>
+          <div class="res-card-region">🇶🇦 Qatar · Expat Life</div>
+          <div class="res-card-link mono">Open tool →</div>
+        </div>
+
+        <div class="res-card">
+          <span class="res-card-badge free">Free · Email for full access</span>
+          <div class="res-card-title">Qatar School Finder</div>
+          <div class="res-card-desc">Filter by curriculum, area, fees, and special needs provisions. Honest waiting-list reality included.</div>
+          <div class="res-card-region">🇶🇦 Qatar · Education</div>
+          <div class="res-card-link mono">Find a school →</div>
+        </div>
+
+        <div class="res-card">
+          <span class="res-card-badge free">Free · 5 minutes</span>
+          <div class="res-card-title">GCC AI Readiness Assessment</div>
+          <div class="res-card-desc">10 questions. A clear score. Next steps designed for Gulf professionals — not Silicon Valley startups.</div>
+          <div class="res-card-region">🌙 Gulf &amp; Middle East · AI</div>
+          <div class="res-card-link mono">Take the assessment →</div>
+        </div>
+
+        <div class="res-card">
+          <span class="res-card-badge free">Free · Email for full guide</span>
+          <div class="res-card-title">South African to Gulf — Relocation Guide</div>
+          <div class="res-card-desc">SARS tax, credential recognition, driving licence conversion, SA banking abroad. Nobody else makes this guide.</div>
+          <div class="res-card-region">🇿🇦 South Africa → 🌙 Gulf</div>
+          <div class="res-card-link mono">Get the guide →</div>
+        </div>
+
+      </div>
+      <div style="margin-top:16px;">
+        <p class="res-note mono">More tools launching monthly — <a href="#newsletter">subscribe to be notified</a>.</p>
       </div>
     </div>
-  </section>
 
-  <!-- Content Pillars -->
-  <section class="pillars">
-    <div class="container">
-      <h2 class="section-title">What I Write About</h2>
-      <div class="gold-rule"></div>
-      <div class="pillars-grid">
-        <div class="pillar">
-          <span class="pillar-number">P1</span>
-          <h3 class="pillar-title">Industry 5.0</h3>
-          <p class="pillar-desc">AI, systems design, and cross-sector intelligence — how the next industrial wave is actually unfolding.</p>
-        </div>
-        <div class="pillar">
-          <span class="pillar-number">P2</span>
-          <h3 class="pillar-title">The Bedouin's View</h3>
-          <p class="pillar-desc">Gulf and Africa. Regional perspective on global signals. The context the global media misses.</p>
-        </div>
-        <div class="pillar">
-          <span class="pillar-number">P3</span>
-          <h3 class="pillar-title">Connecting the Dots</h3>
-          <p class="pillar-desc">Cross-sector pattern recognition. The same failure mode in a hospital, a school, and a supply chain — and what it means.</p>
-        </div>
-        <div class="pillar">
-          <span class="pillar-number">P4</span>
-          <h3 class="pillar-title">The Human Constant</h3>
-          <p class="pillar-desc">Ethics, faith, humanity. The things that remain true regardless of which technology wave we are riding.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Latest Baseera -->
-  {latestEditions.length > 0 && (
-    <section class="latest-baseera">
-      <div class="container">
-        <div class="section-header">
-          <div>
-            <h2 class="section-title">Latest Baseera بصيرة</h2>
-            <div class="gold-rule"></div>
+    <!-- GUIDES -->
+    <div class="res-panel" id="tab-guides">
+      <ul class="res-list">
+        <li class="res-list-item">
+          <div class="res-list-num mono">01</div>
+          <div class="res-list-body">
+            <div class="res-list-title">Parent's AI Starter Guide</div>
+            <div class="res-list-desc">What every parent needs to know about AI before their children know more than them. Plain language. Practical steps.</div>
+            <div class="res-list-meta mono"><span>Family · AI</span><span>Free · Email</span></div>
           </div>
-          <a href="/baseera" class="view-all">View all editions →</a>
-        </div>
-        <div class="baseera-grid">
-          {latestEditions.map((edition) => (
-            <a href={`/baseera/${edition.slug}`} class="baseera-card">
-              <div class="card-edition">Edition {edition.data.edition}</div>
-              <h3 class="card-title">{edition.data.title}</h3>
-              <p class="card-finding">{edition.data.finding}</p>
-              <div class="card-footer">
-                <span class="card-date">{edition.data.date}</span>
-                <span class="card-tags">
-                  {edition.data.tags?.slice(0, 2).map((tag) => (
-                    <span class="card-tag">{tag}</span>
-                  ))}
-                </span>
+          <div class="res-list-arrow">→</div>
+        </li>
+        <li class="res-list-item">
+          <div class="res-list-num mono">02</div>
+          <div class="res-list-body">
+            <div class="res-list-title">Teacher's AI Guide — Gulf &amp; Africa Edition</div>
+            <div class="res-list-desc">Built for teachers in international and African school systems. Not translated from a Silicon Valley use case.</div>
+            <div class="res-list-meta mono"><span>Education · AI</span><span>Free · Email</span></div>
+          </div>
+          <div class="res-list-arrow">→</div>
+        </li>
+        <li class="res-list-item">
+          <div class="res-list-num mono">03</div>
+          <div class="res-list-body">
+            <div class="res-list-title">Gulf Family Relocation Comparison</div>
+            <div class="res-list-desc">Qatar vs UAE vs Saudi vs Bahrain — schooling, housing, costs, lifestyle. Honest, experienced, no tourism copy.</div>
+            <div class="res-list-meta mono"><span>Gulf · Expat Life</span><span>Free</span></div>
+          </div>
+          <div class="res-list-arrow">→</div>
+        </li>
+        <li class="res-list-item">
+          <div class="res-list-num mono">04</div>
+          <div class="res-list-body">
+            <div class="res-list-title">Board AI Briefing Template</div>
+            <div class="res-list-desc">One-page framework for executives presenting AI risk and opportunity to their board. Plain language. Non-technical.</div>
+            <div class="res-list-meta mono"><span>Leadership · AI</span><span>Free · Email</span></div>
+          </div>
+          <div class="res-list-arrow">→</div>
+        </li>
+      </ul>
+      <div class="res-coming">
+        More guides <strong>launching soon</strong>. <a href="#newsletter">Subscribe</a> to be first.
+      </div>
+    </div>
+
+    <!-- PROMPTS -->
+    <div class="res-panel" id="tab-prompts">
+      <ul class="res-list">
+        <li class="res-list-item">
+          <div class="res-list-num mono">01</div>
+          <div class="res-list-body">
+            <div class="res-list-title">Teacher Prompt Pack — 50 Ready-to-Use Prompts</div>
+            <div class="res-list-desc">Lesson planning, differentiation, assessment rubrics, parent communication. First 10 free, full 50 after email.</div>
+            <div class="res-list-meta mono"><span>Education</span><span>Free → Email</span></div>
+          </div>
+          <div class="res-list-arrow">→</div>
+        </li>
+        <li class="res-list-item">
+          <div class="res-list-num mono">02</div>
+          <div class="res-list-body">
+            <div class="res-list-title">Executive AI Prompt Pack — 30 Leadership Prompts</div>
+            <div class="res-list-desc">Strategic planning, communications, decision frameworks, board preparation. Built for Gulf and African leadership contexts.</div>
+            <div class="res-list-meta mono"><span>Leadership</span><span>$9</span></div>
+          </div>
+          <div class="res-list-arrow">→</div>
+        </li>
+        <li class="res-list-item">
+          <div class="res-list-num mono">03</div>
+          <div class="res-list-body">
+            <div class="res-list-title">Parent AI Prompts — Conversations with your Children</div>
+            <div class="res-list-desc">Ready-made prompts for talking to your kids about AI, screen time, creativity, and what to expect at school.</div>
+            <div class="res-list-meta mono"><span>Parenting · Family</span><span>Free</span></div>
+          </div>
+          <div class="res-list-arrow">→</div>
+        </li>
+      </ul>
+      <div class="res-coming">Full prompt library <strong>coming soon</strong>.</div>
+    </div>
+
+    <!-- MODELS / FRAMEWORKS -->
+    <div class="res-panel" id="tab-models">
+      <ul class="res-list">
+        <li class="res-list-item">
+          <div class="res-list-num mono">01</div>
+          <div class="res-list-body">
+            <div class="res-list-title">The M.E.S.H. Protocol</div>
+            <div class="res-list-desc">Mental Models · Ethics · Systems Thinking · Humanity. A framework for navigating the AI transition without losing what makes us human.</div>
+            <div class="res-list-meta mono"><span>Framework · AI</span><span>In development</span></div>
+          </div>
+          <div class="res-list-arrow">→</div>
+        </li>
+        <li class="res-list-item">
+          <div class="res-list-num mono">02</div>
+          <div class="res-list-body">
+            <div class="res-list-title">AI Strategy Canvas</div>
+            <div class="res-list-desc">A one-page strategic framework for organisations entering the AI transition. Six boxes. Clear thinking. Free to download.</div>
+            <div class="res-list-meta mono"><span>Strategy · Leadership</span><span>Free</span></div>
+          </div>
+          <div class="res-list-arrow">→</div>
+        </li>
+        <li class="res-list-item">
+          <div class="res-list-num mono">03</div>
+          <div class="res-list-body">
+            <div class="res-list-title">The Bedouin Navigation Model</div>
+            <div class="res-list-desc">How the Bedouin way of thinking — stars, memory, landscape — applies to systems thinking in a world without a map.</div>
+            <div class="res-list-meta mono"><span>Mental Model</span><span>Essay · Coming soon</span></div>
+          </div>
+          <div class="res-list-arrow">→</div>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<!-- ─── NEWSLETTER ─────────────────────────────────────── -->
+<div class="newsletter-band" id="newsletter">
+  <div class="wrap">
+    <div class="nl-label mono">
+      <div class="nl-dot"></div>
+      Published weekly
+    </div>
+    <h2 class="nl-title">
+      The <em>Sand &amp; Silicon</em> Byte
+    </h2>
+    <p class="nl-desc">
+      A weekly letter at the intersection of AI, the Gulf, and education.
+      One big idea. Three signals. An ancient thread. A prompt you can use this week.
+      Written from inside the systems — not from a think tank.
+    </p>
+    <!--
+      BEEHIIV EMBED — Replace this form with your Beehiiv embed:
+      Dashboard → Grow → Forms → Embed → copy iframe src
+    -->
+    <div class="nl-form">
+      <input type="email" class="nl-input mono" placeholder="your@email.com" aria-label="Email address" />
+      <a href="https://thesandandsiliconbyte.beehiiv.com" target="_blank" rel="noopener" class="nl-btn mono">Subscribe →</a>
+    </div>
+    <p class="nl-note mono">Free. One email a week. No sponsored content. Unsubscribe anytime.</p>
+  </div>
+</div>
+
+<!-- ─── BASEERA / WRITING ──────────────────────────────── -->
+<div class="section" id="writing">
+  <div class="wrap">
+
+    <div class="section-label">Baseera · بصيرة · Distilled reading</div>
+
+    {latestEditions.length === 0 ? (
+      <p class="empty-state">No editions yet — check back soon.</p>
+    ) : (
+      <ul class="writing-list">
+        {latestEditions.map((edition) => (
+          <li class="writing-item">
+            <a href={`/baseera/${edition.slug}`} class="writing-link">
+              <div class="writing-edition mono">
+                Edition {String(edition.data.edition).padStart(3, '0')} · {edition.data.tags?.slice(0,2).join(' · ')}
               </div>
+              <div class="writing-title">{edition.data.title}</div>
+              <div class="writing-excerpt">{edition.data.finding}</div>
             </a>
-          ))}
-        </div>
-      </div>
-    </section>
-  )}
+            <div class="writing-arrow">→</div>
+          </li>
+        ))}
+      </ul>
+    )}
 
-  <!-- Newsletter CTA -->
-  <section class="newsletter-cta">
-    <div class="container--narrow">
-      <div class="cta-inner">
-        <h2 class="cta-title">The Sand & Silicon Byte</h2>
-        <p class="cta-sub">Weekly intelligence for leaders navigating AI, systems, and the knowledge economy. No noise. One signal. Every week.</p>
-        <a href="https://thesandandsiliconbyte.beehiiv.com" target="_blank" rel="noopener" class="btn btn-gold">
-          Subscribe Free →
-        </a>
-      </div>
+    <div style="margin-top: 32px;">
+      <a href="/baseera" class="btn-text">All Baseera editions →</a>
     </div>
-  </section>
+
+  </div>
+</div>
 
 </BaseLayout>
 
 <style>
-  /* Hero */
+  /* ─── HERO ───────────────────────────────────────── */
   .hero {
-    background: var(--navy);
-    padding: 5rem 0;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .hero::before {
-    content: '';
-    position: absolute;
-    top: 0; right: 0;
-    width: 40%;
-    height: 100%;
-    background: linear-gradient(135deg, transparent 0%, rgba(201, 168, 76, 0.07) 100%);
-    pointer-events: none;
-  }
-
-  .hero-inner {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 3rem;
-    align-items: center;
+    padding: 72px 0 64px;
+    border-bottom: 1px solid var(--rule);
   }
 
   .hero-eyebrow {
-    font-size: 0.8rem;
-    letter-spacing: 0.12em;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
     text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 1.25rem;
+    color: var(--sand);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .hero-eyebrow::after {
+    content: '';
+    display: block;
+    flex: 1;
+    height: 1px;
+    background: var(--sand-rule);
+    max-width: 48px;
+  }
+
+  .hero-name {
+    font-size: clamp(40px, 6vw, 64px);
     font-weight: 500;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 6px;
   }
 
-  .hero-headline {
-    font-family: 'Lora', serif;
-    font-size: clamp(1.75rem, 3.5vw, 2.75rem);
-    color: var(--white);
-    font-weight: 600;
-    line-height: 1.25;
-    max-width: 580px;
+  .hero-identity {
+    font-size: clamp(18px, 2vw, 22px);
+    color: var(--ink-soft);
+    font-style: italic;
+    margin-bottom: 28px;
   }
 
-  .hero .gold-rule { margin: 1.75rem 0; }
-
-  .hero-sub {
-    color: rgba(255,255,255,0.75);
-    font-size: 1rem;
-    max-width: 540px;
-    line-height: 1.8;
-    margin-bottom: 2rem;
+  .hero-tagline {
+    font-size: clamp(17px, 1.8vw, 20px);
+    color: var(--ink-mid);
+    line-height: 1.65;
+    margin-bottom: 20px;
+    max-width: 560px;
   }
+
+  .hero-creds {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-faint);
+    letter-spacing: 0.04em;
+    margin-bottom: 36px;
+  }
+
+  .hero-creds span { white-space: nowrap; }
+  .hero-creds .sep { margin: 0 10px; opacity: 0.4; }
 
   .hero-actions {
     display: flex;
-    gap: 1rem;
+    gap: 16px;
     flex-wrap: wrap;
+    align-items: center;
   }
 
-  .btn {
-    display: inline-block;
-    padding: 0.7rem 1.5rem;
-    font-size: 0.875rem;
+  /* ─── ABOUT STRIP ────────────────────────────────── */
+  .about-strip {
+    padding: 56px 0;
+    border-bottom: 1px solid var(--rule);
+    background: var(--page-warm);
+  }
+
+  .about-strip-inner {
+    display: grid;
+    grid-template-columns: 1fr 2.2fr;
+    gap: 56px;
+    align-items: start;
+  }
+
+  .about-strip-name {
+    font-size: 13px;
     font-weight: 500;
-    border-radius: 2px;
-    transition: all 0.2s;
-    letter-spacing: 0.02em;
+    color: var(--ink);
+    margin-bottom: 4px;
+    letter-spacing: 0.04em;
   }
 
-  .btn-primary {
-    background: var(--gold);
-    color: var(--navy-deep);
-    font-weight: 600;
+  .about-strip-handle {
+    font-size: 11px;
+    color: var(--sand-dark);
+    margin-bottom: 20px;
   }
 
-  .btn-primary:hover { opacity: 0.88; }
-
-  .btn-secondary {
-    border: 1px solid rgba(255,255,255,0.3);
-    color: rgba(255,255,255,0.85);
-  }
-
-  .btn-secondary:hover {
-    border-color: var(--gold);
-    color: var(--gold);
-  }
-
-  .hero-badge {
-    flex-shrink: 0;
-  }
-
-  .badge-inner {
-    width: 140px;
-    height: 140px;
-    border: 2px solid var(--gold);
-    border-radius: 50%;
+  .about-strip-img {
+    width: 100%;
+    aspect-ratio: 1;
+    background: var(--sand-pale);
+    border-radius: 4px;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 0.3rem;
-    opacity: 0.7;
-  }
-
-  .badge-ar {
-    font-family: 'Lora', serif;
-    font-size: 1.5rem;
-    color: var(--gold);
-    direction: rtl;
-  }
-
-  .badge-en {
-    font-size: 0.6rem;
-    color: rgba(255,255,255,0.5);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    text-align: center;
-    max-width: 100px;
-    line-height: 1.4;
-  }
-
-  /* Sections */
-  .section-title {
-    font-size: 1.75rem;
-    color: var(--navy);
-    font-weight: 600;
-  }
-
-  .section-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    margin-bottom: 2rem;
-  }
-
-  .view-all {
-    color: var(--navy);
-    font-size: 0.875rem;
-    font-weight: 500;
-    opacity: 0.7;
-    transition: opacity 0.2s;
-    white-space: nowrap;
-  }
-
-  .view-all:hover { opacity: 1; color: var(--gold); }
-
-  /* About */
-  .about {
-    padding: 5rem 0;
-    background: var(--white);
-  }
-
-  .about h2 { margin-bottom: 0; }
-
-  .about-body {
-    display: flex;
-    flex-direction: column;
-    gap: 1.25rem;
-  }
-
-  .about-body p {
-    font-size: 1rem;
-    color: #2a3a4a;
-    line-height: 1.85;
-  }
-
-  /* Pillars */
-  .pillars {
-    padding: 5rem 0;
-    background: var(--sand);
-  }
-
-  .pillars h2 { margin-bottom: 0; }
-
-  .pillars-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-    gap: 1.5rem;
-    margin-top: 2rem;
-  }
-
-  .pillar {
-    background: var(--white);
-    padding: 2rem 1.5rem;
-    border-top: 3px solid var(--navy);
-    position: relative;
-  }
-
-  .pillar-number {
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    color: var(--gold);
-    text-transform: uppercase;
-    margin-bottom: 0.75rem;
-    display: block;
-  }
-
-  .pillar-title {
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--navy);
-    margin-bottom: 0.75rem;
-    font-family: 'Lora', serif;
-  }
-
-  .pillar-desc {
-    font-size: 0.875rem;
-    color: var(--text-muted);
-    line-height: 1.7;
-  }
-
-  /* Latest Baseera */
-  .latest-baseera {
-    padding: 5rem 0;
-    background: var(--white);
-  }
-
-  .baseera-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 1.5rem;
-  }
-
-  .baseera-card {
-    background: var(--sand);
-    padding: 1.75rem;
-    border-left: 3px solid var(--gold);
-    display: block;
-    transition: transform 0.2s, box-shadow 0.2s;
-  }
-
-  .baseera-card:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 20px rgba(26, 60, 94, 0.1);
-  }
-
-  .card-edition {
-    font-size: 0.7rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 0.75rem;
-  }
-
-  .card-title {
-    font-family: 'Lora', serif;
-    font-size: 1.1rem;
-    color: var(--navy);
-    margin-bottom: 0.75rem;
-    line-height: 1.4;
-  }
-
-  .card-finding {
-    font-size: 0.875rem;
-    color: var(--text-muted);
-    line-height: 1.65;
-    margin-bottom: 1.25rem;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
+    font-size: 48px;
+    border: 1px solid var(--rule);
     overflow: hidden;
   }
 
-  .card-footer {
+  .about-strip-body {
+    font-size: 17px;
+    color: var(--ink-mid);
+    line-height: 1.8;
+  }
+
+  .about-strip-body p { margin-bottom: 16px; }
+  .about-strip-body p:last-of-type { margin-bottom: 0; }
+
+  .about-quote {
+    margin-top: 28px;
+    padding: 16px 20px;
+    border-left: 2px solid var(--sand);
+    background: var(--sand-pale);
+    font-style: italic;
+    font-size: 17px;
+    color: var(--ink-mid);
+    line-height: 1.6;
+    border-radius: 0 4px 4px 0;
+  }
+
+  .about-socials {
+    margin-top: 24px;
     display: flex;
-    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .about-socials a {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-faint);
+    letter-spacing: 0.06em;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 1px;
+    transition: all 0.15s;
+  }
+  .about-socials a:hover { color: var(--sand-dark); border-color: var(--sand-rule); }
+
+  /* ─── RESOURCES ──────────────────────────────────── */
+  .resources-tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 40px;
+  }
+
+  .res-tab {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    padding: 12px 20px;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    transition: all 0.15s;
+    background: none;
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    display: flex;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 0.5rem;
+    gap: 7px;
   }
 
-  .card-date {
-    font-size: 0.75rem;
-    color: var(--text-muted);
+  .res-tab:hover { color: var(--ink-mid); }
+
+  .res-tab.active {
+    color: var(--ink);
+    border-bottom-color: var(--sand);
   }
 
-  .card-tags {
+  .res-panel { display: none; }
+  .res-panel.active { display: block; }
+
+  .res-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+
+  .res-card {
+    background: var(--page);
+    padding: 28px;
+    transition: background 0.15s;
+    cursor: pointer;
     display: flex;
-    gap: 0.4rem;
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: 8px;
   }
 
-  .card-tag {
-    font-size: 0.65rem;
+  .res-card:hover { background: var(--sand-pale); }
+
+  .res-card-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--sand-dark);
+    background: var(--sand-pale);
+    border: 1px solid var(--sand-rule);
+    padding: 2px 7px;
+    border-radius: 2px;
+    display: inline-block;
+    width: fit-content;
+  }
+
+  .res-card-badge.free {
+    color: var(--teal);
+    background: rgba(13,115,119,0.06);
+    border-color: rgba(13,115,119,0.2);
+  }
+
+  .res-card-title {
+    font-size: 17px;
     font-weight: 500;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+
+  .res-card-desc {
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.65;
+    flex: 1;
+  }
+
+  .res-card-region {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-faint);
+    letter-spacing: 0.05em;
+    margin-top: 4px;
+  }
+
+  .res-card-link {
+    font-size: 10px;
+    color: var(--sand-dark);
     letter-spacing: 0.06em;
     text-transform: uppercase;
-    background: var(--navy);
-    color: rgba(255,255,255,0.8);
-    padding: 0.2rem 0.5rem;
-    border-radius: 2px;
+    margin-top: 4px;
   }
 
-  /* Newsletter CTA */
-  .newsletter-cta {
-    padding: 5rem 0;
-    background: var(--navy);
+  .res-note {
+    font-size: 11px;
+    color: var(--ink-faint);
+    letter-spacing: 0.04em;
   }
 
-  .cta-inner {
+  .res-note a {
+    color: var(--sand-dark);
+    border-bottom: 1px solid var(--sand-rule);
+  }
+
+  .res-list { list-style: none; }
+
+  .res-list-item {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--rule);
+    cursor: pointer;
+    transition: all 0.12s;
+  }
+
+  .res-list-item:last-child { border-bottom: none; }
+  .res-list-item:hover .res-list-title { color: var(--sand-dark); }
+
+  .res-list-num {
+    font-size: 11px;
+    color: var(--ink-faint);
+    min-width: 28px;
+    padding-top: 3px;
+  }
+
+  .res-list-body { flex: 1; }
+
+  .res-list-title {
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 4px;
+    transition: color 0.15s;
+  }
+
+  .res-list-desc {
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+
+  .res-list-meta {
+    margin-top: 8px;
+    font-size: 10px;
+    color: var(--ink-faint);
+    display: flex;
+    gap: 12px;
+  }
+
+  .res-list-arrow {
+    font-size: 16px;
+    color: var(--rule);
+    padding-top: 2px;
+    transition: color 0.15s, transform 0.15s;
+  }
+  .res-list-item:hover .res-list-arrow { color: var(--sand); transform: translateX(3px); }
+
+  .res-coming {
     text-align: center;
+    padding: 48px 24px;
+    color: var(--ink-faint);
+    font-size: 15px;
+    font-style: italic;
+    border: 1px dashed var(--rule);
+    border-radius: 6px;
+    margin-top: 20px;
+  }
+  .res-coming strong { color: var(--sand-dark); font-style: normal; font-weight: 500; }
+  .res-coming a { color: var(--sand-dark); }
+
+  /* ─── NEWSLETTER ─────────────────────────────────── */
+  .newsletter-band {
+    background: var(--ink);
+    padding: 64px 0;
   }
 
-  .cta-title {
-    font-size: 1.75rem;
-    color: var(--white);
-    margin-bottom: 1rem;
+  .newsletter-band .wrap { max-width: 600px; }
+
+  .nl-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--sand);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
   }
 
-  .cta-sub {
-    color: rgba(255,255,255,0.7);
-    font-size: 1rem;
-    max-width: 480px;
-    margin: 0 auto 2rem;
-    line-height: 1.7;
+  .nl-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: var(--sand);
+    flex-shrink: 0;
+    animation: pulse 2.5s ease-in-out infinite;
   }
 
-  .btn-gold {
-    background: var(--gold);
-    color: var(--navy-deep);
-    font-weight: 600;
-    padding: 0.85rem 2rem;
-    font-size: 0.9rem;
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
   }
 
-  .btn-gold:hover { opacity: 0.88; }
+  .nl-title {
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 500;
+    color: #FAFAF8;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin-bottom: 16px;
+  }
 
-  @media (max-width: 768px) {
-    .hero-inner { grid-template-columns: 1fr; }
-    .hero-badge { display: none; }
-    .section-header { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+  .nl-title em { color: var(--sand); font-style: italic; }
+
+  .nl-desc {
+    font-size: 17px;
+    color: rgba(250,250,248,0.6);
+    line-height: 1.75;
+    margin-bottom: 32px;
+  }
+
+  .nl-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .nl-input {
+    flex: 1;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 3px;
+    padding: 13px 16px;
+    font-size: 13px;
+    color: #FAFAF8;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .nl-input::placeholder { color: rgba(255,255,255,0.3); }
+  .nl-input:focus { border-color: var(--sand); }
+
+  .nl-btn {
+    display: inline-block;
+    background: var(--sand);
+    color: var(--ink);
+    border: none;
+    border-radius: 3px;
+    padding: 13px 24px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.15s;
+    white-space: nowrap;
+  }
+  .nl-btn:hover { background: #E8D5AA; color: var(--ink); }
+
+  .nl-note {
+    font-size: 10px;
+    color: rgba(255,255,255,0.25);
+    letter-spacing: 0.04em;
+  }
+
+  /* ─── WRITING / BASEERA ──────────────────────────── */
+  .writing-list { list-style: none; }
+
+  .writing-item {
+    padding: 28px 0;
+    border-bottom: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 24px;
+    align-items: start;
+    cursor: pointer;
+  }
+
+  .writing-item:first-child { padding-top: 0; }
+  .writing-item:last-child { border-bottom: none; }
+  .writing-item:hover .writing-title { color: var(--sand-dark); }
+
+  .writing-link { display: block; }
+
+  .writing-edition {
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--sand);
+    margin-bottom: 8px;
+  }
+
+  .writing-title {
+    font-size: 20px;
+    font-weight: 500;
+    color: var(--ink);
+    line-height: 1.3;
+    margin-bottom: 8px;
+    transition: color 0.15s;
+  }
+
+  .writing-excerpt {
+    font-size: 15px;
+    color: var(--ink-soft);
+    line-height: 1.65;
+  }
+
+  .writing-arrow {
+    font-size: 18px;
+    color: var(--rule);
+    margin-top: 6px;
+    transition: color 0.15s, transform 0.15s;
+  }
+  .writing-item:hover .writing-arrow { color: var(--sand); transform: translateX(4px); }
+
+  .empty-state {
+    font-size: 15px;
+    color: var(--ink-faint);
+    font-style: italic;
+    padding: 40px 0;
+  }
+
+  @media (max-width: 760px) {
+    .hero { padding: 48px 0 40px; }
+    .section { padding: 52px 0; }
+    .about-strip-inner { grid-template-columns: 1fr; gap: 32px; }
+    .about-strip-img { max-width: 120px; }
+    .res-grid { grid-template-columns: 1fr; }
+    .nl-form { flex-direction: column; }
+    .writing-item { grid-template-columns: 1fr; }
+    .writing-arrow { display: none; }
   }
 </style>
+
+<script>
+  // Tab switching for Resources
+  const tabs = document.querySelectorAll('.res-tab');
+  const panels = document.querySelectorAll('.res-panel');
+
+  tabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const target = tab.getAttribute('data-tab');
+      tabs.forEach(t => t.classList.remove('active'));
+      panels.forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      const panel = document.getElementById(`tab-${target}`);
+      if (panel) panel.classList.add('active');
+    });
+  });
+</script>
