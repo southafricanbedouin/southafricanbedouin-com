@@ -1,0 +1,360 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const editions = await getCollection('baseera');
+  return editions.map((edition) => ({
+    params: { slug: edition.slug },
+    props: { edition },
+  }));
+}
+
+const { edition } = Astro.props;
+const { Content } = await edition.render();
+const { title, edition: num, date, article, articleUrl, author, finding, pattern, signal, tags, linkedinUrl } = edition.data;
+---
+
+<BaseLayout
+  title={`Baseera Edition ${num}: ${title}`}
+  description={finding}
+>
+
+  <!-- Edition Header -->
+  <section class="edition-header">
+    <div class="container--narrow">
+      <div class="breadcrumb">
+        <a href="/baseera">Baseera بصيرة</a>
+        <span class="sep">→</span>
+        <span>Edition {num}</span>
+      </div>
+      <h1 class="edition-title">{title}</h1>
+      <div class="edition-meta">
+        <span class="edition-num">Edition {num}</span>
+        <span class="edition-date">{date}</span>
+      </div>
+      {tags && (
+        <div class="edition-tags">
+          {tags.map((tag) => <span class="tag">{tag}</span>)}
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- Source -->
+  <section class="source-block">
+    <div class="container--narrow">
+      <div class="source-inner">
+        <span class="source-label">Source</span>
+        <div>
+          {articleUrl ? (
+            <a href={articleUrl} target="_blank" rel="noopener" class="source-title">{article} ↗</a>
+          ) : (
+            <span class="source-title">{article}</span>
+          )}
+          {author && <p class="source-author">{author}</p>}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Three Layers -->
+  <div class="layers">
+    <div class="container--narrow">
+
+      <div class="layer layer--finding">
+        <div class="layer-header">
+          <span class="layer-number">01</span>
+          <h2 class="layer-title">The Finding</h2>
+        </div>
+        <p class="layer-body">{finding}</p>
+      </div>
+
+      <div class="layer layer--pattern">
+        <div class="layer-header">
+          <span class="layer-number">02</span>
+          <h2 class="layer-title">The Pattern</h2>
+        </div>
+        <p class="layer-body">{pattern}</p>
+      </div>
+
+      <div class="layer layer--signal">
+        <div class="layer-header">
+          <span class="layer-number">03</span>
+          <h2 class="layer-title">The Signal</h2>
+        </div>
+        <p class="layer-body">{signal}</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Full Content -->
+  <article class="content">
+    <div class="container--narrow">
+      <div class="gold-rule"></div>
+      <div class="prose">
+        <Content />
+      </div>
+    </div>
+  </article>
+
+  <!-- Footer Actions -->
+  <section class="edition-footer">
+    <div class="container--narrow">
+      {linkedinUrl && (
+        <a href={linkedinUrl} target="_blank" rel="noopener" class="btn-linkedin">
+          View on LinkedIn →
+        </a>
+      )}
+      <a href="/baseera" class="btn-back">← All editions</a>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .edition-header {
+    background: var(--navy);
+    padding: 4rem 0 3rem;
+  }
+
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 1.5rem;
+  }
+
+  .breadcrumb a {
+    color: var(--gold);
+    transition: opacity 0.2s;
+  }
+
+  .breadcrumb a:hover { opacity: 0.8; }
+
+  .sep { color: rgba(255,255,255,0.3); }
+
+  .edition-title {
+    font-size: clamp(1.5rem, 3.5vw, 2.25rem);
+    color: var(--white);
+    font-weight: 600;
+    line-height: 1.3;
+    margin-bottom: 1.25rem;
+  }
+
+  .edition-meta {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .edition-num {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    background: rgba(201, 168, 76, 0.15);
+    padding: 0.3rem 0.75rem;
+    border-radius: 2px;
+  }
+
+  .edition-date {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.5);
+  }
+
+  .edition-tags {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    background: rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.7);
+    padding: 0.2rem 0.5rem;
+    border-radius: 2px;
+  }
+
+  /* Source */
+  .source-block {
+    background: var(--white);
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .source-inner {
+    display: flex;
+    gap: 1.5rem;
+    align-items: flex-start;
+  }
+
+  .source-label {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    white-space: nowrap;
+    margin-top: 0.2rem;
+  }
+
+  .source-title {
+    font-size: 0.95rem;
+    font-style: italic;
+    color: var(--navy);
+    font-family: 'Lora', serif;
+  }
+
+  a.source-title:hover {
+    text-decoration: underline;
+    color: var(--gold);
+  }
+
+  .source-author {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 0.25rem;
+  }
+
+  /* Layers */
+  .layers {
+    padding: 3rem 0;
+    background: var(--sand);
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .layer {
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .layer:last-child { border-bottom: none; }
+
+  .layer-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .layer-number {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .layer-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--navy);
+    font-family: 'Lora', serif;
+  }
+
+  .layer-body {
+    font-size: 1rem;
+    color: var(--text);
+    line-height: 1.85;
+  }
+
+  .layer--signal {
+    background: var(--navy);
+    padding: 2rem;
+    margin-top: 1.5rem;
+    border-bottom: none;
+  }
+
+  .layer--signal .layer-title {
+    color: var(--gold);
+  }
+
+  .layer--signal .layer-body {
+    color: rgba(255,255,255,0.85);
+    font-size: 1.05rem;
+  }
+
+  .layer--signal .layer-number {
+    color: rgba(201, 168, 76, 0.6);
+  }
+
+  /* Prose */
+  .content {
+    padding: 3rem 0;
+    background: var(--white);
+  }
+
+  .prose {
+    font-size: 1rem;
+    line-height: 1.85;
+    color: #2a3a4a;
+  }
+
+  .prose p {
+    margin-bottom: 1.25rem;
+  }
+
+  .prose h2, .prose h3 {
+    color: var(--navy);
+    margin: 2rem 0 0.75rem;
+  }
+
+  .prose strong {
+    color: var(--navy);
+    font-weight: 600;
+  }
+
+  .prose em {
+    font-style: italic;
+  }
+
+  /* Footer */
+  .edition-footer {
+    padding: 3rem 0;
+    background: var(--sand);
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+  }
+
+  .edition-footer .container--narrow {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-linkedin {
+    background: var(--navy);
+    color: var(--white);
+    padding: 0.7rem 1.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border-radius: 2px;
+    transition: background 0.2s;
+  }
+
+  .btn-linkedin:hover {
+    background: var(--navy-deep);
+  }
+
+  .btn-back {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    transition: color 0.2s;
+  }
+
+  .btn-back:hover { color: var(--navy); }
+</style>

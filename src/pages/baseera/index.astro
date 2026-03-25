@@ -1,0 +1,212 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const editions = await getCollection('baseera');
+const sorted = editions.sort((a, b) => b.data.edition - a.data.edition);
+---
+
+<BaseLayout
+  title="Baseera بصيرة Archive"
+  description="All editions of Baseera — bi-weekly signal briefings distilling one article into The Finding, The Pattern, and The Signal."
+>
+  <!-- Page Header -->
+  <section class="page-header">
+    <div class="container">
+      <p class="eyebrow">Archive</p>
+      <h1 class="page-title">Baseera <span class="ar">بصيرة</span></h1>
+      <div class="gold-rule"></div>
+      <p class="page-desc">
+        Every edition distils one article or paper into three layers: <strong>The Finding</strong> (what the source says), <strong>The Pattern</strong> (what it means across sectors), and <strong>The Signal</strong> (what leaders should act on). Bi-weekly. No noise.
+      </p>
+    </div>
+  </section>
+
+  <!-- Editions Grid -->
+  <section class="editions">
+    <div class="container">
+      {sorted.length === 0 ? (
+        <p class="empty">No editions yet. Check back soon.</p>
+      ) : (
+        <div class="editions-grid">
+          {sorted.map((edition) => (
+            <a href={`/baseera/${edition.slug}`} class="edition-card">
+              <div class="card-top">
+                <span class="edition-number">Edition {edition.data.edition}</span>
+                <span class="edition-date">{edition.data.date}</span>
+              </div>
+              <h2 class="edition-title">{edition.data.title}</h2>
+              <p class="edition-source">
+                Source: <em>{edition.data.article}</em>
+                {edition.data.author && ` — ${edition.data.author}`}
+              </p>
+              <div class="edition-finding">
+                <span class="finding-label">The Finding</span>
+                <p>{edition.data.finding}</p>
+              </div>
+              {edition.data.tags && (
+                <div class="edition-tags">
+                  {edition.data.tags.map((tag) => (
+                    <span class="tag">{tag}</span>
+                  ))}
+                </div>
+              )}
+              <span class="read-link">Read edition →</span>
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-header {
+    background: var(--navy);
+    padding: 4rem 0 3rem;
+  }
+
+  .eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+  }
+
+  .page-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: var(--white);
+    font-weight: 600;
+  }
+
+  .ar {
+    color: var(--gold);
+    font-style: italic;
+  }
+
+  .page-header .gold-rule { margin: 1.5rem 0; }
+
+  .page-desc {
+    color: rgba(255,255,255,0.72);
+    font-size: 1rem;
+    max-width: 580px;
+    line-height: 1.8;
+  }
+
+  .editions {
+    padding: 4rem 0;
+  }
+
+  .editions-grid {
+    display: grid;
+    gap: 1.5rem;
+  }
+
+  .edition-card {
+    background: var(--white);
+    padding: 2rem;
+    border-left: 4px solid var(--gold);
+    display: block;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .edition-card:hover {
+    transform: translateX(4px);
+    box-shadow: 0 2px 16px rgba(26, 60, 94, 0.08);
+  }
+
+  .card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+  }
+
+  .edition-number {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .edition-date {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  .edition-title {
+    font-size: 1.25rem;
+    color: var(--navy);
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+  }
+
+  .edition-source {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 1.25rem;
+  }
+
+  .edition-finding {
+    background: var(--sand);
+    padding: 1rem 1.25rem;
+    border-radius: 2px;
+    margin-bottom: 1.25rem;
+  }
+
+  .finding-label {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--navy);
+    display: block;
+    margin-bottom: 0.4rem;
+  }
+
+  .edition-finding p {
+    font-size: 0.875rem;
+    color: var(--text);
+    line-height: 1.7;
+  }
+
+  .edition-tags {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.25rem;
+  }
+
+  .tag {
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    background: var(--navy);
+    color: rgba(255,255,255,0.8);
+    padding: 0.2rem 0.5rem;
+    border-radius: 2px;
+  }
+
+  .read-link {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--navy);
+    letter-spacing: 0.02em;
+    transition: color 0.2s;
+  }
+
+  .edition-card:hover .read-link {
+    color: var(--gold);
+  }
+
+  .empty {
+    text-align: center;
+    color: var(--text-muted);
+    padding: 4rem 0;
+    font-style: italic;
+  }
+</style>

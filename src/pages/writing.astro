@@ -1,0 +1,210 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const platforms = [
+  {
+    name: "The Sand & Silicon Byte",
+    subtitle: "Weekly Newsletter",
+    description: "The owned asset. Weekly intelligence for leaders navigating AI, systems, and the knowledge economy. One signal, fully thought through. Beehiiv.",
+    url: "https://thesandandsiliconbyte.beehiiv.com",
+    cta: "Subscribe →",
+    primary: true,
+  },
+  {
+    name: "Substack",
+    subtitle: "Raw thinking · southafricanbedouin",
+    description: "Where the ideas start. Irregular, impulse-driven, less polished. Raw thinking before it becomes content. Discovery layer.",
+    url: "https://southafricanbedouin.substack.com",
+    cta: "Read on Substack →",
+    primary: false,
+  },
+  {
+    name: "LinkedIn",
+    subtitle: "@southafricanbedouin",
+    description: "Daily and bi-weekly content across all four pillars. Where Baseera editions are published first. The primary public voice.",
+    url: "https://linkedin.com/in/muhammadseedat",
+    cta: "Connect →",
+    primary: false,
+  },
+];
+---
+
+<BaseLayout
+  title="Writing"
+  description="Muhammad Seedat's writing — newsletter, Substack, and LinkedIn. One signal, fully thought through."
+>
+
+  <section class="page-header">
+    <div class="container">
+      <p class="eyebrow">Writing</p>
+      <h1 class="page-title">Where the thinking lives</h1>
+      <div class="gold-rule"></div>
+      <p class="page-desc">
+        The newsletter is the owned asset. Everything else feeds it. Here is where to find each layer of the writing.
+      </p>
+    </div>
+  </section>
+
+  <section class="platforms">
+    <div class="container--narrow">
+      <div class="platforms-list">
+        {platforms.map((p) => (
+          <div class={`platform-card ${p.primary ? 'platform-card--primary' : ''}`}>
+            <div class="platform-top">
+              <div>
+                <h2 class="platform-name">{p.name}</h2>
+                <span class="platform-sub">{p.subtitle}</span>
+              </div>
+              {p.primary && <span class="primary-badge">Primary</span>}
+            </div>
+            <p class="platform-desc">{p.description}</p>
+            <a href={p.url} target="_blank" rel="noopener" class="platform-cta">
+              {p.cta}
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="writing-note">
+    <div class="container--narrow">
+      <h2>On the writing itself</h2>
+      <div class="gold-rule"></div>
+      <p>
+        Everything I write follows the same principle: <strong>I am the witness, not the hero.</strong> The content is about the pattern, the system, the idea I noticed — not about my years of experience or my journey. The reader is the protagonist.
+      </p>
+      <p>
+        The voice is direct. No performed reflection. No announcement phrases. The thought delivered, not announced.
+      </p>
+      <p>
+        Long-form always opens with <em>As-salamu alaykum (Peace be upon you)</em>. That is not a stylistic choice. It is who I am.
+      </p>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .page-header {
+    background: var(--navy);
+    padding: 4rem 0 3rem;
+  }
+
+  .eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+  }
+
+  .page-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: var(--white);
+    font-weight: 600;
+  }
+
+  .page-header .gold-rule { margin: 1.5rem 0; }
+
+  .page-desc {
+    color: rgba(255,255,255,0.72);
+    font-size: 1rem;
+    max-width: 520px;
+    line-height: 1.8;
+  }
+
+  .platforms {
+    padding: 4rem 0;
+    background: var(--sand);
+  }
+
+  .platforms-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .platform-card {
+    background: var(--white);
+    padding: 2rem;
+    border-left: 3px solid var(--border);
+  }
+
+  .platform-card--primary {
+    border-left-color: var(--gold);
+    background: var(--white);
+    box-shadow: 0 2px 20px rgba(26, 60, 94, 0.07);
+  }
+
+  .platform-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+  }
+
+  .platform-name {
+    font-size: 1.2rem;
+    color: var(--navy);
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+  }
+
+  .platform-sub {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+  }
+
+  .primary-badge {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    background: var(--gold);
+    color: var(--navy-deep);
+    padding: 0.25rem 0.6rem;
+    border-radius: 2px;
+  }
+
+  .platform-desc {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+    margin-bottom: 1.25rem;
+  }
+
+  .platform-cta {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--navy);
+    transition: color 0.2s;
+  }
+
+  .platform-cta:hover { color: var(--gold); }
+
+  .writing-note {
+    padding: 4rem 0;
+    background: var(--white);
+  }
+
+  .writing-note h2 {
+    font-size: 1.5rem;
+    color: var(--navy);
+    margin-bottom: 0;
+  }
+
+  .writing-note .gold-rule { margin: 1.25rem 0 1.75rem; }
+
+  .writing-note p {
+    font-size: 1rem;
+    color: #2a3a4a;
+    line-height: 1.85;
+    margin-bottom: 1.25rem;
+    max-width: 680px;
+  }
+
+  .writing-note strong { color: var(--navy); }
+  .writing-note em { font-style: italic; }
+</style>

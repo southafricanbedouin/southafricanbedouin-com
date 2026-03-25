@@ -1,0 +1,475 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const baseeraEditions = await getCollection('baseera');
+const latestEditions = baseeraEditions
+  .sort((a, b) => b.data.edition - a.data.edition)
+  .slice(0, 3);
+---
+
+<BaseLayout title="Muhammad Seedat" description="Systems thinker. Strategic advisor. The South African Bedouin.">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-inner">
+        <div class="hero-text">
+          <p class="hero-eyebrow">Systems Thinker · Strategic Advisor · Doha, Qatar</p>
+          <h1 class="hero-headline">
+            The systems you build today determine who leads tomorrow.
+          </h1>
+          <div class="gold-rule"></div>
+          <p class="hero-sub">
+            As-salamu alaykum. I'm Muhammad Seedat — industrial engineer, systems thinker, and advisor based in Doha. I write about Industry 5.0, AI in the Gulf and Africa, and the human constant underneath every transformation.
+          </p>
+          <div class="hero-actions">
+            <a href="/baseera" class="btn btn-primary">Read Baseera بصيرة →</a>
+            <a href="https://thesandandsiliconbyte.beehiiv.com" target="_blank" rel="noopener" class="btn btn-secondary">The Sand & Silicon Byte</a>
+          </div>
+        </div>
+        <div class="hero-badge">
+          <div class="badge-inner">
+            <span class="badge-ar">بصيرة</span>
+            <span class="badge-en">The South African Bedouin</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- About -->
+  <section class="about">
+    <div class="container--narrow">
+      <h2 class="section-title">Who I Am</h2>
+      <div class="gold-rule"></div>
+      <div class="about-body">
+        <p>
+          South African-born. Gulf-built. Fifteen years building greenfield hospitals, national education strategies, special needs school systems, and enterprise transformations across Healthcare, Education, Government, and FMCG in the Gulf.
+        </p>
+        <p>
+          I trained as an industrial engineer. I think like a systems architect. I write like someone who has watched the same failure pattern repeat across enough sectors to know it is never random.
+        </p>
+        <p>
+          My work sits at the intersection of the knowledge economy, AI adoption, and human-centred leadership — always viewed through the lens of <strong>Africa and the East</strong>. Not Silicon Valley. Not London. The regions the world's largest transformation wave is actually happening in.
+        </p>
+        <p>
+          I run <strong>Baseera (بصيرة)</strong> — a bi-weekly signal briefing that distils one article or paper into three layers: The Finding, The Pattern, The Signal. Each edition is one idea, fully thought through.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Content Pillars -->
+  <section class="pillars">
+    <div class="container">
+      <h2 class="section-title">What I Write About</h2>
+      <div class="gold-rule"></div>
+      <div class="pillars-grid">
+        <div class="pillar">
+          <span class="pillar-number">P1</span>
+          <h3 class="pillar-title">Industry 5.0</h3>
+          <p class="pillar-desc">AI, systems design, and cross-sector intelligence — how the next industrial wave is actually unfolding.</p>
+        </div>
+        <div class="pillar">
+          <span class="pillar-number">P2</span>
+          <h3 class="pillar-title">The Bedouin's View</h3>
+          <p class="pillar-desc">Gulf and Africa. Regional perspective on global signals. The context the global media misses.</p>
+        </div>
+        <div class="pillar">
+          <span class="pillar-number">P3</span>
+          <h3 class="pillar-title">Connecting the Dots</h3>
+          <p class="pillar-desc">Cross-sector pattern recognition. The same failure mode in a hospital, a school, and a supply chain — and what it means.</p>
+        </div>
+        <div class="pillar">
+          <span class="pillar-number">P4</span>
+          <h3 class="pillar-title">The Human Constant</h3>
+          <p class="pillar-desc">Ethics, faith, humanity. The things that remain true regardless of which technology wave we are riding.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Latest Baseera -->
+  {latestEditions.length > 0 && (
+    <section class="latest-baseera">
+      <div class="container">
+        <div class="section-header">
+          <div>
+            <h2 class="section-title">Latest Baseera بصيرة</h2>
+            <div class="gold-rule"></div>
+          </div>
+          <a href="/baseera" class="view-all">View all editions →</a>
+        </div>
+        <div class="baseera-grid">
+          {latestEditions.map((edition) => (
+            <a href={`/baseera/${edition.slug}`} class="baseera-card">
+              <div class="card-edition">Edition {edition.data.edition}</div>
+              <h3 class="card-title">{edition.data.title}</h3>
+              <p class="card-finding">{edition.data.finding}</p>
+              <div class="card-footer">
+                <span class="card-date">{edition.data.date}</span>
+                <span class="card-tags">
+                  {edition.data.tags?.slice(0, 2).map((tag) => (
+                    <span class="card-tag">{tag}</span>
+                  ))}
+                </span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+  )}
+
+  <!-- Newsletter CTA -->
+  <section class="newsletter-cta">
+    <div class="container--narrow">
+      <div class="cta-inner">
+        <h2 class="cta-title">The Sand & Silicon Byte</h2>
+        <p class="cta-sub">Weekly intelligence for leaders navigating AI, systems, and the knowledge economy. No noise. One signal. Every week.</p>
+        <a href="https://thesandandsiliconbyte.beehiiv.com" target="_blank" rel="noopener" class="btn btn-gold">
+          Subscribe Free →
+        </a>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  /* Hero */
+  .hero {
+    background: var(--navy);
+    padding: 5rem 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 40%;
+    height: 100%;
+    background: linear-gradient(135deg, transparent 0%, rgba(201, 168, 76, 0.07) 100%);
+    pointer-events: none;
+  }
+
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 3rem;
+    align-items: center;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.8rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.25rem;
+    font-weight: 500;
+  }
+
+  .hero-headline {
+    font-family: 'Lora', serif;
+    font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+    color: var(--white);
+    font-weight: 600;
+    line-height: 1.25;
+    max-width: 580px;
+  }
+
+  .hero .gold-rule { margin: 1.75rem 0; }
+
+  .hero-sub {
+    color: rgba(255,255,255,0.75);
+    font-size: 1rem;
+    max-width: 540px;
+    line-height: 1.8;
+    margin-bottom: 2rem;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 0.7rem 1.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border-radius: 2px;
+    transition: all 0.2s;
+    letter-spacing: 0.02em;
+  }
+
+  .btn-primary {
+    background: var(--gold);
+    color: var(--navy-deep);
+    font-weight: 600;
+  }
+
+  .btn-primary:hover { opacity: 0.88; }
+
+  .btn-secondary {
+    border: 1px solid rgba(255,255,255,0.3);
+    color: rgba(255,255,255,0.85);
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+  }
+
+  .hero-badge {
+    flex-shrink: 0;
+  }
+
+  .badge-inner {
+    width: 140px;
+    height: 140px;
+    border: 2px solid var(--gold);
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem;
+    opacity: 0.7;
+  }
+
+  .badge-ar {
+    font-family: 'Lora', serif;
+    font-size: 1.5rem;
+    color: var(--gold);
+    direction: rtl;
+  }
+
+  .badge-en {
+    font-size: 0.6rem;
+    color: rgba(255,255,255,0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    text-align: center;
+    max-width: 100px;
+    line-height: 1.4;
+  }
+
+  /* Sections */
+  .section-title {
+    font-size: 1.75rem;
+    color: var(--navy);
+    font-weight: 600;
+  }
+
+  .section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 2rem;
+  }
+
+  .view-all {
+    color: var(--navy);
+    font-size: 0.875rem;
+    font-weight: 500;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+    white-space: nowrap;
+  }
+
+  .view-all:hover { opacity: 1; color: var(--gold); }
+
+  /* About */
+  .about {
+    padding: 5rem 0;
+    background: var(--white);
+  }
+
+  .about h2 { margin-bottom: 0; }
+
+  .about-body {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .about-body p {
+    font-size: 1rem;
+    color: #2a3a4a;
+    line-height: 1.85;
+  }
+
+  /* Pillars */
+  .pillars {
+    padding: 5rem 0;
+    background: var(--sand);
+  }
+
+  .pillars h2 { margin-bottom: 0; }
+
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .pillar {
+    background: var(--white);
+    padding: 2rem 1.5rem;
+    border-top: 3px solid var(--navy);
+    position: relative;
+  }
+
+  .pillar-number {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+    display: block;
+  }
+
+  .pillar-title {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 0.75rem;
+    font-family: 'Lora', serif;
+  }
+
+  .pillar-desc {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  /* Latest Baseera */
+  .latest-baseera {
+    padding: 5rem 0;
+    background: var(--white);
+  }
+
+  .baseera-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .baseera-card {
+    background: var(--sand);
+    padding: 1.75rem;
+    border-left: 3px solid var(--gold);
+    display: block;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .baseera-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 20px rgba(26, 60, 94, 0.1);
+  }
+
+  .card-edition {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.75rem;
+  }
+
+  .card-title {
+    font-family: 'Lora', serif;
+    font-size: 1.1rem;
+    color: var(--navy);
+    margin-bottom: 0.75rem;
+    line-height: 1.4;
+  }
+
+  .card-finding {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    line-height: 1.65;
+    margin-bottom: 1.25rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .card-date {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+  }
+
+  .card-tags {
+    display: flex;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+  }
+
+  .card-tag {
+    font-size: 0.65rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    background: var(--navy);
+    color: rgba(255,255,255,0.8);
+    padding: 0.2rem 0.5rem;
+    border-radius: 2px;
+  }
+
+  /* Newsletter CTA */
+  .newsletter-cta {
+    padding: 5rem 0;
+    background: var(--navy);
+  }
+
+  .cta-inner {
+    text-align: center;
+  }
+
+  .cta-title {
+    font-size: 1.75rem;
+    color: var(--white);
+    margin-bottom: 1rem;
+  }
+
+  .cta-sub {
+    color: rgba(255,255,255,0.7);
+    font-size: 1rem;
+    max-width: 480px;
+    margin: 0 auto 2rem;
+    line-height: 1.7;
+  }
+
+  .btn-gold {
+    background: var(--gold);
+    color: var(--navy-deep);
+    font-weight: 600;
+    padding: 0.85rem 2rem;
+    font-size: 0.9rem;
+  }
+
+  .btn-gold:hover { opacity: 0.88; }
+
+  @media (max-width: 768px) {
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero-badge { display: none; }
+    .section-header { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+  }
+</style>

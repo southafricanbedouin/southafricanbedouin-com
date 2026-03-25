@@ -1,0 +1,332 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const frameworks = [
+  {
+    name: "Baseera بصيرة",
+    version: "3.1",
+    type: "Content Framework",
+    description: "A bi-weekly signal briefing system. Each edition distils one article or research paper into three layers: The Finding, The Pattern, The Signal. Built for leaders who want one idea, fully thought through.",
+    status: "Active",
+  },
+  {
+    name: "The M.E.S.H. Protocol",
+    version: null,
+    type: "Education Framework",
+    description: "Mental Models, Ethics, Systems Thinking, Humanity. Muhammad's framework arguing the factory schooling model is obsolete in the AI age. The four capabilities no algorithm replaces. Currently in slow-build seeding phase.",
+    status: "In Development",
+  },
+  {
+    name: "The Seedat System",
+    version: "3.1",
+    type: "Operating System",
+    description: "Seven-part personal operating system covering strategic architecture, content engine, business verticals, automation stack, 6-month calendar, and the Open Systems Project. The infrastructure behind the output.",
+    status: "Internal",
+  },
+];
+
+const categories = [
+  {
+    title: "Systems Thinking",
+    items: ["Thinking in Systems — Donella Meadows", "The Fifth Discipline — Peter Senge", "An Introduction to General Systems Thinking — Gerald Weinberg"],
+  },
+  {
+    title: "AI & Industry 5.0",
+    items: ["Life 3.0 — Max Tegmark", "The Coming Wave — Mustafa Suleyman", "Atlas of AI — Kate Crawford"],
+  },
+  {
+    title: "Leadership & Strategy",
+    items: ["Good Strategy Bad Strategy — Richard Rumelt", "The Effective Executive — Peter Drucker", "Team of Teams — Gen. Stanley McChrystal"],
+  },
+  {
+    title: "Gulf & Africa",
+    items: ["Vision or Mirage: Saudi Arabia at the Crossroads — David Rundell", "The Looming Tower — Lawrence Wright", "The Fate of Africa — Martin Meredith"],
+  },
+];
+---
+
+<BaseLayout
+  title="Resources"
+  description="Frameworks, systems, tools, and books that shape Muhammad Seedat's thinking."
+>
+
+  <section class="page-header">
+    <div class="container">
+      <p class="eyebrow">Resources</p>
+      <h1 class="page-title">Tools, frameworks & thinking</h1>
+      <div class="gold-rule"></div>
+      <p class="page-desc">
+        The frameworks I have built, the books that shaped my thinking, and the systems I run. Nothing recommended that I have not used.
+      </p>
+    </div>
+  </section>
+
+  <!-- Frameworks -->
+  <section class="frameworks">
+    <div class="container">
+      <h2 class="section-title">Frameworks & Systems</h2>
+      <div class="gold-rule"></div>
+      <div class="frameworks-grid">
+        {frameworks.map((f) => (
+          <div class="framework-card">
+            <div class="framework-top">
+              <span class="framework-type">{f.type}</span>
+              <span class={`framework-status status--${f.status.toLowerCase().replace(' ', '-')}`}>
+                {f.status}
+              </span>
+            </div>
+            <h3 class="framework-name">
+              {f.name}
+              {f.version && <span class="framework-version">v{f.version}</span>}
+            </h3>
+            <p class="framework-desc">{f.description}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Reading -->
+  <section class="reading">
+    <div class="container">
+      <h2 class="section-title">Reading List</h2>
+      <div class="gold-rule"></div>
+      <p class="reading-note">
+        Books that have genuinely shaped how I think. Not a curated shelf — a working list.
+      </p>
+      <div class="reading-grid">
+        {categories.map((cat) => (
+          <div class="reading-category">
+            <h3 class="category-title">{cat.title}</h3>
+            <ul class="book-list">
+              {cat.items.map((book) => (
+                <li class="book-item">{book}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Tools -->
+  <section class="tools">
+    <div class="container--narrow">
+      <h2 class="section-title">Tools I Use</h2>
+      <div class="gold-rule"></div>
+      <div class="tools-grid">
+        <div class="tool-group">
+          <h3 class="tool-group-title">Content</h3>
+          <p>Publer (scheduling) · Canva (design) · Beehiiv (newsletter) · Substack (raw thinking)</p>
+        </div>
+        <div class="tool-group">
+          <h3 class="tool-group-title">Intelligence</h3>
+          <p>Feedly · Grok · Perplexity · Google Alerts · NotebookLM</p>
+        </div>
+        <div class="tool-group">
+          <h3 class="tool-group-title">AI</h3>
+          <p>Claude (via Cowork) · Gemini Pro · OpenClaw (Telegram interface)</p>
+        </div>
+        <div class="tool-group">
+          <h3 class="tool-group-title">Command Centre</h3>
+          <p>Telegram · Make.com (automation, planned)</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<style>
+  .page-header {
+    background: var(--navy);
+    padding: 4rem 0 3rem;
+  }
+
+  .eyebrow {
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+  }
+
+  .page-title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: var(--white);
+    font-weight: 600;
+  }
+
+  .page-header .gold-rule { margin: 1.5rem 0; }
+
+  .page-desc {
+    color: rgba(255,255,255,0.72);
+    font-size: 1rem;
+    max-width: 520px;
+    line-height: 1.8;
+  }
+
+  .section-title {
+    font-size: 1.6rem;
+    color: var(--navy);
+    margin-bottom: 0;
+  }
+
+  /* Frameworks */
+  .frameworks {
+    padding: 5rem 0;
+    background: var(--sand);
+  }
+
+  .frameworks-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .framework-card {
+    background: var(--white);
+    padding: 2rem;
+    border-top: 3px solid var(--gold);
+  }
+
+  .framework-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.75rem;
+  }
+
+  .framework-type {
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+
+  .framework-status {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.5rem;
+    border-radius: 2px;
+  }
+
+  .status--active { background: rgba(26, 60, 94, 0.1); color: var(--navy); }
+  .status--in-development { background: rgba(201, 168, 76, 0.15); color: #8a6a20; }
+  .status--internal { background: var(--sand); color: var(--text-muted); }
+
+  .framework-name {
+    font-size: 1.1rem;
+    color: var(--navy);
+    margin-bottom: 0.75rem;
+    font-family: 'Lora', serif;
+    font-weight: 600;
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+  }
+
+  .framework-version {
+    font-size: 0.7rem;
+    color: var(--gold);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+  }
+
+  .framework-desc {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  /* Reading */
+  .reading {
+    padding: 5rem 0;
+    background: var(--white);
+  }
+
+  .reading-note {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    font-style: italic;
+    margin: 1rem 0 2rem;
+  }
+
+  .reading-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 2rem;
+  }
+
+  .reading-category {
+    padding: 1.5rem;
+    background: var(--sand);
+    border-left: 3px solid var(--navy);
+  }
+
+  .category-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--navy);
+    letter-spacing: 0.04em;
+    margin-bottom: 1rem;
+    font-family: 'Poppins', sans-serif;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+  }
+
+  .book-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .book-item {
+    font-size: 0.85rem;
+    color: #2a3a4a;
+    line-height: 1.5;
+    padding-left: 0.75rem;
+    border-left: 2px solid var(--gold);
+  }
+
+  /* Tools */
+  .tools {
+    padding: 5rem 0;
+    background: var(--sand);
+  }
+
+  .tools-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .tool-group {
+    background: var(--white);
+    padding: 1.5rem;
+  }
+
+  .tool-group-title {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.75rem;
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .tool-group p {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+</style>
