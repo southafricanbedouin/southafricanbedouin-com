@@ -60,9 +60,9 @@ const latestEditions = baseeraEditions
 
       <div class="about-strip-body">
         <p>
-          South African-born. Qatar-based. Half my life in each — two homes, one lens.
+          South African-born. Qatar-based. Half my life in each.
           Industrial Engineer by training. Systems Architect by practice.
-          I spent years at Accenture learning how large, complex organisations actually work —
+          I spent years learning how large, complex organisations actually work —
           and more importantly, why they don't.
         </p>
         <p>
@@ -74,6 +74,32 @@ const latestEditions = baseeraEditions
           Father. Barista. Someone who believes in one Creator and finds that belief everywhere —
           in systems, in people, in the way things connect when you slow down enough to see it.
         </p>
+        <details class="about-long">
+          <summary class="about-long-toggle mono">Read more ↓</summary>
+          <div class="about-long-body">
+            <p>
+              I've spent over 18 years building systems nobody had built before. Considering the Context.
+              Greenfield hospitals and manufacturing facilities. Digital Transformations.
+              National education roadmaps. Schools for children the world forgot.
+              Supply chains that moved across 70 nationalities.
+              And now — the AI transition that's reshaping all of it.
+            </p>
+            <p>
+              I'm not a specialist. I'm an architect. I connect the dots that specialists miss —
+              across Healthcare, Education, Government, and the systems that sit beneath them all.
+            </p>
+            <p class="about-pillars">
+              What I write about: AI and what it actually means for leaders in Healthcare and Education ·
+              Systems thinking as an unfair advantage in the AI moment ·
+              Ancient frameworks that still outperform the latest productivity trend ·
+              The Middle East, Africa, and the Global South — the perspective most platforms ignore.
+            </p>
+            <p>
+              Every week in <em>The Sand &amp; Silicon Byte</em>, I decode one development at the intersection
+              of AI, human systems, and culture. Just the insights.
+            </p>
+          </div>
+        </details>
         <blockquote class="about-quote">
           "The systems you build today determine who leads tomorrow."
         </blockquote>
@@ -447,6 +473,36 @@ const latestEditions = baseeraEditions
     color: var(--ink-mid);
     line-height: 1.6;
     border-radius: 0 4px 4px 0;
+  }
+
+  .about-long { margin: 20px 0; }
+
+  .about-long-toggle {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--sand-dark);
+    cursor: pointer;
+    list-style: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border-bottom: 1px solid var(--sand-rule);
+    padding-bottom: 2px;
+  }
+  .about-long-toggle::-webkit-details-marker { display: none; }
+
+  .about-long-body {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--rule);
+  }
+  .about-long-body p { margin-bottom: 14px; }
+  .about-pillars {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.8;
   }
 
   .about-socials {
