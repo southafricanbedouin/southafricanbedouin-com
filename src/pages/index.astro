@@ -45,11 +45,7 @@ const latestEditions = baseeraEditions
         <div class="about-strip-name mono">Muhammad Seedat</div>
         <div class="about-strip-handle mono">@southafricanbedouin</div>
         <div class="about-strip-img">
-          <!--
-            Replace with:
-            <img src="/images/muhammad.jpg" alt="Muhammad Seedat" />
-          -->
-          🧔🏽
+          <img src="/ms_profilepic_casual.png" alt="Muhammad Seedat" />
         </div>
         <div class="about-socials">
           <a href="https://linkedin.com/in/southafricanbedouin" target="_blank" rel="noopener">LinkedIn ↗</a>
@@ -451,6 +447,14 @@ const latestEditions = baseeraEditions
     justify-content: center;
     font-size: 48px;
     border: 1px solid var(--rule);
+  }
+
+  .about-strip-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+    border-radius: 4px;
     overflow: hidden;
   }
 
