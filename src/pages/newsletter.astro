@@ -501,14 +501,15 @@
   .about-avatar {
     width: 160px; height: 160px;
     border-radius: 50%;
-    background: radial-gradient(circle at 35% 35%, var(--gold), var(--cyan) 70%, var(--black));
     border: 3px solid var(--gold);
-    display: flex; align-items: center; justify-content: center;
-    font-family: 'Big Shoulders Display', sans-serif;
-    font-size: 56px; font-weight: 900;
-    color: var(--black);
     box-shadow: 0 0 36px rgba(255,184,0,0.28);
     flex-shrink: 0;
+    overflow: hidden;
+  }
+  .about-avatar img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
   }
   .about-name {
     font-family: 'Big Shoulders Display', sans-serif;
@@ -820,15 +821,14 @@
 <!-- ABOUT -->
 <div class="about-strip">
   <div class="about-inner">
-    <div class="about-avatar">MS</div>
+    <div class="about-avatar"><img src="/images/msheadshot.png" alt="Muhammad Seedat"/></div>
     <div>
       <div class="section-eye" style="margin-bottom:10px;">The Author</div>
       <div class="about-name">Muhammad<br/>Seedat</div>
       <div class="about-handle">@southafricanbedouin</div>
-      <p class="about-bio">Strategic Advisor. Operations Executive. Systems Thinker. South African-born, Qatar-based. Industrial Engineer. Builder of greenfield hospitals, national education strategies, and special needs ecosystems. In the age of AI, the generalist architect is the rarest and most valuable thing you can be.</p>
+      <p class="about-bio">South African-born. Qatar-based. Half my life in each. Industrial Engineer by training. Systems Architect by practice. I spent years learning how large, complex organisations actually work — and more importantly, why they don't.<br/><br/>The handle is @southafricanbedouin. The Bedouin navigated without road signs — by stars, memory, and an understanding of the landscape that only comes from crossing it. That's the operating model here.<br/><br/>Father. Barista. Someone who believes in one Creator and finds that belief everywhere — in systems, in people, in the way things connect when you slow down enough to see it.</p>
       <div class="about-tags">
         <span class="about-tag">Systems Thinking</span>
-        <span class="about-tag">Qatar Foundation</span>
         <span class="about-tag">AI & Leaders</span>
         <span class="about-tag">Healthcare</span>
         <span class="about-tag">Education</span>
