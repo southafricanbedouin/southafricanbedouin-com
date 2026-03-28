@@ -1,9 +1,1 @@
-{
-  "rewrites": [
-    {
-      "source": "/",
-      "has": [{ "type": "host", "value": "newsletter.southafricanbedouin.com" }],
-      "destination": "/newsletter"
-    }
-  ]
-}
+{"rewrites":[{"source":"/","has":[{"type":"host","value":"newsletter.southafricanbedouin.com"}],"destination":"/newsletter"}]}
