@@ -1,1 +1,1 @@
-{"rewrites":[{"source":"/","has":[{"type":"host","value":"newsletter.southafricanbedouin.com"}],"destination":"/newsletter"}]}
+{"redirects":[{"source":"/","has":[{"type":"host","value":"newsletter.southafricanbedouin.com"}],"destination":"https://newsletter.southafricanbedouin.com/newsletter","permanent":false}]}
