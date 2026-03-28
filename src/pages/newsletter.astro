@@ -1,0 +1,868 @@
+---
+// The Sand & Silicon Byte — Newsletter Landing Page
+// Standalone page — intentionally no BaseLayout (separate brand identity)
+---
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>The Sand & Silicon Byte — Muhammad Seedat</title>
+<meta name="description" content="Weekly signal at the intersection of AI, culture & human systems. By Muhammad Seedat (@southafricanbedouin). No hype. No filler. Free."/>
+<meta property="og:title" content="The Sand & Silicon Byte"/>
+<meta property="og:description" content="Weekly signal at the intersection of AI, culture & human systems. No hype. No filler. Free."/>
+<meta property="og:type" content="website"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="The Sand & Silicon Byte"/>
+<meta name="twitter:description" content="Signal at the intersection of AI, culture & human systems. No algorithm. No ads. By @southafricanbedouin."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;900&family=IBM+Plex+Mono:wght@400;700&family=Instrument+Sans:wght@400;600;700&display=swap" rel="stylesheet"/>
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --black:   #08080E;
+    --gold:    #FFB800;
+    --cyan:    #00D4FF;
+    --magenta: #FF006E;
+    --orange:  #FF6B00;
+    --purple:  #8A2BE2;
+    --white:   #F0F0F0;
+    --grey:    #7A7A8A;
+    --card:    #0E0E1A;
+  }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'Instrument Sans', system-ui, sans-serif;
+    overflow-x: hidden;
+    line-height: 1.6;
+  }
+
+  body::before {
+    content: '';
+    position: fixed; inset: 0;
+    background-image: repeating-linear-gradient(-45deg, transparent, transparent 16px, rgba(255,255,255,0.018) 16px, rgba(255,255,255,0.018) 18px);
+    pointer-events: none; z-index: 0;
+  }
+
+  /* ── VHS STRIPE ─────────────────────────────────────── */
+  .vhs-stripe {
+    height: 10px;
+    background: linear-gradient(90deg, var(--gold) 0% 20%, var(--cyan) 20% 40%, var(--magenta) 40% 60%, var(--orange) 60% 80%, var(--purple) 80% 100%);
+  }
+
+  /* ── NAV ────────────────────────────────────────────── */
+  nav {
+    background: rgba(8,8,14,0.96);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255,184,0,0.2);
+    padding: 0 28px;
+    height: 58px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky; top: 0; z-index: 100;
+  }
+
+  .nav-logo {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 900;
+    font-size: 20px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-decoration: none;
+    display: flex; align-items: center; gap: 8px;
+  }
+
+  .nav-logo .s { color: var(--cyan); }
+  .nav-logo .b { color: var(--magenta); font-size: 0.65em; }
+
+  .nav-dot {
+    width: 7px; height: 7px; border-radius: 50%;
+    background: var(--magenta);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%,100% { opacity:1; transform:scale(1); }
+    50% { opacity:.3; transform:scale(0.6); }
+  }
+
+  .nav-back {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--grey);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-back:hover { color: var(--cyan); }
+
+  /* ── HERO ───────────────────────────────────────────── */
+  .hero {
+    min-height: 85vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 72px 40px;
+    gap: 64px;
+    position: relative; z-index: 1;
+  }
+
+  .hero-eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 18px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    display: inline-block;
+    width: 28px; height: 2px;
+    background: var(--cyan);
+  }
+
+  h1 {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-weight: 900;
+    font-size: clamp(60px, 7.5vw, 108px);
+    line-height: 0.9;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+  }
+  h1 .l1 { color: var(--gold); display: block; }
+  h1 .l2 { color: var(--white); display: block; }
+  h1 .l3 { color: var(--magenta); display: block; font-size: 0.58em; margin-top: 6px; }
+
+  .hero-tagline {
+    margin-top: 28px;
+    font-size: 16px;
+    color: rgba(240,240,240,0.68);
+    max-width: 440px;
+    line-height: 1.7;
+  }
+
+  .hero-badges {
+    display: flex; gap: 8px; flex-wrap: wrap;
+    margin-top: 24px;
+  }
+
+  .badge {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border: 1px solid;
+  }
+  .badge-gold   { border-color: var(--gold);    color: var(--gold); }
+  .badge-cyan   { border-color: var(--cyan);    color: var(--cyan); }
+  .badge-mag    { border-color: var(--magenta); color: var(--magenta); }
+
+  /* ── SUBSCRIBE FORM ─────────────────────────────────── */
+  .subscribe-form {
+    margin-top: 32px;
+    display: flex;
+    max-width: 430px;
+  }
+
+  .subscribe-form input {
+    flex: 1;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,184,0,0.35);
+    border-right: none;
+    color: var(--white);
+    padding: 14px 18px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    outline: none;
+    transition: border-color 0.2s;
+  }
+  .subscribe-form input:focus { border-color: var(--gold); }
+  .subscribe-form input::placeholder { color: var(--grey); }
+
+  .subscribe-form button {
+    background: var(--gold);
+    color: var(--black);
+    border: none;
+    padding: 14px 22px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s;
+    white-space: nowrap;
+  }
+  .subscribe-form button:hover { background: var(--cyan); }
+
+  .form-note {
+    margin-top: 10px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    color: var(--grey);
+    letter-spacing: 0.06em;
+  }
+
+  /* ── VHS CARD ───────────────────────────────────────── */
+  .vhs-card {
+    background: var(--card);
+    border: 1px solid rgba(255,184,0,0.18);
+    overflow: hidden;
+    position: relative;
+  }
+
+  .vhs-card-stripe {
+    height: 8px;
+    background: linear-gradient(90deg, var(--gold), var(--cyan), var(--magenta), var(--orange));
+  }
+
+  .vhs-card-body { padding: 28px 24px 20px; }
+
+  .vhs-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    color: var(--grey);
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .vhs-title {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-size: 30px;
+    font-weight: 900;
+    text-transform: uppercase;
+    line-height: 1;
+    margin-bottom: 20px;
+  }
+  .vhs-title .vt1 { color: var(--gold); }
+  .vhs-title .vt2 { color: var(--white); }
+  .vhs-title .vt3 { color: var(--magenta); font-size: 0.65em; }
+
+  .vhs-sphere {
+    width: 110px; height: 110px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #FFD060, #00D4FF 70%, #0A0A1A);
+    margin: 0 auto 20px;
+    position: relative;
+    box-shadow: 0 0 36px rgba(0,212,255,0.28), 0 0 72px rgba(255,184,0,0.12);
+  }
+  .vhs-sphere::after {
+    content: '';
+    position: absolute;
+    top: 20%; left: 25%;
+    width: 27%; height: 21%;
+    background: rgba(255,255,255,0.7);
+    border-radius: 50%;
+    filter: blur(4px);
+  }
+
+  .vhs-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 16px;
+  }
+
+  .vhs-stat {
+    text-align: center;
+    padding: 10px 6px;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.07);
+  }
+  .vhs-stat-num {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-size: 26px; font-weight: 900;
+    color: var(--gold);
+  }
+  .vhs-stat-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 8px;
+    letter-spacing: 0.1em;
+    color: var(--grey);
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+
+  .vhs-card-bottom {
+    display: flex;
+  }
+  .vhs-block { flex: 1; height: 20px; }
+
+  /* ── STATS ROW ──────────────────────────────────────── */
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: rgba(255,255,255,0.07);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    position: relative; z-index: 1;
+  }
+  .stat-item {
+    background: var(--black);
+    padding: 32px 20px;
+    text-align: center;
+  }
+  .stat-num {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-size: 44px; font-weight: 900;
+    color: var(--gold);
+    line-height: 1;
+  }
+  .stat-label {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    color: var(--grey);
+    text-transform: uppercase;
+    margin-top: 6px;
+  }
+
+  /* ── SECTIONS ───────────────────────────────────────── */
+  .section {
+    padding: 72px 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative; z-index: 1;
+  }
+
+  .section-eye {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 14px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .section-eye::before {
+    content: '';
+    display: inline-block;
+    width: 22px; height: 2px;
+    background: var(--cyan);
+  }
+
+  h2 {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-size: clamp(32px, 4vw, 56px);
+    font-weight: 900;
+    text-transform: uppercase;
+    line-height: 0.95;
+    margin-bottom: 20px;
+  }
+  h2 em { color: var(--gold); font-style: normal; }
+
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, var(--gold), var(--cyan), transparent);
+    opacity: 0.3;
+    margin: 0 0 56px;
+  }
+
+  /* ── PILLARS ────────────────────────────────────────── */
+  .pillars {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 40px;
+  }
+
+  .pillar {
+    background: var(--card);
+    border: 1px solid rgba(255,255,255,0.07);
+    padding: 28px 24px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.3s, transform 0.3s;
+  }
+  .pillar:hover { border-color: var(--gold); transform: translateY(-3px); }
+  .pillar::before {
+    content: '';
+    position: absolute; top: 0; left: 0; right: 0;
+    height: 3px;
+  }
+  .pillar.gold::before   { background: var(--gold); }
+  .pillar.cyan::before   { background: var(--cyan); }
+  .pillar.magenta::before { background: var(--magenta); }
+
+  .pillar-num {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-size: 64px; font-weight: 900;
+    color: rgba(255,255,255,0.04);
+    line-height: 1;
+    position: absolute; top: 8px; right: 14px;
+  }
+  .pillar-icon { font-size: 26px; margin-bottom: 14px; }
+  .pillar-title {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-size: 22px; font-weight: 900;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .pillar-desc {
+    font-size: 13px;
+    color: rgba(240,240,240,0.6);
+    line-height: 1.68;
+  }
+
+  /* ── ISSUE PREVIEW ──────────────────────────────────── */
+  .issue-wrap {
+    max-width: 640px;
+    margin: 40px auto 0;
+    background: var(--card);
+    border: 1px solid rgba(255,184,0,0.18);
+    overflow: hidden;
+  }
+  .issue-top { height: 6px; background: linear-gradient(90deg, var(--gold), var(--cyan), var(--magenta)); }
+  .issue-body { padding: 32px 36px; }
+  .issue-meta {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--grey);
+    margin-bottom: 18px;
+    display: flex; gap: 18px;
+  }
+  .issue-title {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-size: 34px; font-weight: 900;
+    text-transform: uppercase;
+    color: var(--gold);
+    line-height: 1.05;
+    margin-bottom: 16px;
+  }
+  .issue-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px; letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--magenta);
+    margin: 22px 0 8px;
+  }
+  .issue-text {
+    font-size: 14px;
+    color: rgba(240,240,240,0.68);
+    line-height: 1.78;
+  }
+  .issue-pq {
+    border-left: 3px solid var(--cyan);
+    padding: 12px 18px;
+    background: rgba(0,212,255,0.06);
+    margin: 16px 0;
+    font-size: 15px;
+    font-style: italic;
+    color: var(--white);
+    line-height: 1.6;
+  }
+  .issue-pq.gold { border-color: var(--gold); background: rgba(255,184,0,0.06); }
+  .issue-cta {
+    display: inline-block;
+    margin-top: 22px;
+    background: var(--gold);
+    color: var(--black);
+    padding: 12px 24px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+  .issue-cta:hover { background: var(--cyan); }
+
+  /* ── ABOUT ──────────────────────────────────────────── */
+  .about-strip {
+    background: rgba(255,184,0,0.05);
+    border-top: 1px solid rgba(255,184,0,0.18);
+    border-bottom: 1px solid rgba(255,184,0,0.18);
+    padding: 56px 40px;
+    position: relative; z-index: 1;
+  }
+  .about-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 56px;
+    align-items: center;
+  }
+  .about-avatar {
+    width: 160px; height: 160px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, var(--gold), var(--cyan) 70%, var(--black));
+    border: 3px solid var(--gold);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-size: 56px; font-weight: 900;
+    color: var(--black);
+    box-shadow: 0 0 36px rgba(255,184,0,0.28);
+    flex-shrink: 0;
+  }
+  .about-name {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-size: 44px; font-weight: 900;
+    text-transform: uppercase;
+    line-height: 1; margin-bottom: 6px;
+  }
+  .about-handle {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--magenta);
+    letter-spacing: 0.1em;
+    margin-bottom: 16px;
+  }
+  .about-bio {
+    font-size: 15px;
+    color: rgba(240,240,240,0.68);
+    line-height: 1.75;
+    max-width: 560px;
+  }
+  .about-tags {
+    display: flex; flex-wrap: wrap; gap: 7px;
+    margin-top: 18px;
+  }
+  .about-tag {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px; letter-spacing: 0.1em;
+    padding: 4px 10px;
+    border: 1px solid rgba(255,184,0,0.35);
+    color: var(--gold);
+    text-transform: uppercase;
+  }
+
+  /* ── FINAL CTA ──────────────────────────────────────── */
+  .final-cta {
+    background: var(--card);
+    border-top: 1px solid rgba(255,184,0,0.18);
+    padding: 72px 40px;
+    text-align: center;
+    position: relative; z-index: 1;
+    overflow: hidden;
+  }
+  .final-cta::before {
+    content: 'S&S';
+    position: absolute;
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-size: 260px; font-weight: 900;
+    color: rgba(255,184,0,0.035);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    user-select: none;
+    white-space: nowrap;
+  }
+  .final-cta h2 { color: var(--gold); position: relative; }
+  .final-cta p {
+    max-width: 480px;
+    margin: 14px auto 32px;
+    font-size: 15px;
+    color: rgba(240,240,240,0.62);
+    line-height: 1.72;
+    position: relative;
+  }
+  .final-form {
+    display: flex;
+    max-width: 440px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .final-form input {
+    flex: 1;
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,184,0,0.35);
+    border-right: none;
+    color: var(--white);
+    padding: 15px 18px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    outline: none;
+  }
+  .final-form input:focus { border-color: var(--gold); }
+  .final-form input::placeholder { color: var(--grey); }
+  .final-form button {
+    background: var(--gold);
+    color: var(--black);
+    border: none;
+    padding: 15px 24px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11px; font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .final-form button:hover { background: var(--cyan); }
+  .final-note {
+    margin-top: 12px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    color: var(--grey);
+    letter-spacing: 0.06em;
+    position: relative;
+  }
+
+  /* ── FOOTER ─────────────────────────────────────────── */
+  footer {
+    background: var(--black);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 28px 40px;
+    position: relative; z-index: 1;
+  }
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+  .footer-logo {
+    font-family: 'Big Shoulders Display', sans-serif;
+    font-size: 18px; font-weight: 900;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .footer-links {
+    display: flex; gap: 20px; list-style: none;
+  }
+  .footer-links a {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 10px; letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--grey);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .footer-links a:hover { color: var(--cyan); }
+  .footer-copy {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 9px;
+    color: rgba(122,122,138,0.5);
+    letter-spacing: 0.06em;
+  }
+
+  /* ── RESPONSIVE ─────────────────────────────────────── */
+  @media (max-width: 860px) {
+    .hero { grid-template-columns: 1fr; padding: 48px 24px; min-height: auto; }
+    .vhs-card { display: none; }
+    .pillars { grid-template-columns: 1fr; }
+    .stats-row { grid-template-columns: 1fr 1fr; }
+    .about-inner { grid-template-columns: 1fr; text-align: center; }
+    .about-avatar { margin: 0 auto; }
+    .about-tags { justify-content: center; }
+    .section { padding: 52px 24px; }
+    .about-strip { padding: 48px 24px; }
+    .final-cta { padding: 52px 24px; }
+    footer { padding: 24px; }
+    .footer-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="vhs-stripe"></div>
+
+<nav>
+  <a href="/" class="nav-logo">
+    <div class="nav-dot"></div>
+    THE <span class="s">SAND &</span> SILICON <span class="b">BYTE</span>
+  </a>
+  <a href="/" class="nav-back">← southafricanbedouin.com</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div>
+    <div class="hero-eyebrow">Weekly Intelligence · Est. 2025</div>
+    <h1>
+      <span class="l1">SAND &</span>
+      <span class="l2">SILICON</span>
+      <span class="l3">BYTE</span>
+    </h1>
+    <p class="hero-tagline">
+      Every week, one development decoded at the intersection of AI, human systems, and culture.
+      What it means for how you lead, build, and live.
+      No hype. No filler. Just the signal.
+    </p>
+    <div class="hero-badges">
+      <span class="badge badge-gold">Weekly · Free</span>
+      <span class="badge badge-cyan">AI & Systems</span>
+      <span class="badge badge-mag">No Algorithm</span>
+    </div>
+    <form class="subscribe-form" action="https://thesandandsiliconbyte.beehiiv.com/subscribe" method="GET" target="_blank">
+      <input type="email" name="email" placeholder="your@email.com" required/>
+      <button type="submit">Subscribe</button>
+    </form>
+    <p class="form-note">Readers across the Gulf, Africa & beyond. Unsubscribe anytime.</p>
+  </div>
+
+  <div class="vhs-card">
+    <div class="vhs-card-stripe"></div>
+    <div class="vhs-card-body">
+      <div class="vhs-label">The Sand & Silicon Byte · Vol. 01</div>
+      <div class="vhs-title">
+        <span class="vt1">SAND &</span><br/>
+        <span class="vt2">SILICON</span><br/>
+        <span class="vt3">BYTE</span>
+      </div>
+      <div class="vhs-sphere"></div>
+      <div class="vhs-stats">
+        <div class="vhs-stat">
+          <div class="vhs-stat-num">3</div>
+          <div class="vhs-stat-label">Pillars/Issue</div>
+        </div>
+        <div class="vhs-stat">
+          <div class="vhs-stat-num">5min</div>
+          <div class="vhs-stat-label">Read Time</div>
+        </div>
+        <div class="vhs-stat">
+          <div class="vhs-stat-num">0</div>
+          <div class="vhs-stat-label">Ads. Ever.</div>
+        </div>
+        <div class="vhs-stat">
+          <div class="vhs-stat-num">∞</div>
+          <div class="vhs-stat-label">Signal</div>
+        </div>
+      </div>
+    </div>
+    <div class="vhs-card-bottom">
+      <div class="vhs-block" style="background:var(--gold)"></div>
+      <div class="vhs-block" style="background:var(--cyan)"></div>
+      <div class="vhs-block" style="background:var(--magenta)"></div>
+      <div class="vhs-block" style="background:var(--orange)"></div>
+      <div class="vhs-block" style="background:var(--purple)"></div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS ROW -->
+<div class="stats-row">
+  <div class="stat-item">
+    <div class="stat-num">Weekly</div>
+    <div class="stat-label">Every issue, every week</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">5min</div>
+    <div class="stat-label">Read time. No bloat.</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">0</div>
+    <div class="stat-label">Ads. No sponsors.</div>
+  </div>
+  <div class="stat-item">
+    <div class="stat-num">Free</div>
+    <div class="stat-label">Always. No paywall.</div>
+  </div>
+</div>
+
+<!-- PILLARS -->
+<section class="section">
+  <div class="section-eye">What You Get</div>
+  <h2>The <em>Signal</em><br/>Every Week</h2>
+  <div class="divider"></div>
+  <div class="pillars">
+    <div class="pillar gold">
+      <div class="pillar-num">01</div>
+      <div class="pillar-icon">⚡</div>
+      <div class="pillar-title">AI & The Architect's Advantage</div>
+      <p class="pillar-desc">AI decoded for leaders — not coders. What it means for Healthcare, Education, and how you operate. Frameworks for navigating the transition without losing what makes you human.</p>
+    </div>
+    <div class="pillar cyan">
+      <div class="pillar-num">02</div>
+      <div class="pillar-icon">🏛️</div>
+      <div class="pillar-title">The Ancient Thread</div>
+      <p class="pillar-desc">One timeless principle connected to something happening now. The most distinctive section of each issue. Ancient wisdom reframed for the people building the future.</p>
+    </div>
+    <div class="pillar magenta">
+      <div class="pillar-num">03</div>
+      <div class="pillar-icon">🌍</div>
+      <div class="pillar-title">The Bedouin's View</div>
+      <p class="pillar-desc">Qatar and Africa and the world. The cross-cultural lens that no specialist can replicate. Personal, honest, and the content CEOs forward to their boards.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ISSUE PREVIEW -->
+<section class="section" style="padding-top:0;">
+  <div class="section-eye">Sample Issue</div>
+  <h2>What an <em>Issue</em><br/>Looks Like</h2>
+  <div class="divider"></div>
+  <div class="issue-wrap">
+    <div class="issue-top"></div>
+    <div class="issue-body">
+      <div class="issue-meta">
+        <span>The Sand & Silicon Byte</span>
+        <span>Edition 012</span>
+        <span>March 2026</span>
+      </div>
+      <div class="issue-title">The Generalist<br/>Is The Room</div>
+      <div class="issue-tag">// The Opening</div>
+      <div class="issue-pq">A CIO told me last Thursday she had a room full of AI experts and nobody who could explain what the machine was optimising <em>for</em>. That problem has a name. It is called the connector gap. And it is the most expensive vacancy on any executive team right now.</div>
+      <div class="issue-tag">// The Ancient Thread</div>
+      <p class="issue-text">"The whole is other than the sum of its parts." — Gestalt, 1920s. Still true. Still ignored by every org chart that promotes individual contributors into system-level decisions.</p>
+      <a href="https://thesandandsiliconbyte.beehiiv.com" class="issue-cta" target="_blank" rel="noopener">Read Full Issues →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<div class="about-strip">
+  <div class="about-inner">
+    <div class="about-avatar">MS</div>
+    <div>
+      <div class="section-eye" style="margin-bottom:10px;">The Author</div>
+      <div class="about-name">Muhammad<br/>Seedat</div>
+      <div class="about-handle">@southafricanbedouin</div>
+      <p class="about-bio">Strategic Advisor. Operations Executive. Systems Thinker. South African-born, Qatar-based. Industrial Engineer. Builder of greenfield hospitals, national education strategies, and special needs ecosystems. In the age of AI, the generalist architect is the rarest and most valuable thing you can be.</p>
+      <div class="about-tags">
+        <span class="about-tag">Systems Thinking</span>
+        <span class="about-tag">Qatar Foundation</span>
+        <span class="about-tag">AI & Leaders</span>
+        <span class="about-tag">Healthcare</span>
+        <span class="about-tag">Education</span>
+        <span class="about-tag">Global South</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FINAL CTA -->
+<section class="final-cta">
+  <h2>Join The <em>Signal</em></h2>
+  <p>Every week at your inbox. The intersection of AI, culture, and human systems — decoded for leaders who are building what comes next.</p>
+  <form class="final-form" action="https://thesandandsiliconbyte.beehiiv.com/subscribe" method="GET" target="_blank">
+    <input type="email" name="email" placeholder="your@email.com" required/>
+    <button type="submit">Subscribe Free</button>
+  </form>
+  <p class="final-note">No hype. No filler. No algorithm. Unsubscribe anytime.</p>
+</section>
+
+<div class="vhs-stripe"></div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">The Sand & Silicon Byte</div>
+    <ul class="footer-links">
+      <li><a href="https://thesandandsiliconbyte.beehiiv.com/archive" target="_blank">Archive</a></li>
+      <li><a href="/#about">About</a></li>
+      <li><a href="https://linkedin.com/in/southafricanbedouin" target="_blank">LinkedIn</a></li>
+      <li><a href="https://x.com/southafricanbedouin" target="_blank">X / Twitter</a></li>
+    </ul>
+    <div class="footer-copy">© {new Date().getFullYear()} Muhammad Seedat · @southafricanbedouin</div>
+  </div>
+</footer>
+
+</body>
+</html>
