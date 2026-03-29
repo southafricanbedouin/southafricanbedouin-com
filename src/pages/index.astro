@@ -105,6 +105,60 @@ const latestEditions = baseeraEditions
   </div>
 </div>
 
+<!-- ─── LEARNING VAULT ────────────────────────────────── -->
+<div class="vault-band" id="vault">
+  <div class="wrap-wide">
+    <div class="vault-inner">
+
+      <div class="vault-left">
+        <div class="vault-eyebrow mono">Free Resource Library</div>
+        <h2 class="vault-title">The Learning<br />Vault.</h2>
+        <p class="vault-byline mono">Curated by @southafricanbedouin</p>
+        <div class="vault-stat-row">
+          <div class="vault-stat">
+            <div class="vault-stat-num">26</div>
+            <div class="vault-stat-label mono">Resources</div>
+          </div>
+          <div class="vault-stat-divider"></div>
+          <div class="vault-stat">
+            <div class="vault-stat-num">100%</div>
+            <div class="vault-stat-label mono">Free</div>
+          </div>
+          <div class="vault-stat-divider"></div>
+          <div class="vault-stat">
+            <div class="vault-stat-num">Weekly</div>
+            <div class="vault-stat-label mono">Updated</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="vault-right">
+        <p class="vault-desc">
+          The largest free resource library for AI, education &amp; professional growth —
+          curated, validated, and growing. Every resource here saves you real money and real time.
+        </p>
+        <div class="vault-tags">
+          <span class="vault-tag">AI &amp; LLMs</span>
+          <span class="vault-tag">Machine Learning</span>
+          <span class="vault-tag">Education</span>
+          <span class="vault-tag">Leadership</span>
+          <span class="vault-tag">Business</span>
+          <span class="vault-tag">Data</span>
+          <span class="vault-tag">Career</span>
+          <span class="vault-tag">Productivity</span>
+        </div>
+        <div class="vault-actions">
+          <a href="/vault" class="vault-cta">Enter the Vault →</a>
+        </div>
+        <p class="vault-note mono">
+          Last updated: March 2026 · Maintained by Muhammad Seedat · New resources added weekly
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
 <!-- ─── RESOURCES ─────────────────────────────────────── -->
 <div class="section" id="resources">
   <div class="wrap-wide">
@@ -527,6 +581,150 @@ const latestEditions = baseeraEditions
   }
   .about-socials a:hover { color: var(--sand-dark); border-color: var(--sand-rule); }
 
+  /* ─── LEARNING VAULT ─────────────────────────────── */
+  .vault-band {
+    background: var(--ink);
+    padding: 72px 0;
+    border-top: 1px solid var(--rule);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .vault-band::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--sand), var(--sand-dark));
+  }
+
+  .vault-inner {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 72px;
+    align-items: center;
+  }
+
+  .vault-eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--sand);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .vault-eyebrow::before {
+    content: '';
+    display: block;
+    width: 24px;
+    height: 1px;
+    background: var(--sand);
+    flex-shrink: 0;
+  }
+
+  .vault-title {
+    font-size: clamp(40px, 5vw, 60px);
+    font-weight: 500;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: #FAFAF8;
+    margin-bottom: 20px;
+  }
+
+  .vault-byline {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: rgba(250,250,248,0.35);
+    margin-bottom: 40px;
+  }
+
+  .vault-stat-row {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .vault-stat-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 22px;
+    color: var(--sand);
+    font-weight: 400;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .vault-stat-label {
+    font-size: 9px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(250,250,248,0.3);
+  }
+
+  .vault-stat-divider {
+    width: 1px;
+    height: 36px;
+    background: rgba(255,255,255,0.1);
+  }
+
+  .vault-desc {
+    font-size: 18px;
+    color: rgba(250,250,248,0.75);
+    line-height: 1.8;
+    margin-bottom: 28px;
+  }
+
+  .vault-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 36px;
+  }
+
+  .vault-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--sand);
+    border: 1px solid rgba(200,169,110,0.3);
+    padding: 4px 10px;
+    border-radius: 2px;
+    background: rgba(200,169,110,0.06);
+  }
+
+  .vault-actions {
+    margin-bottom: 20px;
+  }
+
+  .vault-cta {
+    display: inline-block;
+    background: var(--sand);
+    color: var(--ink);
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 14px 32px;
+    border-radius: 3px;
+    transition: background 0.15s, transform 0.15s;
+  }
+
+  .vault-cta:hover {
+    background: #E8D5AA;
+    color: var(--ink);
+    transform: translateX(2px);
+  }
+
+  .vault-note {
+    font-size: 10px;
+    letter-spacing: 0.04em;
+    color: rgba(250,250,248,0.2);
+  }
+
   /* ─── RESOURCES ──────────────────────────────────── */
   .resources-tabs {
     display: flex;
@@ -870,6 +1068,8 @@ const latestEditions = baseeraEditions
     .section { padding: 52px 0; }
     .about-strip-inner { grid-template-columns: 1fr; gap: 32px; }
     .about-strip-img { max-width: 120px; }
+    .vault-inner { grid-template-columns: 1fr; gap: 40px; }
+    .vault-band { padding: 52px 0; }
     .res-grid { grid-template-columns: 1fr; }
     .nl-form { flex-direction: column; }
     .writing-item { grid-template-columns: 1fr; }
