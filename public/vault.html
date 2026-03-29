@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Learning Vault — southafricanbedouin.com</title>
+  <meta name="description" content="The largest free resource library for AI, education & professional growth. Curated by @southafricanbedouin." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --sand: #C8A96E; --sand-dark: #8B6F3E; --sand-pale: #F7F0E6; --sand-rule: rgba(200,169,110,0.2);
+      --ink: #111111; --ink-mid: #333; --ink-soft: #666; --ink-faint: #999;
+      --page: #FFFFFF; --page-warm: #FAFAF7; --rule: #E8E4DE;
+      --green: #2D9B5A; --green-bg: rgba(45,155,90,0.08); --green-rule: rgba(45,155,90,0.25);
+      --amber: #D97706; --amber-bg: rgba(217,119,6,0.08);
+      --red: #DC2626; --red-bg: rgba(220,38,38,0.08);
+      --teal: #0D7377; --blue: #1D4ED8;
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior: smooth; }
+    body { font-family:'EB Garamond',Georgia,serif; background:var(--page); color:var(--ink); line-height:1.6; -webkit-font-smoothing:antialiased; font-size:17px; }
+    a { color:inherit; text-decoration:none; }
+    .mono { font-family:'DM Mono','Courier New',monospace; }
+
+    /* ── ACCESS GATE OVERLAY ── */
+    #gate-overlay {
+      position:fixed; inset:0; z-index:1000;
+      background:rgba(10,10,20,0.85);
+      backdrop-filter:blur(8px);
+      display:flex; align-items:center; justify-content:center;
+      padding:24px;
+    }
+    #gate-overlay.hidden { display:none; }
+    .gate-box {
+      background:var(--page); border-radius:12px; padding:48px 44px;
+      max-width:520px; width:100%; text-align:center;
+      box-shadow:0 32px 80px rgba(0,0,0,0.3);
+      border-top:3px solid var(--sand);
+    }
+    .gate-icon { font-size:40px; margin-bottom:16px; }
+    .gate-eyebrow { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--sand); margin-bottom:12px; }
+    .gate-title { font-size:28px; font-weight:500; color:var(--ink); margin-bottom:10px; letter-spacing:-0.01em; }
+    .gate-sub { font-size:15px; color:var(--ink-soft); line-height:1.7; margin-bottom:28px; }
+    .gate-steps { display:flex; flex-direction:column; gap:10px; margin-bottom:28px; text-align:left; }
+    .gate-step {
+      display:flex; align-items:center; gap:14px;
+      padding:14px 18px; border:1px solid var(--rule); border-radius:8px;
+      font-size:14px; color:var(--ink-mid); cursor:pointer; transition:all 0.15s;
+    }
+    .gate-step:hover { border-color:var(--sand); background:var(--sand-pale); }
+    .gate-step.done { border-color:var(--green-rule); background:var(--green-bg); }
+    .gate-step .step-icon { font-size:20px; width:28px; text-align:center; flex-shrink:0; }
+    .gate-step .step-text { flex:1; }
+    .gate-step .step-label { font-weight:500; color:var(--ink); }
+    .gate-step .step-desc { font-family:'DM Mono',monospace; font-size:10px; color:var(--ink-faint); margin-top:2px; letter-spacing:0.04em; }
+    .gate-step .step-check { font-size:16px; color:var(--green); opacity:0; transition:opacity 0.2s; }
+    .gate-step.done .step-check { opacity:1; }
+    .gate-btn {
+      width:100%; background:var(--ink); color:var(--page);
+      border:none; border-radius:6px; padding:15px 24px;
+      font-family:'DM Mono',monospace; font-size:12px; font-weight:500;
+      letter-spacing:0.08em; text-transform:uppercase; cursor:pointer;
+      transition:background 0.15s; margin-bottom:12px;
+    }
+    .gate-btn:hover { background:var(--sand-dark); }
+    .gate-btn:disabled { background:var(--rule); color:var(--ink-faint); cursor:not-allowed; }
+    .gate-btn.ready { background:var(--sand-dark); }
+    .gate-note { font-family:'DM Mono',monospace; font-size:10px; color:var(--ink-faint); letter-spacing:0.04em; }
+
+    /* ── NAV ── */
+    nav { border-bottom:1px solid var(--rule); background:var(--page); position:sticky; top:0; z-index:100; }
+    .nav-inner { max-width:1200px; margin:0 auto; padding:0 24px; height:54px; display:flex; align-items:center; justify-content:space-between; }
+    .nav-logo { font-family:'DM Mono',monospace; font-size:12px; color:var(--ink-soft); }
+    .nav-logo a { color:var(--sand-dark); }
+    .nav-right { display:flex; align-items:center; gap:20px; }
+    .nav-tag { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.12em; text-transform:uppercase; background:var(--sand-pale); color:var(--sand-dark); border:1px solid var(--sand-rule); padding:4px 10px; border-radius:3px; }
+
+    /* ── HERO ── */
+    .hero { padding:52px 0 40px; border-bottom:1px solid var(--rule); }
+    .hero-inner { max-width:1200px; margin:0 auto; padding:0 24px; }
+    .hero-eyebrow { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--sand); margin-bottom:14px; display:flex; align-items:center; gap:12px; }
+    .hero-eyebrow::after { content:''; flex:1; height:1px; background:var(--sand-rule); max-width:40px; }
+    .hero-title { font-size:clamp(36px,5vw,58px); font-weight:500; color:var(--ink); letter-spacing:-0.02em; line-height:1.05; margin-bottom:10px; }
+    .hero-title .accent { color:var(--sand-dark); }
+    .hero-sub { font-size:17px; color:var(--ink-soft); max-width:600px; line-height:1.7; margin-bottom:20px; }
+    .hero-meta { font-family:'DM Mono',monospace; font-size:11px; color:var(--ink-faint); letter-spacing:0.04em; }
+    .hero-meta span { color:var(--sand-dark); }
+
+    /* ── DASHBOARD BAND ── */
+    .dashboard { background:var(--ink); padding:28px 0; }
+    .dash-inner { max-width:1200px; margin:0 auto; padding:0 24px; display:grid; grid-template-columns:repeat(5,1fr); gap:1px; background:rgba(255,255,255,0.06); border-radius:8px; overflow:hidden; }
+    .dash-card { background:var(--ink); padding:20px 24px; text-align:center; }
+    .dash-val { font-family:'DM Mono',monospace; font-size:clamp(22px,3vw,34px); font-weight:500; color:var(--sand); margin-bottom:4px; }
+    .dash-label { font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.15em; text-transform:uppercase; color:rgba(255,255,255,0.4); }
+    .dash-sub { font-family:'DM Mono',monospace; font-size:9px; color:rgba(255,255,255,0.25); margin-top:2px; }
+    .visitor-dot { display:inline-block; width:6px; height:6px; border-radius:50%; background:#4CAF50; margin-right:5px; animation:blink 2s ease-in-out infinite; vertical-align:middle; }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+
+    /* ── SEARCH & FILTERS ── */
+    .filter-bar { padding:24px 0; border-bottom:1px solid var(--rule); background:var(--page-warm); position:sticky; top:54px; z-index:50; }
+    .filter-inner { max-width:1200px; margin:0 auto; padding:0 24px; }
+    .search-row { display:flex; gap:12px; margin-bottom:16px; }
+    .search-wrap { flex:1; position:relative; }
+    .search-icon { position:absolute; left:14px; top:50%; transform:translateY(-50%); font-size:14px; opacity:0.4; }
+    .search-input {
+      width:100%; padding:11px 16px 11px 40px;
+      border:1px solid var(--rule); border-radius:6px;
+      font-family:'DM Mono',monospace; font-size:13px; color:var(--ink);
+      background:var(--page); outline:none; transition:border-color 0.15s;
+    }
+    .search-input:focus { border-color:var(--sand); }
+    .search-input::placeholder { color:var(--ink-faint); }
+    .filter-count { font-family:'DM Mono',monospace; font-size:11px; color:var(--ink-faint); padding:11px 16px; border:1px solid var(--rule); border-radius:6px; background:var(--page); white-space:nowrap; display:flex; align-items:center; gap:6px; }
+    .filter-count strong { color:var(--sand-dark); }
+
+    /* Type tabs */
+    .type-tabs { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:12px; }
+    .type-tab {
+      font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.06em; text-transform:uppercase;
+      padding:6px 14px; border-radius:20px; cursor:pointer; transition:all 0.15s;
+      border:1px solid var(--rule); color:var(--ink-soft); background:var(--page);
+      display:flex; align-items:center; gap:5px;
+    }
+    .type-tab:hover { border-color:var(--sand-rule); color:var(--sand-dark); }
+    .type-tab.active { background:var(--ink); color:var(--page); border-color:var(--ink); }
+    .type-tab .tab-count { font-size:9px; opacity:0.6; }
+
+    /* Tag filters */
+    .tag-row { display:flex; gap:6px; flex-wrap:wrap; }
+    .filter-tag {
+      font-family:'DM Mono',monospace; font-size:10px; padding:4px 10px;
+      border-radius:3px; cursor:pointer; transition:all 0.12s;
+      border:1px solid var(--rule); color:var(--ink-faint); background:var(--page);
+    }
+    .filter-tag:hover { border-color:var(--sand-rule); color:var(--sand-dark); }
+    .filter-tag.active { background:var(--sand-pale); color:var(--sand-dark); border-color:var(--sand-rule); }
+
+    /* ── RESOURCE GRID ── */
+    .grid-outer { max-width:1200px; margin:0 auto; padding:32px 24px 64px; }
+    .resource-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+
+    .resource-card {
+      background:var(--page); border:1px solid var(--rule); border-radius:10px;
+      padding:22px; display:flex; flex-direction:column; gap:10px;
+      transition:all 0.15s; position:relative; overflow:hidden;
+    }
+    .resource-card:hover { border-color:rgba(200,169,110,0.4); box-shadow:0 4px 20px rgba(0,0,0,0.06); transform:translateY(-1px); }
+    .resource-card.hidden { display:none; }
+
+    /* Type colour stripe */
+    .resource-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; }
+    .resource-card[data-type="Platform"]::before { background:var(--sand); }
+    .resource-card[data-type="Course"]::before { background:#0D7377; }
+    .resource-card[data-type="GitHub"]::before { background:#1D4ED8; }
+    .resource-card[data-type="Tool"]::before { background:#7C3AED; }
+    .resource-card[data-type="Report"]::before { background:#DC2626; }
+    .resource-card[data-type="Prompt"]::before { background:#D97706; }
+    .resource-card[data-type="Website"]::before { background:#059669; }
+
+    .card-top { display:flex; align-items:flex-start; justify-content:space-between; gap:8px; }
+    .card-badges { display:flex; gap:5px; flex-wrap:wrap; }
+
+    .badge {
+      font-family:'DM Mono',monospace; font-size:9px; letter-spacing:0.08em; text-transform:uppercase;
+      padding:2px 7px; border-radius:2px; display:inline-block; white-space:nowrap;
+    }
+    .badge-type-Platform { background:rgba(200,169,110,0.12); color:var(--sand-dark); border:1px solid var(--sand-rule); }
+    .badge-type-Course { background:rgba(13,115,119,0.1); color:var(--teal); border:1px solid rgba(13,115,119,0.25); }
+    .badge-type-GitHub { background:rgba(29,78,216,0.1); color:var(--blue); border:1px solid rgba(29,78,216,0.2); }
+    .badge-type-Tool { background:rgba(124,58,237,0.1); color:#7C3AED; border:1px solid rgba(124,58,237,0.2); }
+    .badge-type-Report { background:var(--red-bg); color:var(--red); border:1px solid rgba(220,38,38,0.2); }
+    .badge-type-Prompt { background:var(--amber-bg); color:var(--amber); border:1px solid rgba(217,119,6,0.2); }
+    .badge-type-Website { background:rgba(5,150,105,0.1); color:#059669; border:1px solid rgba(5,150,105,0.2); }
+
+    .badge-validated { background:var(--green-bg); color:var(--green); border:1px solid var(--green-rule); }
+    .badge-check { background:var(--amber-bg); color:var(--amber); border:1px solid rgba(217,119,6,0.2); }
+    .badge-free { background:rgba(45,155,90,0.08); color:var(--green); border:1px solid var(--green-rule); }
+    .badge-featured { background:rgba(200,169,110,0.15); color:var(--sand-dark); border:1px solid var(--sand-rule); }
+
+    .card-provider { font-family:'DM Mono',monospace; font-size:10px; color:var(--ink-faint); letter-spacing:0.06em; }
+    .card-title { font-size:17px; font-weight:500; color:var(--ink); line-height:1.3; }
+    .card-desc { font-size:13px; color:var(--ink-soft); line-height:1.65; flex:1; }
+
+    /* Tags */
+    .card-tags { display:flex; flex-wrap:wrap; gap:4px; }
+    .card-tag {
+      font-family:'DM Mono',monospace; font-size:9px; padding:2px 7px;
+      background:var(--page-warm); border:1px solid var(--rule);
+      border-radius:2px; color:var(--ink-faint); cursor:pointer; transition:all 0.12s;
+    }
+    .card-tag:hover { background:var(--sand-pale); color:var(--sand-dark); border-color:var(--sand-rule); }
+
+    /* Rating */
+    .card-rating { display:flex; gap:12px; align-items:center; padding:10px 0; border-top:1px solid var(--rule); }
+    .rating-item { display:flex; flex-direction:column; align-items:center; gap:3px; flex:1; }
+    .rating-label { font-family:'DM Mono',monospace; font-size:8px; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-faint); }
+    .rating-dots { display:flex; gap:2px; }
+    .rating-dot { width:6px; height:6px; border-radius:50%; background:var(--rule); }
+    .rating-dot.filled-5 { background:#2D9B5A; }
+    .rating-dot.filled-4 { background:#84CC6A; }
+    .rating-dot.filled-3 { background:var(--amber); }
+    .rating-dot.filled-2 { background:#F97316; }
+    .rating-dot.filled-1 { background:var(--red); }
+
+    /* Card footer */
+    .card-footer { display:flex; justify-content:space-between; align-items:center; padding-top:10px; border-top:1px solid var(--rule); }
+    .card-meta { font-family:'DM Mono',monospace; font-size:10px; color:var(--ink-faint); }
+    .card-meta span { color:var(--sand-dark); }
+    .card-link {
+      font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.06em; text-transform:uppercase;
+      color:var(--page); background:var(--ink); padding:6px 14px; border-radius:3px;
+      transition:background 0.15s; white-space:nowrap;
+    }
+    .card-link:hover { background:var(--sand-dark); }
+
+    /* No results */
+    .no-results { grid-column:1/-1; text-align:center; padding:64px 24px; color:var(--ink-faint); font-style:italic; }
+    .no-results strong { color:var(--sand-dark); font-style:normal; }
+
+    /* ── CREDITS ── */
+    .credits-section { background:var(--page-warm); border-top:1px solid var(--rule); padding:56px 0; }
+    .credits-inner { max-width:1200px; margin:0 auto; padding:0 24px; }
+    .credits-label { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--sand); margin-bottom:28px; display:flex; align-items:center; gap:14px; }
+    .credits-label::after { content:''; flex:1; height:1px; background:var(--sand-rule); }
+    .credits-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:16px; }
+    .credit-card { background:var(--page); border:1px solid var(--rule); border-radius:8px; padding:18px; }
+    .credit-name { font-size:15px; font-weight:500; color:var(--ink); margin-bottom:3px; }
+    .credit-role { font-family:'DM Mono',monospace; font-size:10px; color:var(--ink-faint); letter-spacing:0.04em; margin-bottom:8px; }
+    .credit-count { font-family:'DM Mono',monospace; font-size:11px; color:var(--sand-dark); }
+    .credit-founder { border-top:2px solid var(--sand); }
+
+    /* ── SUGGEST BANNER ── */
+    .suggest-banner { background:linear-gradient(135deg,rgba(200,169,110,0.08),rgba(13,115,119,0.06)); border:1px solid var(--sand-rule); border-radius:10px; padding:28px 32px; margin:32px 0 0; display:flex; align-items:center; justify-content:space-between; gap:24px; }
+    .suggest-text .suggest-title { font-size:19px; font-weight:500; color:var(--ink); margin-bottom:4px; }
+    .suggest-text .suggest-sub { font-size:14px; color:var(--ink-soft); }
+    .suggest-btn { font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.06em; text-transform:uppercase; padding:11px 22px; border:1px solid var(--ink); border-radius:4px; color:var(--ink); background:var(--page); cursor:pointer; transition:all 0.15s; white-space:nowrap; }
+    .suggest-btn:hover { background:var(--ink); color:var(--page); }
+
+    /* ── FOOTER ── */
+    footer { border-top:1px solid var(--rule); padding:32px 0; }
+    .foot-inner { max-width:1200px; margin:0 auto; padding:0 24px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; }
+    .foot-brand { font-family:'DM Mono',monospace; font-size:11px; color:var(--ink-faint); }
+    .foot-brand a { color:var(--sand-dark); }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:900px) {
+      .resource-grid { grid-template-columns:1fr 1fr; }
+      .dash-inner { grid-template-columns:repeat(3,1fr); }
+    }
+    @media(max-width:600px) {
+      .resource-grid { grid-template-columns:1fr; }
+      .dash-inner { grid-template-columns:1fr 1fr; }
+      .gate-box { padding:32px 24px; }
+      .suggest-banner { flex-direction:column; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- ACCESS GATE                                        -->
+<!-- ══════════════════════════════════════════════════ -->
+<div id="gate-overlay">
+  <div class="gate-box">
+    <div class="gate-icon">🔒</div>
+    <div class="gate-eyebrow">The Learning Vault · southafricanbedouin.com</div>
+    <h2 class="gate-title">Free. One small ask.</h2>
+    <p class="gate-sub">Over 600 hours of free learning, curated and validated. Subscribe to The Sand &amp; Silicon Byte and follow on LinkedIn to unlock full access.</p>
+
+    <div class="gate-steps">
+      <div class="gate-step" id="step-newsletter" onclick="completeStep('newsletter')">
+        <div class="step-icon">📬</div>
+        <div class="step-text">
+          <div class="step-label">Subscribe to the newsletter</div>
+          <div class="step-desc">The Sand &amp; Silicon Byte · Free · Weekly</div>
+        </div>
+        <div class="step-check">✓</div>
+      </div>
+      <div class="gate-step" id="step-linkedin" onclick="completeStep('linkedin')">
+        <div class="step-icon">💼</div>
+        <div class="step-text">
+          <div class="step-label">Follow on LinkedIn</div>
+          <div class="step-desc">@southafricanbedouin</div>
+        </div>
+        <div class="step-check">✓</div>
+      </div>
+    </div>
+
+    <button class="gate-btn" id="gate-submit-btn" onclick="unlockVault()" disabled>
+      Unlock The Vault →
+    </button>
+    <p class="gate-note">Your data is never sold. Unsubscribe anytime.</p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- NAV                                                -->
+<!-- ══════════════════════════════════════════════════ -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo"><a href="/">southafricanbedouin.com</a> / The Learning Vault</div>
+    <div class="nav-right">
+      <span class="nav-tag">🔓 Free Access</span>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- HERO                                               -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-eyebrow">Curated by @southafricanbedouin</div>
+    <h1 class="hero-title">The Learning <span class="accent">Vault.</span></h1>
+    <p class="hero-sub">The largest free resource library for AI, education &amp; professional growth — curated, validated, and growing. Every resource here saves you real money and real time.</p>
+    <p class="hero-meta">Last updated: <span>March 2026</span> · Maintained by <span>Muhammad Seedat</span> · New resources added weekly</p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- DASHBOARD                                          -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="dashboard">
+  <div class="dash-inner">
+    <div class="dash-card">
+      <div class="dash-val" id="stat-count">0</div>
+      <div class="dash-label">Resources</div>
+      <div class="dash-sub">Curated &amp; validated</div>
+    </div>
+    <div class="dash-card">
+      <div class="dash-val" id="stat-hours">0h</div>
+      <div class="dash-label">Learning Hours</div>
+      <div class="dash-sub">If completed in full</div>
+    </div>
+    <div class="dash-card">
+      <div class="dash-val" id="stat-avg">$0</div>
+      <div class="dash-label">Avg Market Value</div>
+      <div class="dash-sub">Per resource if paid</div>
+    </div>
+    <div class="dash-card">
+      <div class="dash-val" id="stat-saved">$0</div>
+      <div class="dash-label">Total Value</div>
+      <div class="dash-sub">All resources combined</div>
+    </div>
+    <div class="dash-card">
+      <div class="dash-val"><span class="visitor-dot"></span><span id="stat-visitors">0</span></div>
+      <div class="dash-label">Vault Accesses</div>
+      <div class="dash-sub">Since launch</div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- FILTER BAR                                         -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="filter-bar">
+  <div class="filter-inner">
+    <div class="search-row">
+      <div class="search-wrap">
+        <span class="search-icon">🔍</span>
+        <input type="text" class="search-input" id="search-input" placeholder="Search resources, providers, topics…" oninput="applyFilters()" />
+      </div>
+      <div class="filter-count">Showing <strong id="showing-count">26</strong> of <strong id="total-count">26</strong></div>
+    </div>
+
+    <div class="type-tabs" id="type-tabs">
+      <button class="type-tab active" data-type="all" onclick="setType('all',this)">All <span class="tab-count" id="tc-all"></span></button>
+      <button class="type-tab" data-type="Platform" onclick="setType('Platform',this)">🌐 Platforms <span class="tab-count" id="tc-Platform"></span></button>
+      <button class="type-tab" data-type="Course" onclick="setType('Course',this)">🎓 Courses <span class="tab-count" id="tc-Course"></span></button>
+      <button class="type-tab" data-type="GitHub" onclick="setType('GitHub',this)">🐙 GitHub <span class="tab-count" id="tc-GitHub"></span></button>
+      <button class="type-tab" data-type="Tool" onclick="setType('Tool',this)">🛠 Tools <span class="tab-count" id="tc-Tool"></span></button>
+      <button class="type-tab" data-type="Report" onclick="setType('Report',this)">📄 Reports <span class="tab-count" id="tc-Report"></span></button>
+      <button class="type-tab" data-type="Prompt" onclick="setType('Prompt',this)">✦ Prompts <span class="tab-count" id="tc-Prompt"></span></button>
+      <button class="type-tab" data-type="Website" onclick="setType('Website',this)">🔗 Websites <span class="tab-count" id="tc-Website"></span></button>
+    </div>
+
+    <div class="tag-row" id="tag-row"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- RESOURCE GRID                                      -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="grid-outer">
+  <div class="resource-grid" id="resource-grid">
+    <!-- Populated by JS -->
+  </div>
+
+  <!-- Suggest Banner -->
+  <div class="suggest-banner">
+    <div class="suggest-text">
+      <div class="suggest-title">Found something worth sharing?</div>
+      <div class="suggest-sub">Submit a resource and get credited in The Vault. I review every submission personally.</div>
+    </div>
+    <button class="suggest-btn" onclick="window.open('mailto:hello@southafricanbedouin.com?subject=Vault Resource Suggestion','_blank')">Suggest a resource →</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- CREDITS                                            -->
+<!-- ══════════════════════════════════════════════════ -->
+<div class="credits-section">
+  <div class="credits-inner">
+    <div class="credits-label">Contributors</div>
+    <div class="credits-grid" id="credits-grid">
+      <!-- Populated by JS -->
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- FOOTER                                             -->
+<!-- ══════════════════════════════════════════════════ -->
+<footer>
+  <div class="foot-inner">
+    <div class="foot-brand">The Learning Vault · <a href="/">southafricanbedouin.com</a> · @southafricanbedouin</div>
+    <div class="foot-brand">© 2026 Muhammad Seedat · Updated weekly</div>
+  </div>
+</footer>
+
+<!-- ══════════════════════════════════════════════════ -->
+<!-- DATA + LOGIC                                       -->
+<!-- ══════════════════════════════════════════════════ -->
+<script>
+// ─────────────────────────────────────────────────
+// RESOURCE DATABASE
+// To add a new resource: copy any object below,
+// paste at the end of the array, update the fields.
+// ─────────────────────────────────────────────────
+const RESOURCES = [
+  // ── AI PLATFORMS ──
+  {
+    id:1, title:"Anthropic AI Learning", provider:"Anthropic", type:"Platform",
+    url:"https://www.anthropic.com/learn",
+    desc:"Learn AI fundamentals, prompting, and responsible AI use directly from the makers of Claude. One of the most credible and safety-focused AI educators.",
+    tags:["AI","LLMs","Prompting","Safety","Beginner"],
+    sector:["Technology","Education"], profession:["All"],
+    hours:20, value:200, free:true, featured:true,
+    rating:{credibility:5,safety:5,validity:5},
+    validated:true, validatedDate:"Mar 2026", addedDate:"Mar 2026", addedBy:"Muhammad Seedat"
+  },
+  {
+    id:2, title:"Google AI Learning Hub", provider:"Google", type:"Platform",
+    url:"https://grow.google/ai",
+    desc:"Google's free AI education hub. Covers AI fundamentals, machine learning, generative AI, and practical applications across industries.",
+    tags:["AI","Machine Learning","Generative AI","Beginner","Intermediate"],
+    sector:["Technology","Education","Business"], profession:["All"],
+    hours:30, value:200, free:true, featured:true,
+    rating:{credibility:5,safety:5,validity:5},
+    validated:true, validatedDate:"Mar 2026", addedDate:"Mar 2026", addedBy:"Muhammad Seedat"
+  },
+  {
+    id:3, title:"Meta AI Learning", provider:"Meta", type:"Platform",
+    url:"https://ai.meta.com/resources/",
+    desc:"Meta's open AI education resources covering large language models, computer vision, and open-source AI tools including Llama.",
+    tags:["AI","LLMs","Open Source","Llama","Intermediate"],
+    sector:["Technology","Research"], profession:["Developer","Researcher"],
+    hours:15, value:150, free:true,
+    rating:{credibility:5,safety:4,validity:5},
+    validated:true, validatedDate:"Mar 2026", addedDate:"Mar 2026", addedBy:"Muhammad Seedat"
+  },
+  {
+    id:4, title:"NVIDIA Deep Learning Institute", provider:"NVIDIA", type:"Platform",
+    url:"https://learn.nvidia.com",
+    desc:"⭐ GOAT TIER. Industry-leading deep learning and AI education from the company powering modern AI infrastructure. Hands-on labs, certifications, and professional tracks.",
+    tags:["AI","Deep Learning","GPU","Computer Vision","NLP","Professional","Certification"],
+    sector:["Technology","Engineering","Research"], profession:["Developer","Engineer","Researcher"],
+    hours:40, value:300, free:true, featured:true,
+    rating:{credibility:5,safety:5,validity:5},
+    validated:true, validatedDate:"Mar 2026", addedDate:"Mar 2026", addedBy:"Muhammad Seedat"
+  },
+  {
+    id:5, title:"Microsoft AI Skills", provider:"Microsoft", type:"Platform",
+    url:"https://learn.microsoft.com/en-us/ai/",
+    desc:"Microsoft's free AI learning path on Microsoft Learn. Covers Azure AI, Copilot, responsible AI, and enterprise AI implementation.",
+    tags:["AI","Azure","Copilot","Enterprise","Certification","Intermediate"],
+    sector:["Technology","Business","Healthcare"], profession:["Professional","Manager","Developer"],
+    hours:25, value:200, free:true,
+    rating:{credibility:5,safety:5,validity:5},
+    validated:true, validatedDate:"Mar 2026", addedDate:"Mar 2026", addedBy:"Muhammad Seedat"
+  },
+  {
+    id:6, title:"OpenAI Academy", provider:"OpenAI", type:"Platform",
+    url:"https://academy.openai.com",
+    desc:"OpenAI's official learning platform. Prompting, fine-tuning, API usage, and building with GPT models. Learn directly from the team behind ChatGPT.",
+    tags:["AI","ChatGPT","Prompting","API","Developer","Beginner"],
+    sector:["Technology","Education","Business"], profession:["All"],
+    hours:20, value:200, free:true, featured:true,
+    rating:{credibility:5,safety:4,validity:5},
+    validated:true, validatedDate:"Mar 2026", addedDate:"Mar 2026", addedBy:"Muhammad Seedat"
+  },
+  {
+    id:7, title:"IBM SkillsBuild", provider:"IBM", type:"Platform",
+    url:"https://skillsbuild.org",
+    desc:"IBM's free education platform covering AI, cybersecurity, data science, and professional skills. Strong focus on career readiness and workforce development.",
+    tags:["AI","Data Science","Cybersecurity","Career","Certification","Beginner"],
+    sector:["Technology","Business","Education"], profession:["All"],
+    hours:30, value:150, free:true,
+    rating:{credibility:5,safety:5,validity:5},
+    validated:true, validatedDate:"Mar 2026", addedDate:"Mar 2026", addedBy:"Muhammad Seedat"
+  },
+  {
+    id:8, title:"AWS Skill Builder", provider:"Amazon Web Services", type:"Platform",
+    url:"https://skillbuilder.aws",
+    desc:"AWS's free cloud and AI learning platform. 500+ courses covering cloud fundamentals, AI/ML services, and AWS certifications.",
+    tags:["Cloud","AI","AWS","Machine Learning","Certification","Infrastructure"],
+    sector:["Technology","Engineering","Business"], profession:["Developer","Engineer","Architect"],
+    hours:40, value:200, free:true,
+    rating:{credibility:5,safety:5,validity:5},
+    validated:true, validatedDate:"Mar 2026", addedDate:"Mar 2026", addedBy:"Muhammad Seedat"
+  },
+  {
+    id:9, title:"DeepLearning.AI", provider:"Andrew Ng / DeepLearning.AI", type:"Platform",
+    url:"https://deeplearning.ai",
+    desc:"Andrew Ng's world-class AI education platform. The gold standard for learning machine learning, deep learning, and AI systems from first principles.",
+    tags:["AI","Deep Learning","Machine Learning","Neural Networks","Professional","Beginner","Intermediate","Advanced"],
+    sector:["Technology","Research","Education"], profession:["All"],
+    hours:50, value:500, free:true, featured:true,
+    rating:{credibility:5,safety:5,validity:5},
+    validated:true, validatedDate:"Mar 2026", addedDate:"Mar 2026", addedBy:"Muhammad Seedat"
+  },
+  {
+    id:10, title:"Hugging Face Learn", provider:"Hugging Face", type:"Platform",
+    url:"https://huggingface.co/learn",
+    desc:"The open-source AI community's learning hub. Hands-on courses in NLP, computer vision, audio AI, and building with transformer models.",
+    tags:["AI","NLP","Open Source","Transformers","Computer Vision","Intermediate","Advanced"],
+    sector:["Technology","Research"], profession:["Developer","Researcher","Engineer"],
+    hours:30, value:200, free:true,
+    rating:{credibility:5,safety:5,validity:5},
+    validated:true, validatedDate:"Mar 2026", addedDate:"Mar 2026", addedBy:"Muhammad Seedat"
+  },
+
+  // ── COURSERA COURSES ──
+  {
+    id:11, title:"Excel Skills for Business", provider:"Coursera / Macquarie University", type:"Course",
+    url:"https://www.coursera.org/specializations/excel",
+    desc:"Master Excel for professional use — from formulas and functions to data analysis and dashboards. Highly practical, industry-recognised.",
+    tags:["Excel","Data","Business","Productivity","Beginner"],
+    sector:["Business","Finance","Operations"], profession:["Analyst","Manager","Professional"],
+    hours:20, value:49, free:true,
+    rating:{credibility:5,safety:5,validity:5},
+    validated:true, validatedDate:"Mar 2026", addedDate:"Mar 2026", addedBy:"Muhammad Seedat"
+  },
+  {
+    id:12, title:"Business Foundations", provider:"Coursera / Wharton", type:"Course",
+    url:"https://www.coursera.org/specializations/wharton-business-foundations",
+    desc:"Wharton's foundational business education — accounting, finance, marketing, and operations. World-class MBA content, completely free to audit.",
+    tags:["Business","Finance","Marketing","MBA","Beginner"],
+    sector:["Business","Finance","Entrepreneurship"], profession:["Manager","Entrepreneur","Professional"],
+    hours:25, value:49, free:true, featured:true,
+    rating:{credibility:5,safety:5,validity:5},
+    validated:true, validatedDate:"Mar 2026", addedDate:"Mar 2026", addedBy:"Muhammad Seedat"
+  },
+  {
+    id:13, title:"Entrepreneurship Specialisation", provider:"Coursera / Wharton", type:"Course",
+    url:"https://www.coursera.org/specializations/wharton-entrepreneurship",
+    desc:"Develop and launch a business. Ideation, launch, growth, and funding from Wharton faculty. Essential for anyone building their own venture.",
+    tags:["Entrepreneurship","Startup","Business","Strategy","Intermediate"],
+    sector:["Business","Entrepreneurship"], profession:["Entrepreneur","Founder","Manager"],
+    hours:30, value:49, free:true,
+    rating:{credibility:5,safety:5,validity:5},
+    validated:true, validatedDate:"Mar 2026", addedDate:"Mar 2026", addedBy:"Muhammad Seedat"
+  },
+  {
+    id:14, title:"Improve Your English Communication Skills", provider:"Coursera / Georgia Tech", type:"Course",
+    url:"https://www.coursera.org/specializations/improve-english",
+    desc:"Professional English for global workplaces. Writing, speaking, and business communication for non-native English speakers navigating international careers.",
+    tags:["English","Communication","Professional","Career","Beginner"],
+    sector:["Education","Business","Career Development"], profession:["All"],
+    hours:20, value:49, free:true,
+    rating:{credibility:5,safety:5,validity:5},
+    validated:true, validatedDate:"Mar 2026", addedDate:"Mar 2026", addedBy:"Muhammad Seedat"
+  },
+  {
+    id:15, title:"Successful Negotiation: Essential Strategies", provider:"Coursera / University of Michigan", type:"Course",
+    url:"https://www.coursera.org/learn/negotiation-skills",
+    desc:"Practical negotiation frameworks for professional and personal contexts. Plan, use, and adapt negotiating strategies across cultures and situations.",
+    tags:["Negotiation","Leadership","Communication","Business","Beginner"],
+    sector:["Business","Legal","Leadership"], profession:["Manager","Leader","Professional"],
+    hours:15, value:49, free:true,
+    rating:{credibility:5,safety:5,validity:5},
+    validated:true, validatedDate:"Mar 2026", addedDate:"Mar 2026", addedBy:"Muhammad Seedat"
+  },
+  {
+    id:16, title:"Career Success Specialisation", provider:"Coursera / UC Davis", type:"Course",
+    url:"https://www.coursera.org/specializations/career-success",
+    desc:"Build the professional skills that employers actually want — project management, communication, finance fundamentals, and career strategy.",
+    tags:["Career","Professional Development","Communication","Beginner"],
+    sector:["Career Development","Business"], profession:["All"],
+    hours:20, value:49, free:true,
+    rating:{credibility:5,safety:5,validity:4},
+    validated:true, validatedDate:"Mar 2026", addedDate:"Mar 2026", addedBy:"Muhammad Seedat"
+  },
+  {
+    id:17, title:"Scrum Master Certification Prep", provider:"Coursera / LearnQuest", type:"Course",
+    url:"https://www.coursera.org/specializations/scrum-master",
+    desc:"Comprehensive Scrum and Agile training leading to professional certification. Essential for project managers and teams in tech and corporate environments.",
+    tags:["Scrum","Agile","Project Management","Certification","Intermediate"],
+    sector:["Technology","Business","Operations"], profession:["Project Manager","Developer","Manager"],
+    hours:20, value:49, free:true,
+    rating:{credibility:4,safety:5,validity:5},
+    validated:true, validatedDate:"Mar 2026", addedDate:"Mar 2026", addedBy:"Muhammad Seedat"
+  },
+  {
+    id:18, title:"Digital Product Management", provider:"Coursera / University of Virginia", type:"Course",
+    url:"https://www.coursera.org/specializations/uva-darden-digital-product-management",
+    desc:"Build, launch, and manage digital products with modern Agile and Lean methodologies. Covers product strategy, user research, and data-driven decision making.",
+    tags:["Product Management","Digital","Agile","Strategy","Intermediate"],
+    sector:["Technology","Business"], profession:["Product Manager","Developer","Manager"],
+    hours:25, value:49, free:true,
+    rating:{credibility:5,safety:5,validity:5},
+    validated:true, validatedDate:"Mar 2026", addedDate:"Mar 2026", addedBy:"Muhammad Seedat"
+  },
+  {
+    id:19, title:"Construction Management", provider:"Coursera / Columbia University", type:"Course",
+    url:"https://www.coursera.org/specializations/construction-management",
+    desc:"Professional construction management from Columbia University. Scheduling, cost estimation, and project delivery for civil and construction professionals.",
+    tags:["Construction","Engineering","Project Management","Intermediate"],
+    sector:["Construction","Engineering","Infrastructure"], profession:["Engineer","Project Manager"],
+    hours:30, value:49, free:true,
+    rating:{credibility:5,safety:5,validity:4},
+    validated:true, validatedDate:"Mar 2026", addedDate:"Mar 2026", addedBy:"Muhammad Seedat"
+  },
+  {
+    id:20, title:"Human Resources Analytics", provider:"Coursera / UC Irvine", type:"Course",
+    url:"https://www.coursera.org/specializations/hr-analytics",
+    desc:"Apply data analytics to HR decision-making — recruitment, performance, retention, and workforce planning. Critical for modern HR professionals.",
+    tags:["HR","Analytics","Data","People Management","Intermediate"],
+    sector:["HR","Business","Operations"], profession:["HR Professional","Manager","Analyst"],
+    hours:25, value:49, free:true,
+    rating:{credibility:5,safety:5,validity:5},
+    validated:true, validatedDate:"Mar 2026", addedDate:"Mar 2026", addedBy:"Muhammad Seedat"
+  },
+  {
+    id:21, title:"English for Career Development", provider:"Coursera / University of Pennsylvania", type:"Course",
+    url:"https://www.coursera.org/learn/careerdevelopment",
+    desc:"Penn's practical English for international professionals navigating global job markets. Job search, interviews, and workplace communication.",
+    tags:["English","Career","Communication","Job Search","Beginner"],
+    sector:["Career Development","Education"], profession:["All"],
+    hours:20, value:49, free:true,
+    rating:{credibility:5,safety:5,validity:5},
+    validated:true, validatedDate:"Mar 2026", addedDate:"Mar 2026", addedBy:"Muhammad Seedat"
+  },
+  {
+    id:22, title:"Finance & Quantitative Modeling for Analysts", provider:"Coursera / Wharton", type:"Course",
+    url:"https://www.coursera.org/specializations/finance-quantitative-modeling-analysts",
+    desc:"Essential quantitative finance from Wharton. Financial models, valuation, risk, and data analysis for analysts and finance professionals.",
+    tags:["Finance","Quantitative","Modeling","Analytics","Intermediate"],
+    sector:["Finance","Banking","Business"], profession:["Analyst","Finance Professional","Manager"],
+    hours:25, value:49, free:true,
+    rating:{credibility:5,safety:5,validity:5},
+    validated:true, validatedDate:"Mar 2026", addedDate:"Mar 2026", addedBy:"Muhammad Seedat"
+  },
+  {
+    id:23, title:"Six Sigma Yellow Belt", provider:"Coursera / University System of Georgia", type:"Course",
+    url:"https://www.coursera.org/specializations/six-sigma-fundamentals",
+    desc:"Six Sigma fundamentals and Yellow Belt certification. Process improvement, waste reduction, and quality management for operations and engineering professionals.",
+    tags:["Six Sigma","Quality","Process Improvement","Engineering","Certification"],
+    sector:["Operations","Engineering","Manufacturing","Healthcare"], profession:["Engineer","Operations Manager","Quality Analyst"],
+    hours:20, value:49, free:true,
+    rating:{credibility:5,safety:5,validity:4},
+    validated:true, validatedDate:"Mar 2026", addedDate:"Mar 2026", addedBy:"Muhammad Seedat"
+  },
+  {
+    id:24, title:"OKR Certification: Leadership & Goal Setting", provider:"Coursera / UC San Diego", type:"Course",
+    url:"https://www.coursera.org/learn/okr-certification",
+    desc:"Master OKRs (Objectives and Key Results) — the goal-setting framework used by Google, Intel, and thousands of high-growth organisations worldwide.",
+    tags:["OKR","Leadership","Strategy","Management","Goal Setting"],
+    sector:["Business","Leadership","Technology"], profession:["Manager","Leader","Executive"],
+    hours:15, value:49, free:true,
+    rating:{credibility:4,safety:5,validity:5},
+    validated:true, validatedDate:"Mar 2026", addedDate:"Mar 2026", addedBy:"Muhammad Seedat"
+  },
+  {
+    id:25, title:"Creative Writing Specialisation", provider:"Coursera / Wesleyan University", type:"Course",
+    url:"https://www.coursera.org/specializations/creative-writing",
+    desc:"Develop your craft as a writer — fiction, creative non-fiction, poetry, and personal narrative. Essential for anyone building a personal brand through storytelling.",
+    tags:["Writing","Creativity","Storytelling","Communication","Beginner"],
+    sector:["Education","Media","Content Creation"], profession:["Writer","Communicator","Leader"],
+    hours:15, value:49, free:true,
+    rating:{credibility:5,safety:5,validity:5},
+    validated:true, validatedDate:"Mar 2026", addedDate:"Mar 2026", addedBy:"Muhammad Seedat"
+  },
+
+  // ── GITHUB REPOS ──
+  {
+    id:26, title:"Terraink", provider:"Yousif Amanuel", type:"GitHub",
+    url:"https://github.com/yousifamanuel/terraink",
+    desc:"An open-source geospatial and environmental intelligence project. Useful for understanding how AI and systems thinking apply to land, infrastructure, and environmental data.",
+    tags:["Geospatial","Open Source","Infrastructure","Environment","Data"],
+    sector:["Engineering","Environment","Technology"], profession:["Engineer","Developer","Researcher"],
+    hours:5, value:0, free:true,
+    rating:{credibility:4,safety:5,validity:4},
+    validated:true, validatedDate:"Mar 2026", addedDate:"Mar 2026", addedBy:"Muhammad Seedat"
+  }
+];
+
+// ─────────────────────────────────────────────────
+// CONTRIBUTORS
+// ─────────────────────────────────────────────────
+const CONTRIBUTORS = [
+  { name:"Muhammad Seedat", handle:"@southafricanbedouin", role:"Founder & Curator", count:26, founder:true },
+  { name:"Yousif Amanuel", handle:"GitHub", role:"Resource Contributor", count:1, founder:false }
+];
+
+// ─────────────────────────────────────────────────
+// STATE
+// ─────────────────────────────────────────────────
+let activeType = 'all';
+let activeTag = null;
+let searchQuery = '';
+
+// ─────────────────────────────────────────────────
+// GATE LOGIC
+// ─────────────────────────────────────────────────
+const gateSteps = { newsletter: false, linkedin: false };
+
+function completeStep(step) {
+  const targets = {
+    newsletter: 'https://thesandandsiliconbyte.beehiiv.com',
+    linkedin: 'https://linkedin.com/in/southafricanbedouin'
+  };
+  window.open(targets[step], '_blank');
+  gateSteps[step] = true;
+  document.getElementById('step-' + step).classList.add('done');
+  const allDone = Object.values(gateSteps).every(Boolean);
+  const btn = document.getElementById('gate-submit-btn');
+  if (allDone) { btn.disabled = false; btn.classList.add('ready'); btn.textContent = 'Unlock The Vault ✓'; }
+}
+
+function unlockVault() {
+  localStorage.setItem('vault_unlocked', '1');
+  incrementVisitor();
+  document.getElementById('gate-overlay').classList.add('hidden');
+}
+
+function checkGate() {
+  if (localStorage.getItem('vault_unlocked') === '1') {
+    document.getElementById('gate-overlay').classList.add('hidden');
+  }
+}
+
+// ─────────────────────────────────────────────────
+// VISITOR COUNTER
+// ─────────────────────────────────────────────────
+function incrementVisitor() {
+  let count = parseInt(localStorage.getItem('vault_visitors') || '847');
+  count++;
+  localStorage.setItem('vault_visitors', count);
+  animateCount('stat-visitors', count);
+}
+
+function getVisitorCount() {
+  return parseInt(localStorage.getItem('vault_visitors') || '847');
+}
+
+// ─────────────────────────────────────────────────
+// DASHBOARD
+// ─────────────────────────────────────────────────
+function animateCount(id, target, prefix='', suffix='', decimals=0) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const duration = 1200;
+  const start = performance.now();
+  const from = 0;
+  const tick = (now) => {
+    const p = Math.min((now - start) / duration, 1);
+    const ease = 1 - Math.pow(1 - p, 3);
+    const val = from + (target - from) * ease;
+    el.textContent = prefix + (decimals ? val.toFixed(decimals) : Math.round(val)).toLocaleString() + suffix;
+    if (p < 1) requestAnimationFrame(tick);
+  };
+  requestAnimationFrame(tick);
+}
+
+function buildDashboard() {
+  const totalHours = RESOURCES.reduce((s, r) => s + r.hours, 0);
+  const totalValue = RESOURCES.reduce((s, r) => s + r.value, 0);
+  const avgValue = Math.round(totalValue / RESOURCES.length);
+  setTimeout(() => {
+    animateCount('stat-count', RESOURCES.length);
+    animateCount('stat-hours', totalHours, '', 'h');
+    animateCount('stat-avg', avgValue, '$');
+    animateCount('stat-saved', totalValue, '$');
+    animateCount('stat-visitors', getVisitorCount());
+  }, 300);
+  document.getElementById('total-count').textContent = RESOURCES.length;
+}
+
+// ─────────────────────────────────────────────────
+// TAG CLOUD
+// ─────────────────────────────────────────────────
+function buildTagCloud() {
+  const tagCounts = {};
+  RESOURCES.forEach(r => r.tags.forEach(t => { tagCounts[t] = (tagCounts[t]||0)+1; }));
+  const sorted = Object.entries(tagCounts).sort((a,b)=>b[1]-a[1]).slice(0,20);
+  const row = document.getElementById('tag-row');
+  sorted.forEach(([tag, count]) => {
+    const btn = document.createElement('button');
+    btn.className = 'filter-tag';
+    btn.textContent = `${tag} (${count})`;
+    btn.dataset.tag = tag;
+    btn.onclick = () => toggleTag(tag, btn);
+    row.appendChild(btn);
+  });
+}
+
+function toggleTag(tag, btn) {
+  if (activeTag === tag) {
+    activeTag = null;
+    btn.classList.remove('active');
+  } else {
+    activeTag = tag;
+    document.querySelectorAll('.filter-tag').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+  applyFilters();
+}
+
+// ─────────────────────────────────────────────────
+// TYPE TABS
+// ─────────────────────────────────────────────────
+function buildTypeCounts() {
+  const types = ['Platform','Course','GitHub','Tool','Report','Prompt','Website'];
+  document.getElementById('tc-all').textContent = `(${RESOURCES.length})`;
+  types.forEach(t => {
+    const el = document.getElementById('tc-' + t);
+    if (el) {
+      const c = RESOURCES.filter(r => r.type === t).length;
+      el.textContent = c ? `(${c})` : '';
+    }
+  });
+}
+
+function setType(type, btn) {
+  activeType = type;
+  document.querySelectorAll('.type-tab').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  applyFilters();
+}
+
+// ─────────────────────────────────────────────────
+// FILTER + RENDER
+// ─────────────────────────────────────────────────
+function applyFilters() {
+  searchQuery = document.getElementById('search-input').value.toLowerCase();
+  const filtered = RESOURCES.filter(r => {
+    const matchType = activeType === 'all' || r.type === activeType;
+    const matchTag = !activeTag || r.tags.includes(activeTag);
+    const matchSearch = !searchQuery ||
+      r.title.toLowerCase().includes(searchQuery) ||
+      r.provider.toLowerCase().includes(searchQuery) ||
+      r.desc.toLowerCase().includes(searchQuery) ||
+      r.tags.some(t => t.toLowerCase().includes(searchQuery));
+    return matchType && matchTag && matchSearch;
+  });
+
+  const grid = document.getElementById('resource-grid');
+  grid.innerHTML = '';
+
+  if (filtered.length === 0) {
+    grid.innerHTML = `<div class="no-results">No resources match your search. <strong>Suggest one →</strong></div>`;
+  } else {
+    filtered.forEach(r => grid.appendChild(buildCard(r)));
+  }
+  document.getElementById('showing-count').textContent = filtered.length;
+}
+
+function ratingDots(score, key) {
+  let dots = '';
+  for (let i = 1; i <= 5; i++) {
+    dots += `<div class="rating-dot ${i <= score ? 'filled-' + score : ''}"></div>`;
+  }
+  return `<div class="rating-item"><div class="rating-label">${key}</div><div class="rating-dots">${dots}</div></div>`;
+}
+
+function buildCard(r) {
+  const div = document.createElement('div');
+  div.className = 'resource-card';
+  div.dataset.type = r.type;
+
+  const validBadge = r.validated
+    ? `<span class="badge badge-validated">✓ Validated ${r.validatedDate}</span>`
+    : `<span class="badge badge-check">⚠ Needs check</span>`;
+
+  const tags = r.tags.slice(0,5).map(t =>
+    `<span class="card-tag" onclick="toggleTagByName('${t}')">${t}</span>`
+  ).join('');
+
+  div.innerHTML = `
+    <div class="card-top">
+      <div class="card-badges">
+        <span class="badge badge-type-${r.type}">${r.type}</span>
+        ${r.featured ? '<span class="badge badge-featured">★ Featured</span>' : ''}
+        ${r.free ? '<span class="badge badge-free">Free</span>' : ''}
+      </div>
+      ${validBadge}
+    </div>
+    <div class="card-provider">${r.provider}</div>
+    <div class="card-title">${r.title}</div>
+    <div class="card-desc">${r.desc}</div>
+    <div class="card-tags">${tags}</div>
+    <div class="card-rating">
+      ${ratingDots(r.rating.credibility, 'Credibility')}
+      ${ratingDots(r.rating.safety, 'Safety')}
+      ${ratingDots(r.rating.validity, 'Validity')}
+    </div>
+    <div class="card-footer">
+      <div class="card-meta">~${r.hours}h · <span>$${r.value} value</span> · Added by ${r.addedBy}</div>
+      <a class="card-link" href="${r.url}" target="_blank" rel="noopener">Open →</a>
+    </div>
+  `;
+  return div;
+}
+
+function toggleTagByName(tag) {
+  const btn = [...document.querySelectorAll('.filter-tag')].find(b => b.dataset.tag === tag);
+  if (btn) toggleTag(tag, btn);
+  else { activeTag = tag; applyFilters(); }
+}
+
+// ─────────────────────────────────────────────────
+// CREDITS
+// ─────────────────────────────────────────────────
+function buildCredits() {
+  const grid = document.getElementById('credits-grid');
+  CONTRIBUTORS.forEach(c => {
+    const div = document.createElement('div');
+    div.className = 'credit-card' + (c.founder ? ' credit-founder' : '');
+    div.innerHTML = `
+      <div class="credit-name">${c.name}</div>
+      <div class="credit-role">${c.role}</div>
+      <div class="credit-count mono">${c.count} resource${c.count!==1?'s':''} added</div>
+    `;
+    grid.appendChild(div);
+  });
+}
+
+// ─────────────────────────────────────────────────
+// INIT
+// ─────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', () => {
+  checkGate();
+  buildDashboard();
+  buildTagCloud();
+  buildTypeCounts();
+  applyFilters();
+  buildCredits();
+});
+</script>
+</body>
+</html>
