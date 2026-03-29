@@ -1,3 +1,16 @@
-{"redirects":[{"source":"/","has":[{"type":"host","value":"newsletter.southafricanbedouin.com"}],"destination":"https://newsletter.southafricanbedouin.com/newsletter","permanent":false}]}
-
-{ "source": "/vault", "destination": "/vault.html" }
+{
+  "redirects": [
+    {
+      "source": "/",
+      "has": [{ "type": "host", "value": "newsletter.southafricanbedouin.com" }],
+      "destination": "https://newsletter.southafricanbedouin.com/newsletter",
+      "permanent": false
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/vault",
+      "destination": "/vault.html"
+    }
+  ]
+}
