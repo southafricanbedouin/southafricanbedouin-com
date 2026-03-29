@@ -429,7 +429,11 @@
 // To add a new resource: copy any object below,
 // paste at the end of the array, update the fields.
 // ─────────────────────────────────────────────────
-const RESOURCES = [
+// Resources loaded from resources.json — add new entries there, not here
+let RESOURCES = [];
+let CONTRIBUTORS = [];
+
+/* placeholder — replaced after fetch */ const _RESOURCES_PLACEHOLDER = [
   // ── AI PLATFORMS ──
   {
     id:1, title:"Anthropic AI Learning", provider:"Anthropic", type:"Platform",
@@ -695,15 +699,7 @@ const RESOURCES = [
     rating:{credibility:4,safety:5,validity:4},
     validated:true, validatedDate:"Mar 2026", addedDate:"Mar 2026", addedBy:"Muhammad Seedat"
   }
-];
-
-// ─────────────────────────────────────────────────
-// CONTRIBUTORS
-// ─────────────────────────────────────────────────
-const CONTRIBUTORS = [
-  { name:"Muhammad Seedat", handle:"@southafricanbedouin", role:"Founder & Curator", count:26, founder:true },
-  { name:"Yousif Amanuel", handle:"GitHub", role:"Resource Contributor", count:1, founder:false }
-];
+]; /* end _RESOURCES_PLACEHOLDER */
 
 // ─────────────────────────────────────────────────
 // STATE
@@ -943,11 +939,30 @@ function buildCredits() {
 // ─────────────────────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
   checkGate();
-  buildDashboard();
-  buildTagCloud();
-  buildTypeCounts();
-  applyFilters();
-  buildCredits();
+  fetch('/resources.json')
+    .then(r => r.json())
+    .then(data => {
+      RESOURCES = data.resources;
+      CONTRIBUTORS = data.contributors;
+      buildDashboard();
+      buildTagCloud();
+      buildTypeCounts();
+      applyFilters();
+      buildCredits();
+    })
+    .catch(() => {
+      // Fallback: if fetch fails (e.g. local file open), use placeholder data
+      RESOURCES = _RESOURCES_PLACEHOLDER;
+      CONTRIBUTORS = [
+        { name:"Muhammad Seedat", handle:"@southafricanbedouin", role:"Founder & Curator", count:26, founder:true },
+        { name:"Yousif Amanuel", handle:"GitHub", role:"Resource Contributor", count:1, founder:false }
+      ];
+      buildDashboard();
+      buildTagCloud();
+      buildTypeCounts();
+      applyFilters();
+      buildCredits();
+    });
 });
 </script>
 </body>
