@@ -5,6 +5,12 @@
       "has": [{ "type": "host", "value": "newsletter.southafricanbedouin.com" }],
       "destination": "https://newsletter.southafricanbedouin.com/newsletter",
       "permanent": false
+    },
+    {
+      "source": "/subscribe",
+      "has": [{ "type": "host", "value": "newsletter.southafricanbedouin.com" }],
+      "destination": "https://thesandandsiliconbyte.beehiiv.com/subscribe",
+      "permanent": false
     }
   ],
   "rewrites": [
