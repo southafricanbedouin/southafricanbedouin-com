@@ -394,7 +394,7 @@
       <div class="suggest-title">Found something worth sharing?</div>
       <div class="suggest-sub">Submit a resource and get credited in The Vault. I review every submission personally.</div>
     </div>
-    <button class="suggest-btn" onclick="window.open('mailto:hello@southafricanbedouin.com?subject=Vault Resource Suggestion','_blank')">Suggest a resource →</button>
+    <button class="suggest-btn" onclick="window.open('https://airtable.com/appIoGRWYlekTtxqY/tbl4uX9QE5MK7qnsC/form','_blank')">Submit a resource →</button>
   </div>
 </div>
 
@@ -947,32 +947,41 @@ function buildCredits() {
 // ─────────────────────────────────────────────────
 // INIT
 // ─────────────────────────────────────────────────
+function initVault(data) {
+  RESOURCES = data.resources;
+  CONTRIBUTORS = data.contributors;
+  buildDashboard();
+  buildTagCloud();
+  buildTypeCounts();
+  applyFilters();
+  buildCredits();
+}
+
+function useStaticFallback() {
+  RESOURCES = _RESOURCES_PLACEHOLDER;
+  CONTRIBUTORS = [
+    { name:"Muhammad Seedat", handle:"@southafricanbedouin", role:"Founder & Curator", count:25, founder:true },
+    { name:"Yousif Amanuel", handle:"GitHub", role:"Resource Contributor", count:1, founder:false },
+    { name:"Janel Loi", handle:"@janelloi", role:"Resource Contributor", count:1, founder:false }
+  ];
+  buildDashboard();
+  buildTagCloud();
+  buildTypeCounts();
+  applyFilters();
+  buildCredits();
+}
+
 document.addEventListener('DOMContentLoaded', () => {
   checkGate();
-  fetch('/resources.json')
-    .then(r => r.json())
-    .then(data => {
-      RESOURCES = data.resources;
-      CONTRIBUTORS = data.contributors;
-      buildDashboard();
-      buildTagCloud();
-      buildTypeCounts();
-      applyFilters();
-      buildCredits();
-    })
+  // Try live Airtable API first, fall back to static JSON, then hardcoded placeholder
+  fetch('/api/vault-resources')
+    .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+    .then(data => initVault(data))
     .catch(() => {
-      // Fallback: if fetch fails (e.g. local file open), use placeholder data
-      RESOURCES = _RESOURCES_PLACEHOLDER;
-      CONTRIBUTORS = [
-        { name:"Muhammad Seedat", handle:"@southafricanbedouin", role:"Founder & Curator", count:26, founder:true },
-        { name:"Yousif Amanuel", handle:"GitHub", role:"Resource Contributor", count:1, founder:false },
-        { name:"Janel Loi", handle:"@janelloi", role:"Resource Contributor", count:1, founder:false }
-      ];
-      buildDashboard();
-      buildTagCloud();
-      buildTypeCounts();
-      applyFilters();
-      buildCredits();
+      fetch('/resources.json')
+        .then(r => r.json())
+        .then(data => initVault(data))
+        .catch(() => useStaticFallback());
     });
 });
 </script>
