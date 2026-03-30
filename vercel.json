@@ -11,6 +11,10 @@
     {
       "source": "/vault",
       "destination": "/vault.html"
+    },
+    {
+      "source": "/submit",
+      "destination": "/submit.html"
     }
   ]
 }

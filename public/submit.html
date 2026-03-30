@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Submit a Resource — The Learning Vault</title>
+  <meta name="description" content="Know a great free resource? Submit it to The Learning Vault. Muhammad reviews every submission personally." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --sand: #C8A96E; --sand-dark: #8B6F3E; --sand-pale: #F7F0E6; --sand-rule: rgba(200,169,110,0.2);
+      --ink: #111111; --ink-mid: #333; --ink-soft: #666; --ink-faint: #999;
+      --page: #FFFFFF; --page-warm: #FAFAF7; --rule: #E8E4DE;
+      --green: #2D9B5A; --green-bg: rgba(45,155,90,0.06); --green-rule: rgba(45,155,90,0.25);
+      --red: #DC2626; --red-bg: rgba(220,38,38,0.06);
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { font-family:'EB Garamond',Georgia,serif; background:var(--page-warm); color:var(--ink); line-height:1.6; -webkit-font-smoothing:antialiased; font-size:17px; min-height:100vh; }
+    a { color:inherit; text-decoration:none; }
+    .mono { font-family:'DM Mono','Courier New',monospace; }
+
+    /* ── NAV ── */
+    nav { border-bottom:1px solid var(--rule); background:var(--page); position:sticky; top:0; z-index:100; }
+    .nav-inner { max-width:760px; margin:0 auto; padding:0 24px; height:54px; display:flex; align-items:center; justify-content:space-between; }
+    .nav-logo { font-family:'DM Mono',monospace; font-size:12px; color:var(--ink-soft); }
+    .nav-logo a { color:var(--sand-dark); font-weight:500; }
+    .nav-back { font-family:'DM Mono',monospace; font-size:11px; color:var(--ink-faint); letter-spacing:0.04em; display:flex; align-items:center; gap:6px; transition:color 0.15s; }
+    .nav-back:hover { color:var(--sand-dark); }
+
+    /* ── HERO ── */
+    .hero { padding:52px 24px 40px; max-width:760px; margin:0 auto; }
+    .hero-eyebrow { font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.2em; text-transform:uppercase; color:var(--sand); margin-bottom:14px; display:flex; align-items:center; gap:10px; }
+    .hero-eyebrow::after { content:''; height:1px; width:32px; background:var(--sand-rule); }
+    .hero-title { font-size:clamp(30px,4vw,46px); font-weight:500; letter-spacing:-0.02em; line-height:1.1; margin-bottom:12px; }
+    .hero-sub { font-size:16px; color:var(--ink-soft); max-width:520px; line-height:1.75; }
+
+    /* ── FORM CARD ── */
+    .form-wrap { max-width:760px; margin:0 auto 80px; padding:0 24px; }
+    .form-card { background:var(--page); border:1px solid var(--rule); border-radius:12px; padding:40px 44px; }
+    @media(max-width:600px) { .form-card { padding:28px 22px; } }
+
+    .form-section { margin-bottom:36px; }
+    .section-label {
+      font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.18em; text-transform:uppercase;
+      color:var(--sand-dark); margin-bottom:20px; padding-bottom:10px; border-bottom:1px solid var(--sand-rule);
+      display:flex; align-items:center; gap:8px;
+    }
+    .section-num { color:var(--ink-faint); }
+
+    .field { margin-bottom:22px; }
+    .field-label {
+      display:flex; align-items:baseline; gap:6px;
+      font-size:15px; font-weight:500; color:var(--ink); margin-bottom:6px;
+    }
+    .field-required { font-family:'DM Mono',monospace; font-size:10px; color:var(--red); }
+    .field-hint { font-family:'DM Mono',monospace; font-size:11px; color:var(--ink-faint); margin-bottom:8px; line-height:1.5; }
+
+    .field input, .field select, .field textarea {
+      width:100%; padding:11px 14px;
+      border:1px solid var(--rule); border-radius:7px;
+      font-family:'DM Mono',monospace; font-size:13px; color:var(--ink);
+      background:var(--page); outline:none; transition:border-color 0.15s, box-shadow 0.15s;
+      appearance:none; -webkit-appearance:none;
+    }
+    .field textarea { resize:vertical; min-height:96px; line-height:1.6; }
+    .field select { background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23999' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 14px center; padding-right:36px; cursor:pointer; }
+    .field input:focus, .field select:focus, .field textarea:focus { border-color:var(--sand); box-shadow:0 0 0 3px rgba(200,169,110,0.1); }
+    .field input.error, .field select.error, .field textarea.error { border-color:var(--red); box-shadow:0 0 0 3px rgba(220,38,38,0.08); }
+    .field input::placeholder, .field textarea::placeholder { color:var(--ink-faint); }
+    .field-error { font-family:'DM Mono',monospace; font-size:10px; color:var(--red); margin-top:5px; display:none; }
+    .field-error.visible { display:block; }
+
+    /* Tag chips multi-select */
+    .tag-chips { display:flex; flex-wrap:wrap; gap:7px; margin-top:4px; }
+    .tag-chip {
+      font-family:'DM Mono',monospace; font-size:10px; letter-spacing:0.04em;
+      padding:5px 12px; border-radius:3px; cursor:pointer; user-select:none;
+      border:1px solid var(--rule); color:var(--ink-faint); background:var(--page);
+      transition:all 0.12s;
+    }
+    .tag-chip:hover { border-color:var(--sand-rule); color:var(--sand-dark); }
+    .tag-chip.selected { background:var(--sand-pale); color:var(--sand-dark); border-color:var(--sand-rule); }
+    .tag-chips-hint { font-family:'DM Mono',monospace; font-size:10px; color:var(--ink-faint); margin-top:8px; }
+
+    /* Two-column row */
+    .field-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+    @media(max-width:520px) { .field-row { grid-template-columns:1fr; } }
+
+    /* Submit button */
+    .submit-row { display:flex; align-items:center; gap:16px; margin-top:8px; flex-wrap:wrap; }
+    .submit-btn {
+      background:var(--ink); color:var(--page);
+      border:none; border-radius:7px; padding:14px 32px;
+      font-family:'DM Mono',monospace; font-size:12px; font-weight:500;
+      letter-spacing:0.08em; text-transform:uppercase; cursor:pointer;
+      transition:background 0.15s, transform 0.1s; white-space:nowrap;
+    }
+    .submit-btn:hover { background:var(--sand-dark); }
+    .submit-btn:active { transform:scale(0.98); }
+    .submit-btn:disabled { background:var(--rule); color:var(--ink-faint); cursor:not-allowed; transform:none; }
+    .submit-note { font-family:'DM Mono',monospace; font-size:10px; color:var(--ink-faint); line-height:1.6; }
+
+    /* ── STATES ── */
+    /* Loading spinner */
+    .spinner { display:none; width:18px; height:18px; border:2px solid var(--rule); border-top-color:var(--sand-dark); border-radius:50%; animation:spin 0.7s linear infinite; }
+    @keyframes spin { to { transform:rotate(360deg); } }
+    .loading .spinner { display:block; }
+    .loading .submit-btn { display:none; }
+
+    /* Success state */
+    #success-state {
+      display:none; text-align:center; padding:48px 24px;
+    }
+    #success-state.visible { display:block; }
+    .success-icon { font-size:48px; margin-bottom:20px; }
+    .success-title { font-size:28px; font-weight:500; letter-spacing:-0.01em; margin-bottom:10px; }
+    .success-sub { font-size:16px; color:var(--ink-soft); max-width:400px; margin:0 auto 28px; line-height:1.7; }
+    .success-actions { display:flex; gap:12px; justify-content:center; flex-wrap:wrap; }
+    .success-link {
+      font-family:'DM Mono',monospace; font-size:11px; letter-spacing:0.06em; text-transform:uppercase;
+      padding:11px 22px; border-radius:6px; transition:all 0.15s; cursor:pointer;
+    }
+    .success-link.primary { background:var(--ink); color:var(--page); border:1px solid var(--ink); }
+    .success-link.primary:hover { background:var(--sand-dark); border-color:var(--sand-dark); }
+    .success-link.secondary { background:transparent; color:var(--ink-soft); border:1px solid var(--rule); }
+    .success-link.secondary:hover { border-color:var(--sand-rule); color:var(--sand-dark); }
+
+    /* Error banner */
+    #error-banner {
+      display:none; background:var(--red-bg); border:1px solid rgba(220,38,38,0.2);
+      border-radius:7px; padding:14px 18px; margin-bottom:20px;
+      font-family:'DM Mono',monospace; font-size:12px; color:var(--red);
+    }
+    #error-banner.visible { display:block; }
+
+    /* ── FOOTER ── */
+    footer { border-top:1px solid var(--rule); padding:24px; text-align:center; }
+    .foot-text { font-family:'DM Mono',monospace; font-size:10px; color:var(--ink-faint); letter-spacing:0.04em; }
+    .foot-text a { color:var(--sand-dark); }
+
+    /* Reviewer note */
+    .reviewer-note {
+      background:var(--sand-pale); border:1px solid var(--sand-rule); border-radius:8px;
+      padding:16px 20px; margin-top:28px;
+      display:flex; gap:14px; align-items:flex-start;
+    }
+    .reviewer-avatar { font-size:28px; flex-shrink:0; line-height:1; }
+    .reviewer-text { font-size:14px; color:var(--ink-soft); line-height:1.65; }
+    .reviewer-name { font-family:'DM Mono',monospace; font-size:11px; color:var(--sand-dark); margin-top:4px; }
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">The Learning Vault · <a href="/">southafricanbedouin.com</a></div>
+    <a href="/vault" class="nav-back">← Back to the Vault</a>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-eyebrow">Submit a Resource</div>
+  <h1 class="hero-title">Know something worth sharing?</h1>
+  <p class="hero-sub">Every resource in the Vault was hand-picked. If you've found something genuinely useful — free, credible, and worth someone's time — submit it here. I review every submission personally.</p>
+
+  <div class="reviewer-note">
+    <div class="reviewer-avatar">📬</div>
+    <div>
+      <div class="reviewer-text">Submissions go straight into my review queue. I check quality, credibility, and fit before publishing. If your resource is approved, you'll be credited as a contributor.</div>
+      <div class="reviewer-name mono">— Muhammad Seedat, @southafricanbedouin</div>
+    </div>
+  </div>
+</div>
+
+<!-- ── FORM ── -->
+<div class="form-wrap">
+  <div class="form-card">
+
+    <div id="error-banner"></div>
+
+    <!-- FORM CONTENT -->
+    <div id="form-content">
+      <form id="submit-form" novalidate>
+
+        <!-- SECTION 1: THE RESOURCE -->
+        <div class="form-section">
+          <div class="section-label"><span class="section-num mono">01</span> The Resource</div>
+
+          <div class="field">
+            <label class="field-label" for="title">Resource Name <span class="field-required">*</span></label>
+            <div class="field-hint">The official name of the course, platform, tool, or project.</div>
+            <input type="text" id="title" name="title" placeholder="e.g. DeepLearning.AI, Hugging Face Learn" autocomplete="off" />
+            <div class="field-error" id="err-title">Please enter the resource name.</div>
+          </div>
+
+          <div class="field">
+            <label class="field-label" for="url">URL <span class="field-required">*</span></label>
+            <div class="field-hint">The direct link — homepage, course page, or GitHub repo.</div>
+            <input type="url" id="url" name="url" placeholder="https://" autocomplete="off" />
+            <div class="field-error" id="err-url">Please enter a valid URL (include https://).</div>
+          </div>
+
+          <div class="field-row">
+            <div class="field">
+              <label class="field-label" for="provider">Creator / Provider <span class="field-required">*</span></label>
+              <div class="field-hint">Who made it? Person, company, or university.</div>
+              <input type="text" id="provider" name="provider" placeholder="e.g. Google, Andrew Ng" />
+              <div class="field-error" id="err-provider">Please enter the creator or provider.</div>
+            </div>
+            <div class="field">
+              <label class="field-label" for="type">Type <span class="field-required">*</span></label>
+              <div class="field-hint">What kind of resource is this?</div>
+              <select id="type" name="type">
+                <option value="" disabled selected>Select type…</option>
+                <option value="Platform">Platform</option>
+                <option value="Course">Course</option>
+                <option value="Tool">Tool</option>
+                <option value="GitHub">GitHub Repo</option>
+                <option value="Guide">Guide / Article</option>
+                <option value="Community">Community</option>
+                <option value="Game">Game</option>
+                <option value="Other">Other</option>
+              </select>
+              <div class="field-error" id="err-type">Please select a type.</div>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="field-label" for="desc">Description <span class="field-required">*</span></label>
+            <div class="field-hint">2–3 sentences. What is it, who is it for, and why does it matter? Write like you're recommending it to a smart friend.</div>
+            <textarea id="desc" name="desc" placeholder="This is a free platform that… It's best for people who… What makes it stand out is…"></textarea>
+            <div class="field-error" id="err-desc">Please add a short description (at least 30 characters).</div>
+          </div>
+        </div>
+
+        <!-- SECTION 2: TAGS -->
+        <div class="form-section">
+          <div class="section-label"><span class="section-num mono">02</span> Tags <span style="font-size:10px;color:var(--ink-faint);font-weight:400;text-transform:none;letter-spacing:0;">— select all that apply</span></div>
+
+          <div class="tag-chips" id="tag-chips">
+            <span class="tag-chip" data-tag="AI">AI</span>
+            <span class="tag-chip" data-tag="LLMs">LLMs</span>
+            <span class="tag-chip" data-tag="Prompting">Prompting</span>
+            <span class="tag-chip" data-tag="Machine Learning">Machine Learning</span>
+            <span class="tag-chip" data-tag="Deep Learning">Deep Learning</span>
+            <span class="tag-chip" data-tag="Data Science">Data Science</span>
+            <span class="tag-chip" data-tag="Developer">Developer</span>
+            <span class="tag-chip" data-tag="Open Source">Open Source</span>
+            <span class="tag-chip" data-tag="Business">Business</span>
+            <span class="tag-chip" data-tag="Finance">Finance</span>
+            <span class="tag-chip" data-tag="Entrepreneurship">Entrepreneurship</span>
+            <span class="tag-chip" data-tag="Leadership">Leadership</span>
+            <span class="tag-chip" data-tag="Career">Career</span>
+            <span class="tag-chip" data-tag="Productivity">Productivity</span>
+            <span class="tag-chip" data-tag="Writing">Writing</span>
+            <span class="tag-chip" data-tag="Communication">Communication</span>
+            <span class="tag-chip" data-tag="Certification">Certification</span>
+            <span class="tag-chip" data-tag="Beginner">Beginner</span>
+            <span class="tag-chip" data-tag="Intermediate">Intermediate</span>
+            <span class="tag-chip" data-tag="Advanced">Advanced</span>
+            <span class="tag-chip" data-tag="Free">Free</span>
+            <span class="tag-chip" data-tag="Strategy">Strategy</span>
+            <span class="tag-chip" data-tag="Engineering">Engineering</span>
+            <span class="tag-chip" data-tag="Design">Design</span>
+            <span class="tag-chip" data-tag="Analytics">Analytics</span>
+          </div>
+          <div class="tag-chips-hint mono">Not seeing a relevant tag? Leave a note in the description.</div>
+        </div>
+
+        <!-- SECTION 3: YOUR DETAILS -->
+        <div class="form-section">
+          <div class="section-label"><span class="section-num mono">03</span> Your Details</div>
+
+          <div class="field-row">
+            <div class="field">
+              <label class="field-label" for="submitter-name">Your Name <span class="field-required">*</span></label>
+              <div class="field-hint">You'll be credited if it's approved.</div>
+              <input type="text" id="submitter-name" name="submitter_name" placeholder="Full name or handle" />
+              <div class="field-error" id="err-name">Please enter your name.</div>
+            </div>
+            <div class="field">
+              <label class="field-label" for="submitter-email">Email <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--ink-faint);">optional</span></label>
+              <div class="field-hint">Only if you'd like a reply.</div>
+              <input type="email" id="submitter-email" name="submitter_email" placeholder="you@example.com" />
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="field-label" for="why">Why this resource? <span style="font-family:'DM Mono',monospace;font-size:10px;color:var(--ink-faint);">optional</span></label>
+            <div class="field-hint">Any context that helps me evaluate it — your personal experience, who you saw use it, what problem it solves.</div>
+            <textarea id="why" name="why" placeholder="I used this when I was learning X and it helped me because…" style="min-height:72px;"></textarea>
+          </div>
+        </div>
+
+        <!-- SUBMIT -->
+        <div class="submit-row" id="submit-row">
+          <button type="submit" class="submit-btn" id="submit-btn">Submit for review →</button>
+          <div class="spinner" id="spinner"></div>
+          <p class="submit-note">Free to submit · Review takes 1–5 days · You'll be credited if approved</p>
+        </div>
+
+      </form>
+    </div>
+
+    <!-- SUCCESS STATE -->
+    <div id="success-state">
+      <div class="success-icon">✦</div>
+      <div class="success-title">Submitted. Thank you.</div>
+      <p class="success-sub">Your resource is in the review queue. If it's a good fit for the Vault, you'll be credited as a contributor.</p>
+      <div class="success-actions">
+        <a href="/vault" class="success-link primary">Back to the Vault</a>
+        <span class="success-link secondary" onclick="resetForm()">Submit another</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="foot-text">The Learning Vault · <a href="/">southafricanbedouin.com</a> · Free to submit · Curated by @southafricanbedouin</div>
+</footer>
+
+<script>
+// ── TAG CHIPS ──
+const selectedTags = new Set();
+document.querySelectorAll('.tag-chip').forEach(chip => {
+  chip.addEventListener('click', () => {
+    const tag = chip.dataset.tag;
+    if (selectedTags.has(tag)) {
+      selectedTags.delete(tag);
+      chip.classList.remove('selected');
+    } else {
+      selectedTags.add(tag);
+      chip.classList.add('selected');
+    }
+  });
+});
+
+// ── VALIDATION ──
+function validateField(id, errId, checkFn) {
+  const el = document.getElementById(id);
+  const err = document.getElementById(errId);
+  const valid = checkFn(el.value.trim());
+  el.classList.toggle('error', !valid);
+  err.classList.toggle('visible', !valid);
+  return valid;
+}
+
+function isUrl(v) {
+  try { const u = new URL(v); return u.protocol === 'https:' || u.protocol === 'http:'; }
+  catch { return false; }
+}
+
+function validateAll() {
+  const v1 = validateField('title', 'err-title', v => v.length > 1);
+  const v2 = validateField('url', 'err-url', v => isUrl(v));
+  const v3 = validateField('provider', 'err-provider', v => v.length > 1);
+  const v4 = validateField('type', 'err-type', v => v !== '');
+  const v5 = validateField('desc', 'err-desc', v => v.length >= 30);
+  const v6 = validateField('submitter-name', 'err-name', v => v.length > 1);
+  return v1 && v2 && v3 && v4 && v5 && v6;
+}
+
+// Clear error on input
+['title','url','provider','type','desc','submitter-name'].forEach(id => {
+  const el = document.getElementById(id);
+  el.addEventListener('input', () => {
+    el.classList.remove('error');
+    const errEl = document.getElementById('err-' + (id === 'submitter-name' ? 'name' : id));
+    if (errEl) errEl.classList.remove('visible');
+  });
+});
+
+// ── SUBMIT ──
+document.getElementById('submit-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  if (!validateAll()) {
+    document.querySelector('.field.error input, .field.error select, .field.error textarea')?.scrollIntoView({ behavior:'smooth', block:'center' });
+    return;
+  }
+
+  // Show loading
+  const btn = document.getElementById('submit-btn');
+  const spinner = document.getElementById('spinner');
+  const errBanner = document.getElementById('error-banner');
+  btn.style.display = 'none';
+  spinner.style.display = 'block';
+  errBanner.classList.remove('visible');
+
+  const payload = {
+    title:           document.getElementById('title').value.trim(),
+    url:             document.getElementById('url').value.trim(),
+    provider:        document.getElementById('provider').value.trim(),
+    type:            document.getElementById('type').value,
+    desc:            document.getElementById('desc').value.trim(),
+    tags:            Array.from(selectedTags),
+    submitter_name:  document.getElementById('submitter-name').value.trim(),
+    submitter_email: document.getElementById('submitter-email').value.trim(),
+    why:             document.getElementById('why').value.trim(),
+  };
+
+  try {
+    const resp = await fetch('/api/submit-resource', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+
+    if (!resp.ok) {
+      const data = await resp.json().catch(() => ({}));
+      throw new Error(data.error || `Server error (${resp.status})`);
+    }
+
+    // Success
+    document.getElementById('form-content').style.display = 'none';
+    document.getElementById('success-state').classList.add('visible');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  } catch (err) {
+    btn.style.display = '';
+    spinner.style.display = 'none';
+    errBanner.textContent = 'Something went wrong: ' + err.message + ' — please try again or email hello@southafricanbedouin.com';
+    errBanner.classList.add('visible');
+    errBanner.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+});
+
+// ── RESET (submit another) ──
+function resetForm() {
+  document.getElementById('submit-form').reset();
+  selectedTags.clear();
+  document.querySelectorAll('.tag-chip').forEach(c => c.classList.remove('selected'));
+  document.querySelectorAll('.error').forEach(el => el.classList.remove('error'));
+  document.querySelectorAll('.field-error').forEach(el => el.classList.remove('visible'));
+  document.getElementById('form-content').style.display = '';
+  document.getElementById('success-state').classList.remove('visible');
+}
+</script>
+</body>
+</html>
