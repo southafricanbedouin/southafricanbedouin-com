@@ -362,7 +362,7 @@
         <span class="search-icon">🔍</span>
         <input type="text" class="search-input" id="search-input" placeholder="Search resources, providers, topics…" oninput="applyFilters()" />
       </div>
-      <div class="filter-count">Showing <strong id="showing-count">26</strong> of <strong id="total-count">26</strong></div>
+      <div class="filter-count">Showing <strong id="showing-count">27</strong> of <strong id="total-count">27</strong></div>
     </div>
 
     <div class="type-tabs" id="type-tabs">
@@ -698,6 +698,16 @@ let CONTRIBUTORS = [];
     hours:5, value:0, free:true,
     rating:{credibility:4,safety:5,validity:4},
     validated:true, validatedDate:"Mar 2026", addedDate:"Mar 2026", addedBy:"Muhammad Seedat"
+  },
+  {
+    id:27, title:"TerminalQuest", provider:"Janel Loi", type:"Tool",
+    url:"https://theterminalquest.vercel.app/",
+    desc:"A free, 15-minute retro terminal game that installs real muscle memory for shortcuts you'll actually use — Ctrl+U, navigation, file management — without you even noticing. Built for everyone using AI coding tools who just touched a terminal for the first time. There are easter eggs hidden in the sandbox.",
+    tags:["Terminal","Productivity","Developer","Beginner","Free","Tools"],
+    sector:["Technology","Education"], profession:["Developer","All"],
+    hours:0.25, value:0, free:true,
+    rating:{credibility:5,safety:5,validity:5},
+    validated:true, validatedDate:"Mar 2026", addedDate:"Mar 2026", addedBy:"Janel Loi"
   }
 ]; /* end _RESOURCES_PLACEHOLDER */
 
@@ -955,7 +965,8 @@ document.addEventListener('DOMContentLoaded', () => {
       RESOURCES = _RESOURCES_PLACEHOLDER;
       CONTRIBUTORS = [
         { name:"Muhammad Seedat", handle:"@southafricanbedouin", role:"Founder & Curator", count:26, founder:true },
-        { name:"Yousif Amanuel", handle:"GitHub", role:"Resource Contributor", count:1, founder:false }
+        { name:"Yousif Amanuel", handle:"GitHub", role:"Resource Contributor", count:1, founder:false },
+        { name:"Janel Loi", handle:"@janelloi", role:"Resource Contributor", count:1, founder:false }
       ];
       buildDashboard();
       buildTagCloud();
