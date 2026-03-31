@@ -172,42 +172,51 @@ const latestEditions = baseeraEditions
       <button class="res-tab" data-tab="guides">📖 Guides</button>
       <button class="res-tab" data-tab="prompts">✦ Prompts</button>
       <button class="res-tab" data-tab="models">⬡ Models</button>
+      <button class="res-tab" data-tab="systems">⚙ Systems</button>
     </div>
 
     <!-- TOOLS -->
     <div class="res-panel active" id="tab-tools">
       <div class="res-grid">
 
-        <div class="res-card">
+        <a href="https://qpulse-phi.vercel.app" target="_blank" rel="noopener" class="res-card res-card--live">
           <span class="res-card-badge free">Free · No signup</span>
+          <div class="res-card-title">Qatar Pulse</div>
+          <div class="res-card-desc">Situational awareness dashboard for residents and expats in Qatar. Pulls from official sources only — QNA, MOFA, MOEHE for school updates, HIA for aviation, Qatar Airways for live route status. When the Ministry moves schools to distance learning, it's on the page.</div>
+          <div class="res-card-region">🇶🇦 Qatar · Situational Awareness</div>
+          <div class="res-card-link mono">Open dashboard ↗</div>
+        </a>
+
+        <div class="res-card res-card--dev">
+          <span class="res-card-badge dev">In development</span>
           <div class="res-card-title">Qatar Newcomer Navigator</div>
           <div class="res-card-desc">The complete guide to arriving in Qatar. QID, driving licence, bank account, school enrollment — step by step, in plain language.</div>
           <div class="res-card-region">🇶🇦 Qatar · Expat Life</div>
-          <div class="res-card-link mono">Open tool →</div>
+          <div class="res-card-link mono res-card-link--muted">Coming soon</div>
         </div>
 
-        <div class="res-card">
-          <span class="res-card-badge free">Free · Email for full access</span>
+        <div class="res-card res-card--dev">
+          <span class="res-card-badge dev">In development</span>
           <div class="res-card-title">Qatar School Finder</div>
           <div class="res-card-desc">Filter by curriculum, area, fees, and special needs provisions. Honest waiting-list reality included.</div>
           <div class="res-card-region">🇶🇦 Qatar · Education</div>
-          <div class="res-card-link mono">Find a school →</div>
+          <div class="res-card-link mono res-card-link--muted">Coming soon</div>
         </div>
 
-        <div class="res-card">
-          <span class="res-card-badge free">Free · 5 minutes</span>
+        <div class="res-card res-card--dev">
+          <span class="res-card-badge dev">In development</span>
           <div class="res-card-title">GCC AI Readiness Assessment</div>
           <div class="res-card-desc">10 questions. A clear score. Next steps designed for Gulf professionals — not Silicon Valley startups.</div>
           <div class="res-card-region">🌙 Gulf &amp; Middle East · AI</div>
-          <div class="res-card-link mono">Take the assessment →</div>
+          <div class="res-card-link mono res-card-link--muted">Coming soon</div>
         </div>
 
-        <div class="res-card">
-          <span class="res-card-badge free">Free · Email for full guide</span>
+        <div class="res-card res-card--dev">
+          <span class="res-card-badge dev">In development</span>
           <div class="res-card-title">South African to Gulf — Relocation Guide</div>
           <div class="res-card-desc">SARS tax, credential recognition, driving licence conversion, SA banking abroad. Nobody else makes this guide.</div>
           <div class="res-card-region">🇿🇦 South Africa → 🌙 Gulf</div>
-          <div class="res-card-link mono">Get the guide →</div>
+          <div class="res-card-link mono res-card-link--muted">Coming soon</div>
         </div>
 
       </div>
@@ -326,6 +335,55 @@ const latestEditions = baseeraEditions
           <div class="res-list-arrow">→</div>
         </li>
       </ul>
+    </div>
+
+    <!-- SYSTEMS -->
+    <div class="res-panel" id="tab-systems">
+      <div class="systems-intro mono">
+        SeedSystems™ — intelligence infrastructure for professionals who operate at pace.
+        Each system is a complete operating protocol: prompts, sequence, output.
+      </div>
+      <ul class="res-list">
+        <li class="res-list-item">
+          <div class="res-list-num mono">01</div>
+          <div class="res-list-body">
+            <div class="res-list-title">The Morning Intelligence System</div>
+            <div class="res-list-desc">15 minutes. 10 prompts. Complete daily clarity before the day begins. Five intelligence layers: situation brief, priority filter, decision prep, opportunity scan, and your compiled daily brief. Powered by Claude AI.</div>
+            <div class="res-list-meta mono"><span>AI · Productivity · Decision-Making</span><span>$29</span></div>
+          </div>
+          <div class="res-list-arrow">→</div>
+        </li>
+        <li class="res-list-item res-list-item--dev">
+          <div class="res-list-num mono">02</div>
+          <div class="res-list-body">
+            <div class="res-list-title">Content Engine System</div>
+            <div class="res-list-desc">A complete content operating system for creators and founders. From raw idea to published post — systematised.</div>
+            <div class="res-list-meta mono"><span>Content · Creator</span><span>Coming soon</span></div>
+          </div>
+          <div class="res-list-arrow res-list-arrow--muted">→</div>
+        </li>
+        <li class="res-list-item res-list-item--dev">
+          <div class="res-list-num mono">03</div>
+          <div class="res-list-body">
+            <div class="res-list-title">Sales Intelligence System</div>
+            <div class="res-list-desc">Pre-call briefing, pipeline review, objection prep, and follow-up — all systematised into a single daily protocol.</div>
+            <div class="res-list-meta mono"><span>Sales · Strategy</span><span>Coming soon</span></div>
+          </div>
+          <div class="res-list-arrow res-list-arrow--muted">→</div>
+        </li>
+        <li class="res-list-item res-list-item--dev">
+          <div class="res-list-num mono">04</div>
+          <div class="res-list-body">
+            <div class="res-list-title">Career Accelerator System</div>
+            <div class="res-list-desc">Strategic career positioning, opportunity identification, and personal brand clarity — for professionals ready to move.</div>
+            <div class="res-list-meta mono"><span>Career · Leadership</span><span>Coming soon</span></div>
+          </div>
+          <div class="res-list-arrow res-list-arrow--muted">→</div>
+        </li>
+      </ul>
+      <div class="res-coming">
+        More systems in development. <a href="#newsletter">Subscribe</a> to be notified on launch.
+      </div>
     </div>
 
   </div>
@@ -794,6 +852,38 @@ const latestEditions = baseeraEditions
   }
 
   .res-card:hover { background: var(--sand-pale); }
+
+  a.res-card--live { display: flex; flex-direction: column; text-decoration: none; color: inherit; }
+  a.res-card--live:hover { background: var(--sand-pale); }
+
+  .res-card--dev {
+    opacity: 0.55;
+    pointer-events: none;
+  }
+
+  .res-card-badge.dev {
+    color: var(--ink-faint);
+    background: transparent;
+    border-color: var(--rule);
+  }
+
+  .res-card-link--muted {
+    color: var(--ink-faint) !important;
+  }
+
+  .res-list-item--dev { opacity: 0.5; }
+  .res-list-arrow--muted { color: var(--rule) !important; }
+
+  .systems-intro {
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    color: var(--ink-soft);
+    line-height: 1.7;
+    padding: 20px 0 28px;
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: 8px;
+    max-width: 560px;
+  }
 
   .res-card-badge {
     font-family: 'DM Mono', monospace;
