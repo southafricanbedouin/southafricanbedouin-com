@@ -9,7 +9,7 @@ finding: "11 distinct security failures in 14 days — 20 researchers stress-tes
 pattern: "The AI industry is building L4-capability agents on L2-understanding foundations. The failures documented here are not jailbreaks — they are failures of social coherence. An agent's ability to maintain a consistent model of who it serves, what it is authorised to do, and when to stop. The agents had no reliable way to distinguish their owner from a stranger. They defaulted to whoever spoke most urgently. This is not an AI safety paper. It is an institutional architecture paper wearing a lab coat."
 signal: "Before you deploy agents at scale, build the governance infrastructure first. The threat is not sophisticated attacks — it is ordinary social pressure applied to systems with no coherent model of who they serve. Three foundations are missing: a stakeholder model, a self-model, and a private deliberation surface. These are not engineering patches — they are institutional architecture problems requiring policy, governance frameworks, and oversight protocols."
 tags: ["AI", "Agentic AI", "Systems Thinking", "Industry 5.0"]
-linkedinUrl: ""
+linkedinUrl: "https://www.linkedin.com/posts/seedatmuhammad_baseera-31-edition-002-agents-of-chaos-ugcPost-7441463734058815488-glME"
 ---
 
 38 researchers deployed 5 autonomous AI agents in a live lab — then spent two weeks trying to break them.

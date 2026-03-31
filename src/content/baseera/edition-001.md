@@ -9,7 +9,7 @@ finding: "$50B lost per year — combined treatment costs and productivity losse
 pattern: "The GCC's real diversification play isn't fintech or tourism — it's becoming the world's precision health hub. The Gulf is sitting on a unique biological asset: high consanguinity rates, a young population, and existing national genome projects create a research environment no Western health system can replicate. The same strategic pattern that built the Gulf's oil economy — capital aligned with collective action to attract global talent and build enduring institutions — is being proposed for genomics. This is not a health paper. It is an economic architecture paper wearing a medical coat."
 signal: "Healthcare systems always pay. The only question is whether they pay early — or late. The GCC's federated genomics compact, modelled on Nordic data collaborations, is the infrastructure play that will define the next decade of regional health economics. The leaders who position now in biotech, in data governance, in precision medicine platforms are building the next oil."
 tags: ["Gulf", "Genomics", "Healthcare", "Industry 5.0"]
-linkedinUrl: ""
+linkedinUrl: "https://www.linkedin.com/posts/seedatmuhammad_baseera31edition001-activity-7438905591994949632-H6mE"
 ---
 
 14 researchers across 6 Gulf nations published a paper in *Nature Medicine* that deserves more attention than it's getting.

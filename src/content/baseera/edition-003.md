@@ -9,7 +9,7 @@ finding: "75% of programming tasks now covered by AI — yet no measurable incre
 pattern: "AI isn't eliminating jobs. It's rerouting who gets hired into them. The headline — no systemic unemployment increase — will comfort optimists. It shouldn't. Hiring of 22–25 year olds into exposed occupations has dropped 14%. AI isn't firing people. It's closing the door for the next generation walking in. For the Gulf, every nationalisation strategy depends on young citizens entering knowledge-economy roles — precisely the most exposed. For Africa, 60% of the continent is under 25, educated for BPO, data processing, and customer service — the top AI-exposed occupations. This is not a labour market paper. It is an early warning system for every economy betting its future on knowledge workers."
 signal: "The most exposed workers earn 47% more, are older, more educated, and female. Stop planning for AI as a factory-floor disruption. Start asking what happens when the knowledge-economy jobs you've been training an entire generation for start absorbing fewer graduates. AI displacement isn't coming for low-wage workers first — it's coming for your most expensive, most educated employees."
 tags: ["AI", "Labour Market", "Economics", "Gulf", "Industry 5.0"]
-linkedinUrl: ""
+linkedinUrl: "https://www.linkedin.com/posts/seedatmuhammad_baseera-31-edition-003-ai-labour-market-ugcPost-7441477260395724800-ZoAa"
 ---
 
 Anthropic measured what AI could theoretically do to jobs — then checked what it's actually doing.
