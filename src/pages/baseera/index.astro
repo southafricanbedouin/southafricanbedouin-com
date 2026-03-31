@@ -30,26 +30,39 @@ const sorted = editions.sort((a, b) => b.data.edition - a.data.edition);
       <p class="empty-state">No editions yet — check back soon.</p>
     ) : (
       <ul class="editions-list">
-        {sorted.map((edition) => (
-          <li class="edition-item">
-            <a href={`/baseera/${edition.slug}`} class="edition-link">
-              <div class="edition-meta mono">
-                Edition {String(edition.data.edition).padStart(3, '0')}
-                {edition.data.tags && <span> · {edition.data.tags.slice(0,2).join(' · ')}</span>}
-                <span class="edition-date"> · {edition.data.date}</span>
-              </div>
-              <div class="edition-title">{edition.data.title}</div>
-              <div class="edition-finding">{edition.data.finding}</div>
-              {edition.data.article && (
-                <div class="edition-source mono">
-                  Source: {edition.data.article}
-                  {edition.data.author && ` — ${edition.data.author}`}
+        {sorted.map((edition) => {
+          const dest = edition.data.linkedinUrl
+            ? edition.data.linkedinUrl
+            : `/baseera/${edition.slug}`;
+          const isExternal = !!edition.data.linkedinUrl;
+          return (
+            <li class="edition-item">
+              <a
+                href={dest}
+                class="edition-link"
+                target={isExternal ? '_blank' : undefined}
+                rel={isExternal ? 'noopener noreferrer' : undefined}
+              >
+                <div class="edition-meta mono">
+                  Edition {String(edition.data.edition).padStart(3, '0')}
+                  {edition.data.tags && <span> · {edition.data.tags.slice(0,2).join(' · ')}</span>}
+                  <span class="edition-date"> · {edition.data.date}</span>
                 </div>
-              )}
-            </a>
-            <div class="edition-arrow">→</div>
-          </li>
-        ))}
+                <div class="edition-title">{edition.data.title}</div>
+                <div class="edition-finding">{edition.data.finding}</div>
+                {edition.data.article && (
+                  <div class="edition-source mono">
+                    {edition.data.article}
+                    {edition.data.author && ` — ${edition.data.author}`}
+                  </div>
+                )}
+                <div class="edition-cta mono">
+                  {edition.data.linkedinUrl ? 'View carousel ↗' : 'Read edition →'}
+                </div>
+              </a>
+            </li>
+          );
+        })}
       </ul>
     )}
 
@@ -96,19 +109,13 @@ const sorted = editions.sort((a, b) => b.data.edition - a.data.edition);
   .editions-list { list-style: none; }
 
   .edition-item {
-    display: grid;
-    grid-template-columns: 1fr auto;
-    gap: 24px;
-    align-items: start;
-    padding: 32px 0;
+    padding: 36px 0;
     border-bottom: 1px solid var(--rule);
-    cursor: pointer;
     transition: all 0.12s;
   }
 
   .edition-item:first-child { padding-top: 0; }
   .edition-item:last-child { border-bottom: none; }
-  .edition-item:hover .edition-title { color: var(--sand-dark); }
 
   .edition-link { display: block; }
 
@@ -127,31 +134,41 @@ const sorted = editions.sort((a, b) => b.data.edition - a.data.edition);
     font-weight: 500;
     color: var(--ink);
     line-height: 1.25;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     transition: color 0.15s;
+    max-width: 640px;
   }
+
+  .edition-item:hover .edition-title { color: var(--sand-dark); }
 
   .edition-finding {
     font-size: 15px;
     color: var(--ink-soft);
     line-height: 1.65;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
+    max-width: 620px;
   }
 
   .edition-source {
-    font-size: 10px;
+    font-size: 11px;
     color: var(--ink-faint);
     letter-spacing: 0.04em;
     font-style: italic;
+    margin-bottom: 16px;
   }
 
-  .edition-arrow {
-    font-size: 18px;
-    color: var(--rule);
-    margin-top: 8px;
-    transition: color 0.15s, transform 0.15s;
+  .edition-cta {
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--sand);
+    transition: color 0.15s, letter-spacing 0.15s;
   }
-  .edition-item:hover .edition-arrow { color: var(--sand); transform: translateX(4px); }
+
+  .edition-item:hover .edition-cta {
+    color: var(--sand-dark);
+    letter-spacing: 0.14em;
+  }
 
   .empty-state {
     font-size: 15px;
@@ -161,7 +178,7 @@ const sorted = editions.sort((a, b) => b.data.edition - a.data.edition);
   }
 
   @media (max-width: 760px) {
-    .edition-item { grid-template-columns: 1fr; }
-    .edition-arrow { display: none; }
+    .page-header { padding: 40px 0 32px; }
+    .edition-item { padding: 28px 0; }
   }
 </style>
